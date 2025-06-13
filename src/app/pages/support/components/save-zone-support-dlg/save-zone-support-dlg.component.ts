@@ -40,6 +40,8 @@ const FORM_CONTROL_DYNAMIC = ['solicitude_type', 'issue_type_id', 'comment', 'is
 })
 export class SaveZoneSupportDlgComponent implements OnInit {
 
+  selected = 'option1';
+
   zoneForm = new FormGroup<any>({});
   formValidator!: FormValidator;
   showFields = signal<boolean>(false);

@@ -31,7 +31,7 @@ export class SettingService {
     this.modules.set([
       {
         id: 1,
-        name: 'Zonas',
+        name: 'Construcción',
         path: ['zonas'],
         children: [
           {

@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@ang
 import { Router, RouterOutlet } from '@angular/router';
 import { WowAvatarMenu, WowMenubar } from '@wow/shared/components/menu';
 import { SettingService } from '@wow/core/services';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AsyncPipe } from '@angular/common';
@@ -12,13 +12,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Module, ZoneStateType } from '@wow/core/interfaces';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  SaveZoneSupportDlgComponent
-} from '@wow/pages/support/components/save-zone-support-dlg/save-zone-support-dlg.component';
-import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
+import { SaveZoneSupportDlgComponent } from '@wow/pages/support/components/save-zone-support-dlg/save-zone-support-dlg.component';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatSelect } from '@angular/material/select';
 import { FormGroup } from '@angular/forms';
-
+import {MatSelectModule} from '@angular/material/select';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
@@ -46,7 +44,7 @@ const TAILWIND_BREAKPOINTS = {
     MatSidenavModule,
     MatFormField,
     MatLabel,
-    MatSelect,
+    MatSelect,MatSelectModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule
   ],
   providers: [provideNativeDateAdapter()],
@@ -55,6 +53,7 @@ const TAILWIND_BREAKPOINTS = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShellLayout implements OnInit {
+  selected = 'option1';
   ubigeoForm = new FormGroup<any>({});
   subModules = signal<Module[] | null | undefined>([]);
   selectedZoneState = signal<ZoneStateType | null | undefined>(null);
@@ -78,7 +77,7 @@ export class ShellLayout implements OnInit {
   openSaveZoneDlg(): void {
     this.dialog.open(SaveZoneSupportDlgComponent, {
       role: 'dialog',
-      panelClass: ['dialog-panel-fullscreen', 'dialog-panel-position-end', 'md:w-1/2', 'lg:w-1/3', 'w-full']
+      // panelClass: ['dialog-panel-fullscreen', 'dialog-panel-position-end', 'md:w-1/2', 'lg:w-1/3', 'w-full']
     });
   }
 

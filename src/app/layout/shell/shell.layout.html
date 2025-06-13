@@ -1,18 +1,23 @@
 <div class="fixed w-full z-50">
   <div class="bg-purple-800 text-white toolbar">
     <div class="flex justify-between items-center pl-4 md:pl-10">
-      <div class="flex justify-center items-center gap-2">
-        <button
-          type="button"
-          aria-label="Toggle sidenav"
-          mat-icon-button
-          (click)="sidenav.toggle()">
-          <mat-icon class="text-white" aria-label="Side nav toggle icon">menu</mat-icon>
-        </button>
-
-        <img src="images/wowperu-logo-light.svg" alt="Logo WOW Perú" class="logo">
+      <div class="flex justify-between">
+        <div class="flex items-center">
+          <img src="images/wowperu-logo-light.svg" alt="Logo WOW Perú" class="logo">
+          <div class="pt-2 pl-2 pr-2">|</div>
+          <h2 class="pt-2">Construcción</h2>
+        </div>
+        <div class="flex items-center pl-[70rem]">
+          <h4>Gestión</h4>
+          <button
+            type="button"
+            aria-label="Toggle sidenav"
+            mat-icon-button
+            (click)="sidenav.toggle()">
+            <mat-icon class="text-white" aria-label="Side nav toggle icon">menu</mat-icon>
+          </button>
+        </div>
       </div>
-
       <div class="flex self-stretch">
         <wow-avatar-menu></wow-avatar-menu>
       </div>
@@ -20,6 +25,7 @@
   </div>
   <wow-menubar [modules]="settingService.modules()"></wow-menubar>
 </div>
+
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav class="sidenav" fixedInViewport
                [fixedInViewport]="false"
@@ -31,55 +37,65 @@
 
     <div class="pl-2 pr-2 sm:pl-6 md:pl-10 pt-8 mx-auto">
 
-      <!-- <mat-nav-list role="list">
-        @for (page of subModules(); track page.id) {
-          <a mat-list-item
-             role="listitem"
-             [routerLink]="page.path"
-             routerLinkActive
-             #link="routerLinkActive"
-             [activated]="link.isActive">
-            <mat-icon matListItemIcon>{{ page.icon }}</mat-icon>
-            {{ page.name }}
-          </a>
-        }
-      </mat-nav-list> -->
-
       <!-- <hr class="m-4 dark:border-gray-600"> -->
-      <h2 class="px-4">Lista de zonas de cobertura</h2>
+      <h2 class="pt-7 pb-4">Lista de zonas de cobertura</h2>
       <div class="bordered bg-white container p-4 rounded shadow">
-          <mat-form-field class="w-full mb-2" appearance="outline">
+          <!-- <mat-form-field class="w-full mb-2" appearance="outline">
             <mat-label>Departamento</mat-label>
-            <mat-select formControlName="department" (selectionChange)="departmentChange()">
+            <mat-select formControlName="department" (selectionChange)="departmentChange()"> -->
               <!-- @for (solicitude of settingService.solicitudeTypes(); track solicitude.id) {
                 <mat-option [value]="solicitude.id">{{ solicitude.name }}</mat-option>
               } -->
-            </mat-select>
+            <!-- </mat-select> -->
             <!-- @if (formValidator.hasError('department')) {
               <mat-error>{{ formValidator.getErrorMessage('solicitude_type') }}</mat-error>
             } -->
-          </mat-form-field>
+          <!-- </mat-form-field> -->
 
-          <mat-form-field class="w-full mb-2" appearance="outline">
+          <!-- <mat-form-field class="w-full mb-2" appearance="outline">
             <mat-label>Estado</mat-label>
-            <mat-select formControlName="issue_type_id">
+            <mat-select formControlName="issue_type_id"> -->
               <!-- @for (issue of settingService.issueTypes(); track issue.id) {
                 <mat-option [value]="issue.id">{{ issue.name }}</mat-option>
               } -->
+            <!-- </mat-select>
+          </mat-form-field> -->
+
+          <!-- <mat-form-field class="w-full mb-2" appearance="outline"> 
+            <mat-label> Fecha creación </mat-label> 
+            <input  matInput [matDatepicker]= "picker">  -->
+            <!-- <mat-hint> dd/mm/aa </mat-hint>  -->
+            <!-- <mat-datepicker-toggle  matIconSuffix [for]= "picker" > </mat-datepicker-toggle> 
+            <mat-datepicker #picker > </mat-datepicker > 
+          </mat-form-field > -->
+          <mat-form-field class="w-full">
+            <mat-label>Departamento</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option>Todos</mat-option>
+              <mat-option value="option1">AMAZONAS</mat-option>
+              <mat-option value="option2">ANCASH</mat-option>
+              <mat-option value="option3">APURIMAC</mat-option>
             </mat-select>
           </mat-form-field>
-
-          <mat-form-field class="w-full mb-2" appearance="outline"> 
-            <mat-label> Fecha creación </mat-label> 
-            <input  matInput [matDatepicker]= "picker"> 
-            <!-- <mat-hint> dd/mm/aa </mat-hint>  -->
-            <mat-datepicker-toggle  matIconSuffix [for]= "picker" > </mat-datepicker-toggle> 
-            <mat-datepicker #picker > </mat-datepicker > 
-          </mat-form-field >
-      <mat-action-list class="justify-end">
-        <button type="button" mat-button (click)="clean()">Limpiar</button>
+          <mat-form-field class="w-full">
+            <mat-label>Estado</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option>Todos</mat-option>
+              <mat-option value="option1">Pendiente</mat-option>
+              <mat-option value="option2">Construido</mat-option>
+              <mat-option value="option3">En construcción</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-full">
+            <mat-label>Fecha Creación</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+      <div class="flex justify-end">
+        <button type="button" mat-stroked-button (click)="clean()" class="border">Limpiar</button>&nbsp;
         <button type="button" mat-flat-button (click)="filter()">Filtrar</button>
-      </mat-action-list>
+      </div>
       </div>
     </div>
     
@@ -87,13 +103,14 @@
 
   <mat-sidenav-content>
     <div class="px-4 md:px-10 mt-8 md:mt-6 mb-8">
-      <button mat-fab
-        extended
-        class="mb-6"
-        (click)="openSaveZoneDlg()">
-      <mat-icon>add</mat-icon>
-        Nueva zona
-      </button>
+      <div class="flex justify-end">
+        <button type="button" mat-flat-button
+          class="mb-6"
+          (click)="openSaveZoneDlg()">
+        <mat-icon>add</mat-icon>
+          Nueva zona
+        </button>
+      </div>
       <router-outlet/>
     </div>
   </mat-sidenav-content>
