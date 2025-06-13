@@ -1,0 +1,19 @@
+<div class="w-full rounded-2xl bg-primary-600/10 px-6 pt-6 pb-4">
+  <div class="text-gray-800 text-sm font-medium mb-6">Tiempo transcurrido</div>
+
+  <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
+    <div class="flex justify-around items-center gap-4">
+      <div class="hidden lg:block -mb-1.5">
+        <mat-icon>scheduler</mat-icon>
+      </div>
+      <div class="gap-4 text-2xl font-medium">
+        <span>{{ elapsedMinutes() }}</span>
+      </div>
+      <div class="text-2xl font-semibold">:</div>
+      <div class="text-2xl font-medium">
+        <span>{{ elapsedSeconds() }}</span>
+      </div>
+    </div>
+    <button type="button" mat-button (click)="finishProcess()">Terminar atención</button>
+  </div>
+</div>

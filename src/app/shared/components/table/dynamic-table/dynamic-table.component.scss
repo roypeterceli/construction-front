@@ -1,0 +1,10 @@
+.ctrl-cell-hover {
+  @apply bg-purple-600/10;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.mat-mdc-paginator {
+  &.hidden {
+    display: none;
+  }
+}

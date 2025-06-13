@@ -1,0 +1,15 @@
+<div class="flex gap-1">
+  @if (icon()) {
+    <div class="w-10 flex justify-center">
+      <mat-icon [class.material-icons-outlined]="iconOptions().style === 'outlined'">{{ icon() }}</mat-icon>
+    </div>
+  }
+  <div class=" flex-1">
+    @if (hint()) {
+      <div class="text-xs text-neutral-600" [ngClass]="lineHeight">{{ hint() }}</div>
+    }
+    <div class="leading-6" [ngClass]="style">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

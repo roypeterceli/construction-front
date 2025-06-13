@@ -1,0 +1,47 @@
+<h2 mat-dialog-title>
+  <div class="flex justify-between items-center">
+    <span>Nueva Zona</span>
+  </div>
+</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="zoneForm" class="py-4">
+
+    <div class="grid grid-cols-1 lg:grid-cols-1 gap-4 mb-2">
+      <mat-form-field class="w-full mb-2" appearance="outline">
+        <mat-label>Departamento</mat-label>
+        <mat-select formControlName="solicitude_type" (selectionChange)="issueTypeChange()">
+          <!-- @for (solicitude of settingService.solicitudeTypes(); track solicitude.id) {
+            <mat-option [value]="solicitude.id">{{ solicitude.name }}</mat-option>
+          } -->
+        </mat-select>
+        @if (formValidator.hasError('solicitude_type')) {
+          <mat-error>{{ formValidator.getErrorMessage('solicitude_type') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="w-full mb-2" appearance="outline">
+        <mat-label>Provincia</mat-label>
+        <mat-select formControlName="issue_type_id">
+          <!-- @for (issue of settingService.issueTypes(); track issue.id) {
+            <mat-option [value]="issue.id">{{ issue.name }}</mat-option>
+          } -->
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Código</mat-label>
+        <input type="email" matInput formControlName="email" autocomplete="off">
+        @if (formValidator.hasError('email')) {
+          <mat-error>{{ formValidator.getErrorMessage('email') }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button type="button" mat-button (click)="closeDlg()">Cancelar</button>
+  <button type="button" mat-flat-button (click)="createZone()">Crear Zona</button>
+</mat-dialog-actions>

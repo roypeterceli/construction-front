@@ -1,0 +1,17 @@
+:root {
+  .mat-mdc-card {
+    @apply rounded-lg;
+
+    &.mat-mdc-card-selection {
+      @apply cursor-pointer border;
+
+      &.active {
+        @apply bg-neutral-500/10 border-neutral-400;
+      }
+
+      &:hover {
+        @apply bg-neutral-500/10 border-neutral-400;
+      }
+    }
+  }
+}

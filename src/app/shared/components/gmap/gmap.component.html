@@ -1,0 +1,124 @@
+<div style="display: flex;">
+    
+    <h6 class="text-primary-800 mb-3 uppercase">{{ title }}</h6>
+    <img *ngIf="showImage" src="assets/img/broom.png" style="width: 20px;height: 20px;margin-left: 10px;cursor: pointer;" (click)="eventClick()">
+</div>
+
+<!-- (mouseover)="apply(evalUbigeo)" -->
+<vex-ubigeo *ngIf="ubigeo[0] != undefined"
+    [showAddress]="showAddress"
+    [showExtraData] = "showExtraData"
+    [showField] = "showField"
+    [showAddressInvoice] = "showAddressInvoice"
+    [noEdit] = "noEdit"
+    [isDisableDirection] = "isDisableDirection"
+    [isFacturacion] = "isFacturacion"
+    [isInstalacion] = "isInstalacion"
+    [currentDepartamento]="ubigeo[0].sDepartamento"
+    [currentProvincia]="ubigeo[0].sProvincia"
+    [currentDistrito]="ubigeo[0].nIdUbigeo"
+    [formLead]="formLead"
+    [fcNameUbigeo]="fcNameUbigeo"
+    [fcNameDireccion]="fcNameDireccion"
+    [fcNameDireccionDetalle]="fcNameDireccionDetalle"
+    [fcNameVia] = "fcNameVia"
+    [fcNameNombreVia] = "fcNameNombreVia"
+    [fcNamePredio] = "fcNamePredio"
+    [fcNamePuerta] = "fcNamePuerta"
+    [fcNamePiso] = "fcNamePiso"
+    [fcNameIntDpto] = "fcNameIntDpto"
+    [fcNameZona] = "fcNameZona"
+    [fcNameNombreZona] = "fcNameNombreZona"
+    [fcNameManzana] = "fcNameManzana"
+    [fcNameLote] = "fcNameLote"
+    [fcNameKm] = "fcNameKm"
+    [fcNameSubZona] = "fcNameSubZona"
+    [fcNameNombreSubZona] = "fcNameNombreSubZona"
+    [fcNameReferencia] = "fcNameReferencia"
+    (ubigeo)="obtenerUbigeo($event)"
+    (tipoVia)="showItem($event,1)"
+    (nameVia)="showItem($event,2)"
+    (tipoZona)="showItem($event,3)"
+    (nameZona)="showItem($event,4)"
+    (numero)="showItem($event,5)"
+    (manzana)="showItem($event,6)"
+    (lote)="showItem($event,7)"
+    (km)="showItem($event,8)"
+    (tipoSubZona)="showItem($event,9)"
+    (nameSubZona)="showItem($event,10)"
+   >
+</vex-ubigeo>
+
+<ng-container [formGroup]="formLead">
+
+    <!-- {{ formLead.value.sDireccion }} -->
+<div *ngIf="showMap" >
+    
+    <div class="flex -mx-2 flex-col md:flex-row">
+        <div class="w-12/12 md:w-2/4 px-2">
+            <mat-form-field appearance="outline" class="vex-flex-form-field w-full" color="purple">
+                <mat-label>Dirección</mat-label>
+                <input (keydown.enter)="$event.preventDefault()" maxlength="300" matInput autocorrect="off"
+                    autocapitalize="off" spellcheck="off" type="text" #search
+                    formControlName="sDireccion" (keypress)="valText($event, 1)"
+                    id="sDireccion" value="{{sDireccion}}">
+                <mat-error *ngIf="
+                    formLead.get('sDireccion').errors &&
+                    formLead.get('sDireccion').touched
+                ">
+                <mat-error *ngIf="formLead.get('sDireccion').hasError('required')">Este campo es obligatorio
+                </mat-error>
+                <mat-error *ngIf="
+                    formLead.get('sDireccion').hasError('longitud') &&
+                    !formLead.get('sDireccion').hasError('required')
+                    ">
+                    Este campo debe tener mín 3 caracteres</mat-error>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="w-12/12 md:w-2/4  px-2" *ngIf="!loading && googleMapsIsActive == 1">
+            <div class="flex justify-start items-center pt-3 text-green-700" *ngIf="cobertura == 1">
+                <ic-icon [icon]="icWhereToVote" size="32px"></ic-icon> <span class="pl-3 text-base">Dentro de
+                    cobertura.</span>
+            </div>
+            <div class="flex justify-start items-center pt-3 text-amber-600" *ngIf="cobertura == 2">
+                <ic-icon [icon]="icWarning" size="32px"></ic-icon> <span class="pl-3 text-base">Límite de
+                    cobertura.</span>
+            </div>
+            <div class="flex justify-start items-center pt-3 text-red-600" *ngIf="cobertura == 3">
+                <ic-icon [icon]="icBlock" size="32px"></ic-icon> <span class="pl-3 text-base">Fuera de
+                    cobertura.</span>
+            </div>
+        </div>
+
+        <div class="w-12/12 md:w-2/4 px-2"  *ngIf="!loading && googleMapsIsActive == 0">
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Cobertura</mat-label>
+              <mat-select formControlName="fcCobertura">
+                <mat-option [value]="1">Dentro de Cobertura</mat-option>
+                <mat-option [value]="3">Fuera de Cobertura</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+    </div>
+
+    <ng-container *ngIf="googleMapsIsActive == 1">
+
+        <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" [class]="height" *ngIf="!loading">
+            <agm-polygon *ngFor="let coordenadas of coordenadasData" [paths]="coordenadas" [strokeColor]="strokeColor" [strokeWeight]="strokeWeight" [fillColor]="fillColor"></agm-polygon>
+            <!-- <agm-polygon [paths]="coordenadasData[0]" [strokeColor]="strokeColor" [strokeWeight]="strokeWeight" [fillColor]="fillColor"></agm-polygon> -->
+            <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+                (dragEnd)="markerDragEnd($event)"></agm-marker>
+        </agm-map>
+        
+    </ng-container>
+
+    <div id="loader" [class]="height" *ngIf="loading">
+        <div>
+            <mat-progress-spinner mode="indeterminate" color="accent" diameter="40"></mat-progress-spinner>
+        </div>
+    </div>
+
+</div>
+</ng-container>

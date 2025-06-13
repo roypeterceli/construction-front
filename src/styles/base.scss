@@ -1,0 +1,32 @@
+html,
+body {
+
+    --text-color: #313234;
+
+    height: 100%;
+    background-color: #F5F5F8;
+}
+
+body {
+    margin: 0;
+    font-family: "Inter var", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    -webkit-font-smoothing: antialiased;
+    font-stretch: 100%;
+
+    color: var(--text-color);
+}
+
+
+.mdc-notched-outline__notch {
+    border-right: none;
+}
+
+:root {
+    .mdc-text-field--outlined {
+        --mdc-outlined-text-field-container-shape: theme('borderRadius.DEFAULT');
+    }
+}

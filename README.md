@@ -1,59 +1,87 @@
-# Frontend
+<p style="text-align: center;">
+  <img src="https://wowperu.pe/_astro/internet-hogar-wow-peru.lf6fogPl.svg" alt="Logo Wow Perú" height="50">
+</p>
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.4.
+## Acerca de
 
-## Development server
+Wow Perú es una empresa proveedora de internet, telefonia IP y Cable que utiliza una red de Fibra Óptica. En Materia Gris tuvimos el encargo de implementar el sistema de gestión de clientes e instalación de servicios.
 
-To start a local development server, run:
+## Sobre el proyecto
 
-```bash
+Este proyecto cubre la necesidad de un sistema atención de colas para los centro de atención CEX: [wow-turnos-frontend]
+(https://gitlab.com/wow-turnos/frontend.turnos.wowperu.pe)
+
+## Encargados del Proyecto
+
+### Gestión de Proyecto
+- Cesar Vallejo
+- Ricardo Ormeño
+
+### Desarrollo Frontend
+- Roy Celino 
+- Alvaro Iturrizaga
+
+## Requisitos previos para iniciar la aplicación.
+
+* Antes de comenzar, asegúrese de que su entorno de desarrollo incluya Node.js y un administrador de paquetes npm.
+
+* Node.js
+    * Este proyecto requiere Node.js versión 18 o posterior.
+
+* NPM
+    * Este proyecto requiere NPM versión 11 o posterior.
+
+* Angular CLI
+    * Instala Angular CLI usando npm, abre la terminal e ingresa el siguiente comando.
+
+```
+npm install -g @angular/cli
+```
+
+* Ingrese a la carpeta raíz del proyecto e instale las dependencias con el siguiente comando.
+
+```
+npm install
+```
+
+* Inicie la aplicación con el siguiente comando.
+
+```
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+* Se abrirá automaticamente una pestaña en su navegador en la dirección.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+http://localhost:4200/
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Para configurar el proyecto, después de clonar las fuentes, se debe editar el archivo:
 
-```bash
-ng generate --help
+```
+src\environments\environment.ts
 ```
 
-## Building
+Y modificar el siguiente contenido:
 
-To build the project run:
+```
+export const environment = {
+  api: {
+    sgc: 'https://api-qa.wowperu.pe/api',
+    gestionConstruccion: 'http://127.0.0.1:8000/api'
+  }
+};
 
-```bash
-ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
+## Build dockerfile
+Build for staging or qa environment run:
 ```bash
-ng test
+docker build -t tms-frontend:staging --build-arg ENV=staging .
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
+Build for production environment run:
 ```bash
-ng e2e
+docker build -t tms-frontend .
 ```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

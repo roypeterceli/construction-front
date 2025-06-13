@@ -1,0 +1,160 @@
+@use '@angular/material' as mat;
+@use "./_theme-colors" as wow;
+
+
+html {
+
+  color-scheme: light dark;
+
+  // Border radius de los cards
+  --mdc-elevated-card-container-shape: 5px;
+
+  // Color del borde de los inputs con appearance="outline"
+  --mdc-outlined-text-field-outline-color: #CEBAE1;
+
+  // Sombra del menu
+  --mat-menu-container-elevation-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.08);
+
+  // Sombra del card
+  --mdc-elevated-card-container-elevation: 0 3px 6px 0 rgba(0, 0, 0, 0.08);
+
+  --wow-left-card-width: 350px;
+
+  @include mat.theme((
+          color: wow.$primary-palette,
+          typography: "Inter var",
+          density: 0,
+  ));
+
+}
+
+.accent {
+  @include mat.theme((
+          color: wow.$secondary-palette,
+  ))
+}
+
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  @include mat.menu-overrides((item-leading-spacing: 25px,
+          item-trailing-spacing: 28px,
+          item-label-text-color: #4A4A4D,
+          container-color: #fff,
+          item-hover-state-layer-color: #EDEDF6,
+          divider-bottom-spacing: 0,
+          divider-top-spacing: 0));
+}
+
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  @include mat.card-overrides((
+          subtitle-text-color: orange,
+          elevated-container-color: #fff,
+    //   elevated-container-elevation: 30px
+    //   elevated-container-elevation: red
+  ));
+}
+
+.mat-mdc-card.mat-card-no-space {
+  overflow: hidden;
+
+  .mat-mdc-card-content {
+    padding: 0;
+  }
+
+  .mat-mdc-card-header {
+    padding: 0;
+  }
+}
+
+
+:root {
+  @include mat.table-overrides((
+          background-color: #fff,
+          header-headline-color: #83858A,
+          row-item-outline-color: #EEEEF1,
+          header-headline-size: 12px,
+          row-item-label-text-color: #828387
+  ));
+}
+
+
+.mat-mdc-table {
+  border-bottom: 1px solid #EEEEF1 !important;
+
+  .mat-mdc-header-cell {
+    text-transform: uppercase;
+  }
+
+  .mat-row-even {
+    background-color: rgba(0, 0, 0, 0.01);
+  }
+
+  .mat-mdc-row {
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+  }
+
+  .mat-mdc-row:hover {
+    background-color: rgba(156, 39, 176, 0.02) !important;
+  }
+
+  .mat-mdc-row.mat-row-even:hover {
+    background-color: rgba(156, 39, 176, 0.025) !important;
+  }
+
+  .mat-mdc-cell {
+    box-sizing: content-box;
+    white-space: nowrap;
+  }
+}
+
+// ACORDEON
+
+:root {
+  @include mat.expansion-overrides((
+          container-background-color: #fff,
+          container-text-color: var(--text-color),
+          container-shape: 0,
+          actions-divider-color: red
+  ));
+
+
+}
+
+.mat-expansion-panel {
+  box-shadow: none !important
+}
+
+.mat-expansion-panel-spacing {
+  margin: 0 !important
+}
+
+.mat-expansion-panel {
+  @apply border-t border-gray-200;
+}
+
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  @include mat.divider-overrides((
+          color: #ECECEC
+  ));
+}
+
+.mat-divider.mat-divider-horizontal {
+  @apply mt-4 mb-4;
+}
+
+
+h2 {
+  @apply text-xl font-semibold;
+}
+
+
+h3 {
+  @apply text-orange-500 text-sm font-semibold;
+}
+

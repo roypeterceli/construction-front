@@ -1,0 +1,54 @@
+:root {
+  .mat-mdc-dialog-container {
+    .mdc-dialog__surface {
+      @apply rounded-xl;
+    }
+
+    .mat-mdc-dialog-content {
+      max-height: 70vh;
+    }
+  }
+
+  .mat-mdc-dialog-title {
+    @apply pt-6;
+  }
+
+  /** Reset default height placeholder */
+  .mdc-dialog__title::before {
+    content: none;
+    height: auto;
+  }
+
+  .mat-mdc-dialog-panel {
+    &.alert-dialog-panel {
+      @apply mx-4;
+    }
+
+    &.dialog-panel-fullscreen {
+      height: calc(100% - 50px);
+      max-width: 100%;
+      max-height: 100%;
+
+      mat-dialog-content {
+        max-height: unset !important;
+        flex: 1 0 0;
+      }
+    }
+
+    &.dialog-panel-position-end {
+      @apply mx-6 md:mr-6;
+    }
+  }
+
+  .cdk-global-overlay-wrapper:has(.dialog-panel-position-end) {
+    justify-content: end !important;
+    align-items: center !important;
+  }
+
+  .alert-dialog-panel {
+    .mdc-dialog__surface {
+      @apply dark:border-2 dark:border-gray-500;
+    }
+  }
+
+}

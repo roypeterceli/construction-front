@@ -1,0 +1,52 @@
+<div @fadeInUp class="bg-white px-6 py-8 rounded-lg dark:bg-gray-900 dark:border-gray-700">
+  <div class="flex flex-col items-center justify-center">
+    <div class="fill-current text-center">
+      <img src="images/wowperu-logo-color.svg" class="w-36 dark:hidden" alt="WOW Perú"/>
+      <img src="images/wowperu-logo-light.svg" class="w-36 hidden dark:block" alt="WOW Perú"/>
+    </div>
+  </div>
+
+  <div class="text-center mt-4 mb-6">
+    <h2 class="text-xl font-semibold m-0 dark:text-white">Bienvenido</h2>
+    <h4 class="text-gray-700 dark:text-gray-300 font-medium m-0">
+      Ingresa con tus credenciales
+    </h4>
+  </div>
+
+  <form [formGroup]="loginForm" (ngSubmit)="login()"
+        class="flex flex-col gap-1.5">
+    <mat-form-field class="flex-1" appearance="outline">
+      <mat-label>E-Mail</mat-label>
+      <input type="text" matInput autofocus formControlName="email"/>
+
+      @if (formValidator.hasError('email')) {
+        <mat-error>{{ formValidator.getErrorMessage('email') }}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="flex-1" appearance="outline">
+      <mat-label>Contraseña</mat-label>
+      <input
+        [type]="hidden() ? 'password' : 'text'"
+        formControlName="password"
+        matInput/>
+      <button
+        mat-icon-button
+        matIconSuffix
+        (click)="toggleVisibility()"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidden()"
+        type="button">
+        <mat-icon>{{ hidden() ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+
+      @if (formValidator.hasError('password')) {
+        <mat-error>{{ formValidator.getErrorMessage('password') }}</mat-error>
+      }
+    </mat-form-field>
+    
+    <button mat-flat-button type="submit">
+      Iniciar sesión
+    </button>
+  </form>
+</div>

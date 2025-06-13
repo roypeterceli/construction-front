@@ -1,0 +1,9 @@
+// Fonts
+@forward "fonts/inter";
+
+// Styles / CSS Variables
+@forward "tailwind";
+@forward "base";
+@forward "theme";
+
+@forward "plugins/@angular/material";

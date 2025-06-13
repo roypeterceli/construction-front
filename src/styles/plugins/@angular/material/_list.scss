@@ -1,0 +1,33 @@
+:root {
+
+  .mat-mdc-nav-list {
+
+    .mat-mdc-list-item {
+      @apply rounded-full;
+
+      &.mdc-list-item--activated {
+        @apply bg-primary-700/10;
+
+        &--neutral {
+          @apply bg-gray-700/10;
+        }
+      }
+
+      .mat-mdc-list-item-icon {
+        &.icon-red {
+          @apply text-red-500;
+        }
+        &.icon-green {
+          @apply text-green-500;
+        }
+        &.icon-amber {
+          @apply text-amber-500;
+        }
+        &.icon-blue {
+          @apply text-blue-500;
+        }
+      }
+    }
+  }
+
+}

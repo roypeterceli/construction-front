@@ -1,0 +1,16 @@
+<div class="wow-menubar wow-menubar-primary">
+  <button class="flex items-center gap-2 py-3 px-2 text-white"
+          matRipple
+          [matMenuTriggerFor]="moduleMenu">
+    <mat-icon aria-hidden="false" aria-label="Modules" class="material-icons-outlined" fontIcon="layers"></mat-icon>
+    <span>{{ selectedModule().name }}</span>
+  </button>
+</div>
+
+<mat-menu #moduleMenu="matMenu">
+  @for (module of modules(); track module.id) {
+    <a mat-menu-item [routerLink]="module.path" (click)="selectedModule.set(module)">
+      {{ module.name }}
+    </a>
+  }
+</mat-menu>

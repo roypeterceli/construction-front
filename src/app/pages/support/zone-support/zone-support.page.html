@@ -1,0 +1,9 @@
+<mat-card class="flex-1 mat-card-no-space">
+  <mat-card-content class="overflow-x-auto">
+    <wow-dynamic-table [columns]="columns"
+                       [data]="data()"
+                       (rowDblClick)="goToDetail($event)"
+                       [isLoading]="loading()"
+    ></wow-dynamic-table>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,16 @@
+.toolbar > div {
+  min-height: 80px;
+
+  .logo {
+    height: 32px;
+    width: auto;
+  }
+}
+
+.sidenav {
+  @apply flex items-center justify-center w-72 rounded-none;
+
+  &-container {
+    @apply absolute bottom-0 top-32 left-0 right-0;
+  }
+}

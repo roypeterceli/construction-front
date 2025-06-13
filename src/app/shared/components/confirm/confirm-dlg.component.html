@@ -1,0 +1,77 @@
+<mat-dialog-content>
+  <div class="flex flex-col items-center justify-center pb-4">
+    <div class="bg-yellow-600/10 text-yellow-600 rounded-full p-4">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+           stroke="currentColor"
+           class="size-16">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/>
+      </svg>
+    </div>
+
+    <div class="text-center text-xl mt-6 mb-2.5 font-semibold">
+      Terminar atención
+    </div>
+
+    <div class="text-center text-lg mb-6">
+      ¿Estás seguro de terminar la atención?
+    </div>
+    <form class="flex flex-col gap-2 w-full" [formGroup]="confirmForm">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Código zendesk / correlativo</mat-label>
+        <input type="text"
+               cdkFocusInitial
+               matInput
+               formControlName="codeAtention"
+               maxlength="50"
+               autocomplete="off"
+               required>
+        @if (confirmForm.get('codeAtention')?.invalid) {
+          <mat-error>
+            {{ getErrorMessage('codeAtention') }}
+          </mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Zone Zendesk</mat-label>
+        <input type="text"
+               matInput
+               formControlName="zendeskZone"
+               maxlength="20"
+               autocomplete="off"
+               required>
+        @if (confirmForm.get('zendeskZone')?.invalid) {
+          <mat-error>
+            {{ getErrorMessage('zendeskZone') }}
+          </mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>URL zona Zendesk</mat-label>
+        <input type="text"
+               matInput
+               formControlName="zendeskUrl"
+               maxlength="100"
+               autocomplete="off"
+               required>
+        @if (confirmForm.get('zendeskUrl')?.invalid) {
+          <mat-error>
+            {{ getErrorMessage('zendeskUrl') }}
+          </mat-error>
+        }
+      </mat-form-field>
+    </form>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button type="button" mat-button mat-dialog-close>No</button>
+  <button
+    type="button"
+    mat-flat-button
+    [disabled]="confirmForm.invalid"
+    (click)="endZoneSupport()"
+  >
+    Si, terminar
+  </button>
+</mat-dialog-actions>

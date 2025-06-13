@@ -3,6 +3,24 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@wow/env/*": [
+        "environments/*"
+      ],
+      "@wow/shared/*": [
+        "app/shared/*"
+      ],
+      "@wow/core/*": [
+        "app/core/*"
+      ],
+      "@wow/layout/*": [
+        "app/layout/*"
+      ],
+      "@wow/pages/*": [
+        "app/pages/*"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,

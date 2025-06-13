@@ -1,0 +1,7 @@
+div.wow-menubar {
+  @apply flex items-center justify-start px-8 gap-4;
+
+  &-primary {
+    @apply bg-primary-900 border-t border-t-primary-500;
+  }
+}
