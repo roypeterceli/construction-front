@@ -76,14 +76,24 @@
               <mat-option value="option2">ANCASH</mat-option>
               <mat-option value="option3">APURIMAC</mat-option>
             </mat-select>
+            <!-- <mat-select formControlName="ubigeo_department_id">
+              @for (department of settingService.departments(); track department.id) {
+                <mat-option [value]="department.department_code">{{ department.department_name }}</mat-option>
+              }
+            </mat-select> -->
           </mat-form-field>
           <mat-form-field class="w-full">
             <mat-label>Estado</mat-label>
-            <mat-select [(value)]="selected">
+            <!-- <mat-select [(value)]="selected">
               <mat-option>Todos</mat-option>
               <mat-option value="option1">Pendiente</mat-option>
               <mat-option value="option2">Construido</mat-option>
               <mat-option value="option3">En construcción</mat-option>
+            </mat-select> -->
+            <mat-select formControlName="state_construction">
+              @for (issue of settingService.stateConstruction(); track issue.id) {
+                <mat-option [value]="issue.id">{{ issue.name }}</mat-option>
+              }
             </mat-select>
           </mat-form-field>
           <mat-form-field class="w-full">

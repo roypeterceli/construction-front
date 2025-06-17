@@ -6,22 +6,24 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AsyncPipe } from '@angular/common';
+import { Module, ZoneStateType} from '@wow/core/interfaces';
+import { SaveZoneSupportDlgComponent } from '@wow/pages/support/components/save-zone-support-dlg/save-zone-support-dlg.component';
+
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { Module, ZoneStateType } from '@wow/core/interfaces';
 import { MatDialog } from '@angular/material/dialog';
-import { SaveZoneSupportDlgComponent } from '@wow/pages/support/components/save-zone-support-dlg/save-zone-support-dlg.component';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatSelect } from '@angular/material/select';
 import { FormGroup } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
-
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {provideNativeDateAdapter} from '@angular/material/core';
+
+
 
 
 const TAILWIND_BREAKPOINTS = {
@@ -45,7 +47,7 @@ const TAILWIND_BREAKPOINTS = {
     MatFormField,
     MatLabel,
     MatSelect,MatSelectModule,
-    MatFormFieldModule, MatInputModule, MatDatepickerModule
+    MatFormFieldModule, MatInputModule, MatDatepickerModule, 
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './shell.layout.html',
@@ -62,6 +64,10 @@ export class ShellLayout implements OnInit {
   private readonly router = inject(Router);
   private readonly dialog = inject(MatDialog);
   protected readonly zoneState = ZoneStateType;
+
+
+  // departments = this.ubigeoForm.value as UbigeoServiceResponse;
+
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe([TAILWIND_BREAKPOINTS.sm, TAILWIND_BREAKPOINTS.md])

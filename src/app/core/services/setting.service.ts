@@ -1,9 +1,10 @@
 import { inject, Injectable, signal } from '@angular/core';
 // import { IDENTITY_DOCUMENT_TYPES, ISSUE_TYPES, Module, SOLICITUDE_TYPES, CEX_COLLECTION } from '@wow/core/interfaces';
+import {STATE_CONSTRUCTION} from '@wow/core/interfaces';
 import { Module } from '@wow/core/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { ApiResponse } from '@wow/shared/interfaces';
-import { environment } from '@wow/env/environment';
+import { environment } from '@wow/env/environment.development';
 import { tap } from 'rxjs';
 
 @Injectable({
@@ -13,7 +14,8 @@ export class SettingService {
   modules = signal<Module[]>([]);
   // documentTypes = signal(IDENTITY_DOCUMENT_TYPES);
   // processTypes = signal<{ id: number; name: string }[]>([]);
-  // solicitudeTypes = signal(SOLICITUDE_TYPES);
+  stateConstruction = signal<{ id: number; name: string }[]>(STATE_CONSTRUCTION);
+  departments = signal<{ id: number; name: string }[]>([]);
   // issueTypes = signal<{ id: number; name: string }[]>(ISSUE_TYPES);
   // department = signal<{ department_code: string; department_name: string }[]>([]);
   // province = signal<{ province_code: string; province_name: string }[]>([]);
@@ -62,7 +64,7 @@ export class SettingService {
   }
 
   // private loadDepartments(): void {
-  //   if (this.department().length === 0) {
+  //   if (this.departments().length === 0) {
   //     this.getDepartments().subscribe();
   //   }
   // }
@@ -78,7 +80,7 @@ export class SettingService {
   //     department_code: string; 
   //     department_name: string
   //   }[]>>(`${ environment.api.construction }/ubigeo/departments`).pipe(
-  //     tap(res => this.department.set(res.data ?? []))
+  //     tap(res => this.departments.set(res.data ?? []))
   //   );
   // }
 
