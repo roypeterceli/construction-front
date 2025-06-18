@@ -6,6 +6,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { provideHttpClient } from '@angular/common/http';
 
 
 
@@ -15,6 +16,7 @@ export const appConfig: ApplicationConfig = {
     { provide: LOCALE_ID, useValue: 'es' },
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes),
-    provideAnimationsAsync()
+    provideAnimationsAsync(), 
+    provideHttpClient()
   ]
 };

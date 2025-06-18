@@ -15,17 +15,17 @@ export class SettingService {
   // documentTypes = signal(IDENTITY_DOCUMENT_TYPES);
   // processTypes = signal<{ id: number; name: string }[]>([]);
   stateConstruction = signal<{ id: number; name: string }[]>(STATE_CONSTRUCTION);
-  departments = signal<{ id: number; name: string }[]>([]);
+  // departments = signal<{ id: number; name: string }[]>([]);
   // issueTypes = signal<{ id: number; name: string }[]>(ISSUE_TYPES);
-  // department = signal<{ department_code: string; department_name: string }[]>([]);
+  departments = signal<{ department_code: string; department_name: string }[]>([]);
   // province = signal<{ province_code: string; province_name: string }[]>([]);
 
-  // private http = inject(HttpClient);
+  private http = inject(HttpClient);
 
   constructor() {
     this.getModules();
     // this.loadProcessTypes();
-    // this.loadDepartments();
+    this.loadDepartments();
     // this.loadProvinces();
   }
 
@@ -63,25 +63,25 @@ export class SettingService {
     return this.modules().find(module => module.id === moduleId);
   }
 
-  // private loadDepartments(): void {
-  //   if (this.departments().length === 0) {
-  //     this.getDepartments().subscribe();
-  //   }
-  // }
+  private loadDepartments(): void {
+    if (this.departments().length === 0) {
+      this.getDepartments().subscribe();
+    }
+  }
+  
+  getDepartments() {
+    return this.http.get<ApiResponse<{
+      department_code: string; 
+      department_name: string
+    }[]>>(`${ environment.api.construction }/ubigeo/departments`).pipe(
+      tap(res => this.departments.set(res.data ?? []))
+    );
+  }
 
   // private loadProvinces(): void {
   //   if (this.province().length === 0) {
   //     this.getProvinces().subscribe();
   //   }
-  // }
-
-  // getDepartments() {
-  //   return this.http.get<ApiResponse<{
-  //     department_code: string; 
-  //     department_name: string
-  //   }[]>>(`${ environment.api.construction }/ubigeo/departments`).pipe(
-  //     tap(res => this.departments.set(res.data ?? []))
-  //   );
   // }
 
   // getProvinces() {
