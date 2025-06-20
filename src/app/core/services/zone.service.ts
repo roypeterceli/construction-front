@@ -9,13 +9,14 @@ import { ZoneSupport } from '../interfaces';
   providedIn: 'root'
 })
 export class ZoneService {
+  private http = inject(HttpClient);
+  
   departmentsList = signal<{ code: string; name: string }[]>([]);
   provincesList = signal<{ code: string; name: string }[]>([]);
 
   private zoneCreatedSource = new Subject<void>();
   zoneCreated$ = this.zoneCreatedSource.asObservable();
 
-  private http = inject(HttpClient);
 
   constructor() {
     this.loadDepartments();
