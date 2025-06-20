@@ -17,7 +17,7 @@ export class SettingService {
   stateConstruction = signal<{ id: number; name: string }[]>(STATE_CONSTRUCTION);
   // departments = signal<{ id: number; name: string }[]>([]);
   // issueTypes = signal<{ id: number; name: string }[]>(ISSUE_TYPES);
-  departments = signal<{ department_code: string; department_name: string }[]>([]);
+  
   // province = signal<{ province_code: string; province_name: string }[]>([]);
 
   private http = inject(HttpClient);
@@ -25,7 +25,6 @@ export class SettingService {
   constructor() {
     this.getModules();
     // this.loadProcessTypes();
-    this.loadDepartments();
     // this.loadProvinces();
   }
 
@@ -63,20 +62,7 @@ export class SettingService {
     return this.modules().find(module => module.id === moduleId);
   }
 
-  private loadDepartments(): void {
-    if (this.departments().length === 0) {
-      this.getDepartments().subscribe();
-    }
-  }
   
-  getDepartments() {
-    return this.http.get<ApiResponse<{
-      department_code: string; 
-      department_name: string
-    }[]>>(`${ environment.api.construction }/ubigeo/departments`).pipe(
-      tap(res => this.departments.set(res.data ?? []))
-    );
-  }
 
   // private loadProvinces(): void {
   //   if (this.province().length === 0) {
