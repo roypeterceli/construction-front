@@ -38,23 +38,51 @@
       </mat-form-field> -->
       <mat-form-field class="w-full">
         <mat-label>Departamento</mat-label>
-        <mat-select [(value)]="selected">
-          <mat-option value="option1">LIMA</mat-option>
+        <!-- <mat-select [(value)]="selected"> -->
+          <!-- <mat-option value="option1">LIMA</mat-option>
           <mat-option value="option2">AMAZONAS</mat-option>
-          <mat-option value="option3">ANCASH</mat-option>
-        </mat-select>
+          <mat-option value="option3">ANCASH</mat-option> -->
+          <!-- <mat-select formControlName="ubigeo_department">
+              <mat-option>Todos</mat-option>
+              @for (department of zoneService.departmentsList(); track department.code) {
+                <mat-option [value]="department.code">{{ department.name }}</mat-option>
+              }
+          </mat-select> -->
+          <mat-select formControlName="department_code" (selectionChange)="onDepartmentChange($event.value)">
+            <!-- <mat-option *ngFor="let d of zoneService.departmentsList()" [value]="d.code">
+              {{ d.name }}
+            </mat-option> -->
+             @for (department of zoneService.departmentsList(); track department.code) {
+                <mat-option [value]="department.code">{{ department.name }}</mat-option>
+              }
+          </mat-select>
+        <!-- </mat-select> -->
       </mat-form-field>
       <mat-form-field class="w-full">
         <mat-label>Provincia</mat-label>
-        <mat-select [(value)]="selected">
+        <!-- <mat-select [(value)]="selected">
           <mat-option value="option1">CANTA</mat-option>
           <mat-option value="option2">YAUYOS</mat-option>
           <mat-option value="option3">HUARAL</mat-option>
+        </mat-select> -->
+        <!-- <mat-select formControlName="ubigeo_province">
+           <mat-option>Todos</mat-option>
+           @for (province of zoneService.provincesList(); track province.code) {
+             <mat-option [value]="province.code">{{ province.name }}</mat-option>
+           }
+       </mat-select> -->
+       <mat-select formControlName="province_code">
+        <!-- <mat-option *ngFor="let p of zoneService.provincesList()" [value]="p.code">
+            {{ p.name }}
+          </mat-option> -->
+           @for (province of zoneService.provincesList(); track province.code) {
+             <mat-option [value]="province.code">{{ province.name }}</mat-option>
+           }
         </mat-select>
       </mat-form-field>
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <mat-label>Código</mat-label>
-        <input matInput>
+        <input matInput formControlName="zone_code" maxlength="50">
       </mat-form-field>
 
     </div>

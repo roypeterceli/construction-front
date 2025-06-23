@@ -6,7 +6,11 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+// import { KeycloakService } from './core/services';
+import { authInterceptor, httpErrorInterceptor } from './core/interceptors';
+import { includeBearerTokenInterceptor } from 'keycloak-angular';
+import { provideKeycloakAngular, provideKeycloakTokenInterceptor } from './app.provide';
 
 
 
@@ -17,6 +21,10 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes),
     provideAnimationsAsync(), 
-    provideHttpClient()
+     provideHttpClient(
+      withInterceptors([authInterceptor, httpErrorInterceptor, includeBearerTokenInterceptor]),
+    ),
+    provideKeycloakAngular(),
+    provideKeycloakTokenInterceptor(),
   ]
 };

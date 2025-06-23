@@ -80,6 +80,31 @@
                 </td>
               </ng-container>
             }
+            @case ('date') {
+              <!-- Text Columns -->
+              <ng-container [matColumnDef]="column.property">
+                <th
+                  *matHeaderCellDef
+                  class="uppercase"
+                  mat-header-cell
+                  mat-sort-header>
+                  {{ column.label }}
+                </th>
+                <td *matCellDef="let row; let i = index"
+                    (mouseenter)="hoveredCell.set({ rowIndex: i, columnProperty: column.property })"
+                    (mouseleave)="hoveredCell.set(null)"
+                    [ngClass]="column.cssClasses"
+                    [class.ctrl-cell-hover]="isCtrlHoverActive(i, column.property, column.allowCtrlClick)"
+                    (click)="onCellCtrlClick($event, column.property, row, column.allowCtrlClick)"
+                    mat-cell>
+                  @if (column.format) {
+                    <span>{{ row[column.property] | date:column.format }}</span>
+                  } @else {
+                    <span>{{ row[column.property] | date }}</span>
+                  }
+                </td>
+              </ng-container>
+            }
             @case ('image') {
               <!-- Image Column -->
               <ng-container [matColumnDef]="column.property">

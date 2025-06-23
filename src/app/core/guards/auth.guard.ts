@@ -27,8 +27,8 @@
 
 // export const canActivateAuthRole = createAuthGuard<CanActivateFn>(isAccessAllowed);
 
-import { CanActivateFn } from '@angular/router';
+// import { CanActivateFn } from '@angular/router';
 
-export const authGuard: CanActivateFn = (route, state) => {
-  return true;
-};
+// export const authGuard: CanActivateFn = (route, state) => {
+//   return true;
+// };

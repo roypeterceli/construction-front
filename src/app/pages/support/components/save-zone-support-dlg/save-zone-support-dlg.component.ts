@@ -8,7 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { AlertDialogService } from '@wow/shared/components/alert';
-import { AuthService} from '@wow/core/services';
+import { SettingService, ZoneService} from '@wow/core/services';
 import { ZoneSupport } from '@wow/core/interfaces';
 import { FormValidator } from '@wow/shared/utils';
 import { ScreenLoaderService } from '@wow/shared/components/loader';
@@ -16,14 +16,15 @@ import { finalize } from 'rxjs';
 import { Router } from '@angular/router';
 
 
+
 const FORM_ERROR_MESSAGES = {
-  name: { pattern: 'Solo se permite letras' },
-  last_name: { pattern: 'Solo se permite letras' },
-  phone: { pattern: 'El celular debe empezar con 9' }
+  // zone_code: { pattern: 'Solo letras y números' }
+  // name: { pattern: 'Solo se permite letras' },
+  // last_name: { pattern: 'Solo se permite letras' },
+  // phone: { pattern: 'El celular debe empezar con 9' }
 };
 
-const FORM_CONTROL_DYNAMIC = ['solicitude_type', 'issue_type_id', 'comment', 'is_preference'];
-
+const FORM_CONTROL_DYNAMIC = ['zone_code'];
 @Component({
   selector: 'wow-save-zone-support-dlg',
   imports: [
@@ -40,33 +41,52 @@ const FORM_CONTROL_DYNAMIC = ['solicitude_type', 'issue_type_id', 'comment', 'is
 })
 export class SaveZoneSupportDlgComponent implements OnInit {
 
-  selected = 'option1';
+  // selected = 'option1';
 
   zoneForm = new FormGroup<any>({});
   formValidator!: FormValidator;
-  showFields = signal<boolean>(false);
-  isCustomer = signal<boolean>(false);
-  isSearching = signal<boolean>(false);
-  // settingService = inject(SettingService);
+  // showFields = signal<boolean>(false);
+  settingService = inject(SettingService);
+  // zoneService = inject(ZoneService);
   private screenLoaderService = inject(ScreenLoaderService)
   // private zoneService = inject(ZoneService);
   private alertService = inject(AlertDialogService);
-  private authService = inject(AuthService);
+  // private authService = inject(AuthService);
+  private zoneSupportService = inject(ZoneService);
   private router = inject(Router);
   private readonly fb = inject(FormBuilder);
   private readonly dialogRef = inject(MatDialogRef<SaveZoneSupportDlgComponent>);
-
-  documentNumAttrs = {
-    minlength: 0,
-    maxlength: 100,
-    pattern: ''
-  };
 
   ngOnInit(): void {
     this.initZoneForm();
   }
 
+  // form: FormGroup;
+  constructor(
+    // private fb: FormBuilder,
+    public zoneService: ZoneService // importante que sea público para usarlo en el HTML
+    ) {
+    this.zoneForm = this.fb.group({
+      department_code: [''],
+      province_code: [''],
+      zone_code: ['']
+    });
+  }
+
+
+  onDepartmentChange(departmentCode: string): void {
+    this.zoneService.getProvinceByDepartment(departmentCode).subscribe();
+    this.zoneForm.get('province_code')?.reset(); // limpiar selección previa
+  }
+
+  // onProvinceChange(): void {
+  //   if (!this.isProvinceSelected) {
+  //     this.zoneForm.controls['zone_code'].enabled;
+  //   }
+  // }
+
   createZone(): void {
+
     if (this.zoneForm.invalid) {
       this.zoneForm.markAllAsTouched();
       return;
@@ -76,17 +96,17 @@ export class SaveZoneSupportDlgComponent implements OnInit {
     const zone = this.zoneForm.value as ZoneSupport;
     // zone.created_by = this.authService.currentUser()!.nIdUsuario;
 
-    // this.zoneSupportService.create(zone)
-    //   .pipe(
-    //     finalize(() => this.screenLoaderService.hide())
-    //   )
-    //   .subscribe(res => {
-    //     if (res && res.data) {
-    //       this.closeDlg(res.data);
-    //       this.successMessage(res.data);
-    //       this.zoneSupportService.notifyZoneCreated();
-    //     }
-    //   })
+    this.zoneSupportService.create(zone)
+      .pipe(
+        finalize(() => this.screenLoaderService.hide())
+      )
+      .subscribe(res => {
+        if (res && res.data) {
+          this.closeDlg(res.data);
+          this.successMessage(res.data);
+          this.zoneSupportService.notifyZoneCreated();
+        }
+      })
   }
 
   // searchCustomer(event: any): void {
@@ -126,21 +146,9 @@ export class SaveZoneSupportDlgComponent implements OnInit {
     this.dialogRef.close(data);
   }
 
-  issueTypeChange(): void {
-    if (!this.isTramiteSelected) {
-      this.zoneForm.controls['process_type_id'].setValue(null);
-    }
-  }
-
-  // departmentChange(): void {
-  //   if (!this) {
-  //     this.zoneForm.controls['department'].setValue(null);
-  //   }
-  // }
-
-  // provinceChange(): void {
-  //   if (!this.isDeparmentSelected) {
-  //     this.zoneForm.controls['province'].setValue(null);
+  // issueTypeChange(): void {
+  //   if (!this.isDepartmentSelected) {
+  //     this.zoneForm.controls['process_type_id'].setValue(null);
   //   }
   // }
 
@@ -155,54 +163,40 @@ export class SaveZoneSupportDlgComponent implements OnInit {
 
     alertRef.afterClosed().subscribe(res => {
       if (res && res.isConfirmed) {
-        this.router.navigate(['/zones', zone.zone_id, 'detalles']).then();
+        this.router.navigate(['/zonas', zone.zone_id, 'detalles']).then();
       }
     });
   }
 
-  private setGuestData(): void {
-    this.zoneForm.patchValue({ name: '', last_name: '', email: '', phone: '' });
-    this.isCustomer.set(false);
-  }
+  // private setGuestData(): void {
+  //   this.zoneForm.patchValue({ name: '', last_name: '', email: '', phone: '' });
+  //   this.isCustomer.set(false);
+  // }
 
 
+  // zone_code = this.zoneForm.controls['zone_code'].value;
+
+  
   private initZoneForm(): void {
+    // this.zoneForm.patchValue({ zone_code: ''});
     this.zoneForm = this.fb.group({
-      document_type: [3, [Validators.required]],
-      document_num: [null, [Validators.required]],
-      name: [null, [Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$')]],
-      last_name: [null, [Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$')]],
-      phone: [null, [
-        Validators.required,
-        Validators.minLength(9),
-        Validators.maxLength(9),
-        Validators.pattern('^9\\d{8}$')
-      ]],
-      email: [null, [Validators.email]],
-      solicitude_type: [null, [Validators.required]],
-      issue_type_id: [null, [Validators.required]],
-      process_type_id: [null],
-      comment: [null],
-      is_preference: [false]
+      department_code: [null, [Validators.required]],
+      province_code: [null, [Validators.required]],
+      zone_code: [null, [Validators.required]]
     });
 
     this.formValidator = new FormValidator(this.zoneForm, FORM_ERROR_MESSAGES);
-    this.formValidator.disableControls(FORM_CONTROL_DYNAMIC);
+    // this.formValidator.disableControls(FORM_CONTROL_DYNAMIC);
   }
 
-  get isTramiteSelected(): boolean {
-    const tramiteTypeId = 2;
-    return this.zoneForm.controls['solicitude_type'].value === tramiteTypeId;
-  }
 
-  get isDepartmentSelected(): boolean {
-    const tramiteTypeId = 2;
-    return this.zoneForm.controls['department'].value === tramiteTypeId;
-  }
+  // get isDepartmentSelected(): boolean {
+  //   return this.zoneForm.controls['department_code'].value;
+  // }
 
-  get isProvinceSelected(): boolean {
-    const tramiteTypeId = 2;
-    return this.zoneForm.controls['deparment'].value === tramiteTypeId;
-  }
+  // get isProvinceSelected(): boolean {
+  //   return this.zoneForm.controls['province_code'].enabled;
+  // }
+
 
 }

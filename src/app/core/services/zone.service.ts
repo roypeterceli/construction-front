@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '@wow/env/environment.development';
 import { ApiResponse } from '@wow/shared/interfaces';
-import { Subject, tap } from 'rxjs';
+import { map, Subject, tap } from 'rxjs';
 import { ZoneSupport } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ZoneService {
+
   private http = inject(HttpClient);
   
   departmentsList = signal<{ code: string; name: string }[]>([]);
@@ -25,7 +26,7 @@ export class ZoneService {
 
   private loadDepartments(): void {
     if (this.departmentsList().length === 0) {
-      this.getAllDeparments().subscribe();
+      this.getAllDepartments().subscribe();
     }
   }
 
@@ -35,7 +36,7 @@ export class ZoneService {
     }
   }
 
-  getAllDeparments() {
+  getAllDepartments() {
     return this.http.get<ApiResponse<{ code: string; name: string }[]>>(
       `${environment.api.construction}/ubigeo/departments`
     ).pipe(
@@ -63,11 +64,23 @@ export class ZoneService {
     return this.http.put<ApiResponse<ZoneSupport>>(`${environment.api.construction}/zones/${zoneId}`, data);
   }
 
-  delete(zoneId: number) {
-    return this.http.delete<ApiResponse<ZoneSupport>>(`${environment.api.construction}/zones/${zoneId}`);
-  }
+  // delete(zoneId: number) {
+  //   return this.http.delete<ApiResponse<ZoneSupport>>(`${environment.api.construction}/zones/${zoneId}`);
+  // }
 
   notifyZoneCreated(): void {
     this.zoneCreatedSource.next();
+  }
+
+  //fill table
+  getAll() {
+    return this.http.get<ApiResponse<ZoneSupport[]>>(`${ environment.api.construction }/zones`).pipe(
+      map(res => {
+        if (res && res.data) {
+          return res.data.map(item => new ZoneSupport(item));
+        }
+        return [];
+      })
+    );
   }
 }

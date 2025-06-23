@@ -4,7 +4,7 @@ import { WowDynamicTable } from '@wow/shared/components/table';
 import { ZoneSupport } from '@wow/core/interfaces';
 import { columns } from './zone-support.config';
 import { ActivatedRoute, Router } from '@angular/router';
-// import { ZoneService } from '@wow/core/services';
+import { ZoneService } from '@wow/core/services';
 import { Subject, merge, takeUntil, finalize } from 'rxjs';
 
 @Component({
@@ -21,7 +21,7 @@ export class ZoneSupportPage implements OnInit, OnDestroy {
   readonly loading = signal<boolean>(false);
   readonly columns = columns;
 
-  // private readonly zoneSupportService = inject(ZoneService);
+  private readonly zoneSupportService = inject(ZoneService);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly destroy$ = new Subject<void>();
@@ -29,7 +29,7 @@ export class ZoneSupportPage implements OnInit, OnDestroy {
   ngOnInit(): void {
     merge(
       this.route.queryParams,
-      // this.zoneSupportService.zoneCreated$
+      this.zoneSupportService.zoneCreated$
     )
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => this.getZones());
@@ -45,15 +45,15 @@ export class ZoneSupportPage implements OnInit, OnDestroy {
   }
 
   private getZones(): void {
-    const state = this.route.snapshot.queryParams['state'];
+    // const state = this.route.snapshot.queryParams['state'];
     this.loading.set(true);
 
-    // this.zoneSupportService.getAll(state)
-      // .pipe(
-      //   finalize(() => this.loading.set(false)),
-      //   takeUntil(this.destroy$)
-      // )
-      // .subscribe(zones => this.data.set(zones));
+    this.zoneSupportService.getAll()
+      .pipe(
+        finalize(() => this.loading.set(false)),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(zones => this.data.set(zones));
   }
 
 }

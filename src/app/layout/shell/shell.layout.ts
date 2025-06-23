@@ -22,6 +22,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {provideNativeDateAdapter} from '@angular/material/core';
+// import { UbigeoSupport } from '@wow/core/interfaces/ubigeo';
+import { UbigeoService } from '@wow/core/services/ubigeo.service';
 
 
 
@@ -55,18 +57,19 @@ const TAILWIND_BREAKPOINTS = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShellLayout implements OnInit {
-  selected = 'option1';
+  // selected = 'option1';
   ubigeoForm = new FormGroup<any>({});
   subModules = signal<Module[] | null | undefined>([]);
   selectedZoneState = signal<ZoneStateType | null | undefined>(null);
   settingService = inject(SettingService);
+  ubigeoService = inject(UbigeoService);
   private breakpointObserver = inject(BreakpointObserver);
   private readonly router = inject(Router);
   private readonly dialog = inject(MatDialog);
   protected readonly zoneState = ZoneStateType;
 
 
-  // departments = this.ubigeoForm.value as UbigeoServiceResponse;
+  // ubigeo_department_id = this.ubigeoForm.value as UbigeoSupport;
 
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -87,10 +90,10 @@ export class ShellLayout implements OnInit {
     });
   }
 
-  getZoneFilter(state?: ZoneStateType): void {
-    this.selectedZoneState.set(state);
-    this.router.navigate(['/zonas', 'zonas'], { queryParams: { state: state } }).then();
-  }
+  // getZoneFilter(state?: ZoneStateType): void {
+  //   this.selectedZoneState.set(state);
+  //   this.router.navigate(['/zonas', 'zonas'], { queryParams: { state: state } }).then();
+  // }
 
   private getSubModules(): void {
     const subModule = this.settingService.getSubModules(1);

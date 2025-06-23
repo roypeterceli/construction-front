@@ -1,4 +1,5 @@
 import { TagItem } from '@wow/shared/interfaces';
+import { STATE_CONSTRUCTION, STATE_SALE } from '@wow/core/interfaces';
 
 export enum ZoneStateType {
   PENDING = 1,
@@ -59,38 +60,44 @@ export class ZoneSupport {
   ubigeo_department_id: string;
   ubigeo_province_id: string;
   zone_code: string;
-  troncal_id: number;
-  node_id: number;
+  troncales: number;
+  box_naps: number;
   advance_id: number;
-  zone_state: ZoneStateType;
-  sale_state: ZoneSaleType;
+  state_id: ZoneStateType;
+  sale_id: ZoneSaleType;
   
-  created_at: Date;
+  created_at?: Date;
+  updated_at?: Date;
   created_by?: number;
+  updated_by?: number;
 
   constructor(model: ZoneSupport) {
     this.zone_id = model.zone_id;
     this.ubigeo_department_id = model.ubigeo_department_id;
     this.ubigeo_province_id = model.ubigeo_province_id;
     this.zone_code = model.zone_code;
-    this.troncal_id = model.troncal_id;
-    this.node_id = model.node_id;
+    this.troncales = model.troncales;
+    this.box_naps = model.box_naps;
     this.advance_id = model.advance_id;
-    this.zone_state = model.zone_state;
-    this.sale_state = model.sale_state;
-
-    this.created_by = model.created_by;
+    this.state_id = model.state_id;
+    this.sale_id = model.sale_id;
+    
     this.created_at = model.created_at;
+    this.updated_at = model.updated_at;
+    this.created_by = model.created_by;
+    this.updated_by = model.updated_by;
+
   }
 
-  get stateBadge(): TagItem {
-    return ZONE_SUPPORT_STATE[this.zone_state];
+  get stateBadge(): TagItem | null {
+    return ZONE_SUPPORT_STATE[this.state_id];
   }
 
 
-  get zoneId(): number {
+  get zoneId(): number | null {
     return this.zone_id;
   }
+
   get department(): string {
     return this.ubigeo_department_id;
   }
@@ -99,28 +106,30 @@ export class ZoneSupport {
     return this.ubigeo_province_id;
   }
 
-  get zoneCode(): string | null {
+  get zoneCode(): string | null{
     return this.zone_code;
   }
 
-  // get troncals(): number {
-  //   return this.troncal_id;
-  // }
-
-  // get nodes(): number {
-  //   return this.node_id;
-  // }
-
-  // get advance(): number {
-  //   return this.advance_id;
-  // }
-
-  get zoneState(): number {
-    return this.zone_state;
+  get troncals(): number |null {
+    return this.troncales;
   }
 
-  get saleState(): number {
-    return this.sale_state;
+  get nodes(): number  |null{
+    return this.box_naps;
+  }
+
+  get advance(): number |null {
+    return this.advance_id;
+  }
+
+  get zoneState(): string |null {
+    const index = STATE_CONSTRUCTION.findIndex(item => item.id === this.state_id)
+    return STATE_CONSTRUCTION[index].name;
+  }
+
+  get saleState(): string | null {
+    const index = STATE_SALE.findIndex(item => item.id === this.sale_id)
+    return STATE_SALE[index].name;
   }
 
   get shares(): string | null {

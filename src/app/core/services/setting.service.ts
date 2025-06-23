@@ -24,8 +24,6 @@ export class SettingService {
 
   constructor() {
     this.getModules();
-    // this.loadProcessTypes();
-    // this.loadProvinces();
   }
 
   private getModules() {
@@ -64,18 +62,4 @@ export class SettingService {
 
   
 
-  // private loadProvinces(): void {
-  //   if (this.province().length === 0) {
-  //     this.getProvinces().subscribe();
-  //   }
-  // }
-
-  // getProvinces() {
-  //   return this.http.get<ApiResponse<{
-  //     province_code: string; 
-  //     province_name: string
-  //   }[]>>(`${ environment.api.construction }/ubigeo/departments/${this.province}/provinces`).pipe(
-  //     tap(res => this.province.set(res.data ?? []))
-  //   );
-  // }
 }

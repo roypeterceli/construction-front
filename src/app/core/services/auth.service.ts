@@ -1,12 +1,14 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-import { environment } from '@wow/env/environment';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '@wow/env/environment.development';
 import { map } from 'rxjs';
 import { User } from '@wow/core/interfaces';
 
+import Keycloak from 'keycloak-js';
+
 export const USER_LOCAL_STORAGE_KEY = 'user';
 export const TOKEN_LOCAL_STORAGE_KEY = 'token';
-export const ALLOWED_ID_ROLES = [4, 11, 25,  42, 43, 98];
+// export const ALLOWED_ID_ROLES = [4, 11, 25,  42, 43, 98];
 
 @Injectable({
   providedIn: 'root'
@@ -17,22 +19,24 @@ export class AuthService {
   token = computed(() => this.getToken());
   userLoggedIn = computed(() => !!this.token());
 
-  // private http = inject(HttpClient);
+  private http = inject(HttpClient);
 
-  // login(email: string, password: string) {
-    // const request = { email, password };
-    // return this.http.post(`${ environment.keycloak.config.url }/auth/login`, request).pipe(
-    //   map((res: any) => {
-    //     const user: User = res.aUsuario;
-    //     if (user.aRol && ALLOWED_ID_ROLES.includes(user.aRol.nIdRol)) {
-    //       this.setUserData(user, res.stoken);
-    //       return { status: true, data: res };
-    //     } else {
-    //       return {status: false, data: null};
-    //     }
-    //   })
-    // );
-  // }
+  login(email: string, password: string) {
+    const request = { email, password };
+    return this.http.post(`${ environment.keycloak.config.url }/auth/`, request).pipe(
+      map((res: any) => {
+        const user: User = res.aRol;
+        if (user.realm_access) {
+          this.setUserData(user, res.stoken);
+          return { status: true, data: res };
+        } else {
+          return {status: false, data: null};
+        }
+      })
+    );
+  }
+
+  private keycloak!: Keycloak;
 
   // register(email: string, password: string) {
   //   const request = { email, password };
@@ -81,6 +85,47 @@ export class AuthService {
     return exp ? Date.now() > exp : true;
   }
 
+
+
+  getDecodedToken(): any {
+    return this.keycloak?.tokenParsed;
+  }
+
+  // getEmail(): string | undefined {
+  //   return this.keycloakService.getKeycloakInstance().tokenParsed?.email;
+  // }
+
+  getFullName(): string | undefined {
+    return this.keycloak?.tokenParsed?.session_state;
+  }
+
+  getRoles(): string[] {
+    return this.keycloak?.tokenParsed?.realm_access?.roles || [];
+  }
+
+  hasRole(role: string): boolean {
+    return this.getRoles().includes(role);
+  }
+
+
+
+  // getToken(): string | undefined {
+  //   return this.keycloak?.token;
+  // }
+
+  // logout(): void {
+  //   this.keycloak?.logout();
+  // }
+
+  // getUsername(): string | undefined {
+  //   return this.keycloak?.tokenParsed?.session_state;
+  // }
+
+  // isLoggedIn(): boolean {
+  //   return !!this.keycloak?.token;
+  // }
+
+  
   private getTokenExpiration(token: string): number | null {
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));

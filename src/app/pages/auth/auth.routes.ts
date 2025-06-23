@@ -1,12 +1,18 @@
 import { Routes } from '@angular/router';
 import { LoginPage } from './login/login.page';
+// import { KeycloakService } from '@wow/core/services';
+// import { inject } from '@angular/core';
 // import { RegisterPage } from './register/register.page';
 
 
 export const routes: Routes = [
   {
     path: 'login',
-    component: LoginPage
+    component: LoginPage,    
+    // canActivate: [() => {
+    //   const keycloak = inject(KeycloakService);
+    //   return keycloak.isLoggedIn();
+    // }]
   },
   // {
   //   path: 'register',

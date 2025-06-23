@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   Component, computed,
   effect, HostListener,
-  inject,
   input, model,
   OnInit,
   output, signal,
@@ -23,12 +22,6 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Key } from '@wow/shared/interfaces';
 import { fadeInUp400ms, stagger40ms } from '@wow/shared/animations';
 import { TableColumn, ColumnCellAction } from '../table';
-
-import {
-  SaveZoneSupportDlgComponent
-} from '@wow/pages/support/components/save-zone-support-dlg/save-zone-support-dlg.component';
-import { MatDialog } from '@angular/material/dialog';
-
 
 @Component({
   selector: 'wow-dynamic-table',
@@ -182,11 +175,4 @@ export class WowDynamicTable<T> implements OnInit, AfterViewInit {
     }
   }
 
-  private readonly dialog = inject(MatDialog);
-  openSaveZoneDlg(): void {
-    this.dialog.open(SaveZoneSupportDlgComponent, {
-      role: 'dialog',
-      panelClass: ['dialog-panel-fullscreen', 'dialog-panel-position-end', 'md:w-1/2', 'lg:w-1/3', 'w-full']
-    });
-  }
 }

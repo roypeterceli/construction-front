@@ -3,74 +3,79 @@ import { ZoneSupport } from '@wow/core/interfaces';
 
 export const columns: TableColumn<ZoneSupport>[] = [
   {
-    label: 'ID',
+    label: 'Id',
     type: 'text',
-    property: 'zoneId',
+    property: 'zone_id',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Departamento',
     type: 'text',
-    property: 'department',
+    property: 'ubigeo_department_id',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Provincia',
     type: 'text',
-    property: 'province',
+    property: 'ubigeo_province_id',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Código',
     type: 'text',
-    property: 'zoneCode',
-    visible: true
+    property: 'zone_code',
+    visible: true,
+     cssClasses: ['font-semibold', 'text-gray-800']
   },
-  // {
-  //   label: 'Troncales',
-  //   type: 'number',
-  //   property: 'troncals',
-  //   visible: true
-  // },
-  // {
-  //   label: 'Nodos',
-  //   type: 'number',
-  //   property: 'nodes',
-  //   visible: true
-  // },
-  // {
-  //   label: 'Avance',
-  //   type: 'number',
-  //   property: 'advance',
-  //   visible: true
-  // },
+  {
+    label: 'Troncales',
+    type: 'number',
+    property: 'troncales',
+    visible: true,
+     cssClasses: ['font-semibold', 'text-gray-800']
+  },
+  {
+    label: 'Nodos',
+    type: 'number',
+    property: 'box_naps',
+    visible: true,
+     cssClasses: ['font-semibold', 'text-gray-800']
+  },
+  {
+    label: 'Avance',
+    type: 'number',
+    property: 'advance_id',
+    visible: true,
+    cssClasses: ['font-semibold', 'text-gray-800']
+  },
   {
     label: 'F. Creación',
     type: 'date',
     format: 'yyyy-MM-dd',
     property: 'created_at',
-    visible: true
+    visible: true,
+    cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Estado',
     type: 'badge',
     property: 'stateBadge',
-    visible: true
+    visible: true,
   },
   {
     label: 'Venta',
     type: 'badge',
     property: 'saleState',
-    visible: true
+    visible: true,
   },
   {
     label: 'Acciones',
     type: 'icon',
     icon: 'open_in_new',
     property: 'shares',
-    visible: true
+    visible: true,
   }
 ]
