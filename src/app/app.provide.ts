@@ -22,7 +22,7 @@ export const provideKeycloakAngular = () =>
   });
 
 export function provideKeycloakTokenInterceptor(): Provider {
-  const escapedBaseUrl = environment.keycloak.config.url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const escapedBaseUrl = environment.api.construction.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const apiUrlPattern = new RegExp(`^(${escapedBaseUrl})(/.*)?$`, 'i');
 
   const urlCondition = createInterceptorCondition({
@@ -35,3 +35,10 @@ export function provideKeycloakTokenInterceptor(): Provider {
     useValue: [urlCondition]
   };
 }
+
+// export const provideNgxProgressRouter = () =>
+//   provideNgProgressRouter({
+//     startEvents: [GuardsCheckEnd],
+//     completeEvents: [NavigationEnd],
+//     minDuration: 500
+//   });

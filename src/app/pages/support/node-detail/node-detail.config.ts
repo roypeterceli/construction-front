@@ -1,51 +1,53 @@
 import { TableColumn } from '@wow/shared/components/table';
-import { Zone } from '@wow/core/interfaces';
+import { ZoneSupport } from '@wow/core/interfaces';
 
-export const columns: TableColumn<Zone>[] = [
+export const columns: TableColumn<ZoneSupport>[] = [
   {
     label: 'Id',
     type: 'text',
-    property: 'zoneId',
+    property: 'zone_id',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
-  { 
+  {
     label: 'Departamento',
     type: 'text',
-    property: 'ubigeoDepartmentId',
+    property: 'ubigeo_department_id',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Provincia',
     type: 'text',
-    property: 'ubigeoProvinceId',
+    property: 'ubigeo_province_id',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Código',
     type: 'text',
-    property: 'zoneCode',
+    property: 'zone_code',
     visible: true,
-    cssClasses: ['font-semibold', 'text-gray-800']
+     cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Troncales',
-    type: 'text',
+    type: 'number',
     property: 'troncales',
-    visible: true
+    visible: true,
+     cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Nodos',
-    type: 'text',
-    property: 'boxNaps',
-    visible: true
+    type: 'number',
+    property: 'box_naps',
+    visible: true,
+     cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Avance',
-    type: 'text',
-    property: 'advanceId',
+    type: 'number',
+    property: 'advance_id',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
@@ -53,22 +55,27 @@ export const columns: TableColumn<Zone>[] = [
     label: 'F. Creación',
     type: 'date',
     format: 'yyyy-MM-dd',
-    property: 'createdAt',
+    property: 'created_at',
     visible: true,
-    cssClasses: ['font-semibold']
+    cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Estado',
     type: 'badge',
     property: 'zoneState',
     visible: true,
-    cssClasses: []
   },
   {
     label: 'Venta',
     type: 'badge',
     property: 'saleState',
     visible: true,
-    cssClasses: []
+  },
+  {
+    label: 'Acciones',
+    type: 'icon',
+    icon: 'more_vert',
+    property: 'shares',
+    visible: true,
   }
 ]

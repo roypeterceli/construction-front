@@ -1,4 +1,4 @@
-export interface TroncalServiceResponse {
+export interface Troncal {
   idTroncal: string;
   codeTroncal: string;
   districtTroncal: string;

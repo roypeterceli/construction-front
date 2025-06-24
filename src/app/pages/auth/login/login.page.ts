@@ -6,8 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-// import { AuthService } from '@wow/core/services';
-// import { AlertDialogService } from '@wow/shared/components/alert';
+import { AuthService } from '@wow/core/services';
+import { AlertDialogService } from '@wow/shared/components/alert';
 import { fadeInUp400ms } from '@wow/shared/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { FormValidator } from '@wow/shared/utils';
@@ -36,13 +36,41 @@ export class LoginPage implements OnInit {
   hidden = signal<boolean>(true);
   private fb = inject(FormBuilder);
   private router = inject(Router);
+  private alertService = inject(AlertDialogService);
+  private authService = inject(AuthService);
+
+
 
   ngOnInit(): void {
     this.initLoginForm();
   }
 
+  // login(): void {
+  //   this.router.navigate(['/construccion'])
+  // }
+
   login(): void {
-    this.router.navigate(['/construccion'])
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
+    const { email, password, cexType } = this.loginForm.value;
+
+    this.authService.login(email, password).subscribe(res => {
+      if (res && res.status && res.data) {
+        this.router.navigate(['/construccion']).then();
+      } else {
+        this.unauthorizedMessage();
+      }
+    })
+  }
+
+  private unauthorizedMessage(): void {
+    this.alertService.error({
+      title: 'Acceso restringido',
+      message: '¡Uy! No tienes acceso. Si crees que es un error, comunícate con tu administrador.',
+    })
   }
 
   toggleVisibility(): void {

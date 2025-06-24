@@ -9,7 +9,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { AlertDialogService } from '@wow/shared/components/alert';
 import { SettingService, ZoneService} from '@wow/core/services';
-import { ZoneSupport } from '@wow/core/interfaces';
+import { Zone } from '@wow/core/interfaces';
 import { FormValidator } from '@wow/shared/utils';
 import { ScreenLoaderService } from '@wow/shared/components/loader';
 import { finalize } from 'rxjs';
@@ -93,7 +93,7 @@ export class SaveZoneSupportDlgComponent implements OnInit {
     }
 
     this.screenLoaderService.show();
-    const zone = this.zoneForm.value as ZoneSupport;
+    const zone = this.zoneForm.value as Zone;
     // zone.created_by = this.authService.currentUser()!.nIdUsuario;
 
     this.zoneSupportService.create(zone)
@@ -152,9 +152,9 @@ export class SaveZoneSupportDlgComponent implements OnInit {
   //   }
   // }
 
-  private successMessage(zone: ZoneSupport): void {
+  private successMessage(zone: Zone): void {
     const alertRef = this.alertService.success({
-      title: `Zona creada: ${ zone.zone_code }`,
+      title: `Zona creada: ${ zone.zoneCode }`,
       message: 'La Zona ha sido creada',
       actionButtonsAlign: 'end',
       confirmButton: { text: 'Ver zona', style: 'flat' },
@@ -163,7 +163,7 @@ export class SaveZoneSupportDlgComponent implements OnInit {
 
     alertRef.afterClosed().subscribe(res => {
       if (res && res.isConfirmed) {
-        this.router.navigate(['/zonas', zone.zone_id, 'detalles']).then();
+        this.router.navigate(['/zonas', zone.zoneId, 'detalles']).then();
       }
     });
   }

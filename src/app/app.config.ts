@@ -22,7 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(), 
      provideHttpClient(
-      withInterceptors([authInterceptor, httpErrorInterceptor, includeBearerTokenInterceptor]),
+      withInterceptors([includeBearerTokenInterceptor]),
     ),
     provideKeycloakAngular(),
     provideKeycloakTokenInterceptor(),

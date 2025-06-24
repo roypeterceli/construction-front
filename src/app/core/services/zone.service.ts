@@ -3,7 +3,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '@wow/env/environment.development';
 import { ApiResponse } from '@wow/shared/interfaces';
 import { map, Subject, tap } from 'rxjs';
-import { ZoneSupport } from '../interfaces';
+import { Zone } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -53,19 +53,19 @@ export class ZoneService {
   }
 
   getById(id: number) {
-    return this.http.get<ApiResponse<ZoneSupport>>(`${environment.api.construction}/zones/${id}`);
+    return this.http.get<ApiResponse<Zone>>(`${environment.api.construction}/zones/${id}`);
   }
 
-  create(request: ZoneSupport) {
-    return this.http.post<ApiResponse<ZoneSupport>>(`${environment.api.construction}/zones`, request);
+  create(request: Zone) {
+    return this.http.post<ApiResponse<Zone>>(`${environment.api.construction}/zones`, request);
   }
 
-  update(zoneId: number, data: Partial<ZoneSupport>) {
-    return this.http.put<ApiResponse<ZoneSupport>>(`${environment.api.construction}/zones/${zoneId}`, data);
+  update(id: number, data: Partial<Zone>) {
+    return this.http.put<ApiResponse<Zone>>(`${environment.api.construction}/zones/${id}`, data);
   }
 
   // delete(zoneId: number) {
-  //   return this.http.delete<ApiResponse<ZoneSupport>>(`${environment.api.construction}/zones/${zoneId}`);
+  //   return this.http.delete<ApiResponse<Zone>>(`${environment.api.construction}/zones/${zoneId}`);
   // }
 
   notifyZoneCreated(): void {
@@ -74,10 +74,10 @@ export class ZoneService {
 
   //fill table
   getAll() {
-    return this.http.get<ApiResponse<ZoneSupport[]>>(`${ environment.api.construction }/zones`).pipe(
+    return this.http.get<ApiResponse<Zone[]>>(`${ environment.api.construction }/zones`).pipe(
       map(res => {
         if (res && res.data) {
-          return res.data.map(item => new ZoneSupport(item));
+          return res.data.map(item => new Zone(item));
         }
         return [];
       })

@@ -6,11 +6,14 @@ export const environment = {
     config: {
       url: 'http://localhost:8080',
       realm: 'construction-realm',
-      clientId: 'connection-client'
+      clientId: 'connection-client',
+      clientSecret: '9NKUBK4f16GUi38pZJ8KUyC5DG2PJjoW',
+      grant_type: 'password'
     },
     initOptions: {
       onLoad: 'login-required',
       checkLoginIframe: false
-    }
+    },
+    loadUserProfileAtStartUp: true
   }
 };

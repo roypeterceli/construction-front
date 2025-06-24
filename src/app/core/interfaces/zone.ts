@@ -1,12 +1,11 @@
-export interface ZoneServiceResponse {
-  id: string;
-  department: string;
-  province: string;
-  code: string;
-  troncals: string;
-  nodes: string;
-  advance: string;
-  fecCreated: string;
-  stateCsontruction: string;
-  stateSale: string;
+export interface ZoneSupport {
+  zoneId: string;
+  ubigeoDepartmentId: string;
+  ubigeoProvinceId: string;
+  zoneCode: string;
+  troncales: string;
+  boxNaps: string;
+  advanceId: string;
+  stateId: string;
+  saleId: string;
 }

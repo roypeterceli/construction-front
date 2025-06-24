@@ -4,7 +4,7 @@ import { environment } from '@wow/env/environment.development';
 import { map } from 'rxjs';
 import { User } from '@wow/core/interfaces';
 
-import Keycloak from 'keycloak-js';
+import Keycloak, { KeycloakProfile } from 'keycloak-js';
 
 export const USER_LOCAL_STORAGE_KEY = 'user';
 export const TOKEN_LOCAL_STORAGE_KEY = 'token';
@@ -36,7 +36,7 @@ export class AuthService {
     );
   }
 
-  private keycloak!: Keycloak;
+  // private keycloak!: Keycloak;
 
   // register(email: string, password: string) {
   //   const request = { email, password };
@@ -85,6 +85,18 @@ export class AuthService {
     return exp ? Date.now() > exp : true;
   }
 
+  //with keycloak
+  private keycloak = inject(Keycloak);
+  logout_keycloak(): void {
+    this.keycloak.logout().then();
+  }
+
+  // profile: KeycloakProfile | null;
+  // getProfile(): void {
+  //   this.keycloak.loadUserProfile().then(profile => {
+  //     this.profile = profile;
+  //   });
+  // }
 
 
   getDecodedToken(): any {

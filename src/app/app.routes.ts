@@ -14,7 +14,7 @@ export const routes: Routes = [
     path: '',
     component: ShellLayout,
     // canActivate: [canActivateAuthRole],
-    // data: { role: 'admin' },
+    data: { role: 'admin' },
     children: [
       {
         path: 'construccion',

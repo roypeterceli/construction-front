@@ -1,4 +1,4 @@
-export type ColumnType = 'number'| 'text' | 'image' |'badge' | 'tags' | 'button' | 'date' | 'icon' ;
+export type ColumnType = 'text' | 'image' |'badge' | 'tags' | 'button' | 'date' | 'icon' ;
 
 export interface TableColumn<T> {
   label: string;

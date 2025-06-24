@@ -32,26 +32,42 @@ export class SettingService {
         id: 1,
         name: 'Construcción',
         path: ['zonas'],
-        children: [
-          {
-            id: 1,
-            name: 'Zonas',
-            icon: 'view_list',
-            path: ['/zonas']
-          },
-          {
-            id: 2,
-            name: 'Troncales',
-            icon: 'inbox',
-            path: ['/troncales']
-          },
-          {
-            id: 3,
-            name: 'Nodos',
-            icon: 'view_module',
-            path: ['/nodos']
-          }
-        ]
+       
+        // children: [
+        //   {
+        //     id: 1,
+        //     name: 'Zonas',
+        //     icon: 'view_list',
+        //     path: ['/zonas']
+        //   },
+        //   {
+        //     id: 2,
+        //     name: 'Troncales',
+        //     icon: 'inbox',
+        //     path: ['/troncales']
+        //   },
+        //   {
+        //     id: 3,
+        //     name: 'Nodos',
+        //     icon: 'view_module',
+        //     path: ['/nodos']
+        //   }
+        // ]
+      },
+      {
+        id: 2,
+        name: 'Reportes',
+        path: ['reportes'],
+      },
+      {
+        id: 3,
+        name: 'Notificaciones',
+        path: ['notificaciones'],
+      },
+      {
+        id: 4,
+        name: 'Documentación',
+        path: ['documentacion'],
       }
     ])
   }

@@ -1,14 +1,5 @@
-export interface PortServiceResponse {
-  nroSuministro: string;
-  celular: string;
-  celular2?: string;
-  email: string;
-  departamento: string;
-  provincia: string;
-  distrito: string;
-  direccion: string;
-  velocidad: string;
-  descServicio: string;
-  tipo: string;
-  estado: string;
+export interface Port {
+  idPort: number;
+  idNap: number;
+  
 }

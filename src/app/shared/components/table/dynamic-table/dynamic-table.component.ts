@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  booleanAttribute,
   Component, computed,
   effect, HostListener,
   input, model,
@@ -53,7 +54,7 @@ export class WowDynamicTable<T> implements OnInit, AfterViewInit {
   columns = input<TableColumn<T>[]>([]);
   showHeaderCheckbox = input<boolean>(false)
   showRowCheckbox = input<boolean>(false);
-  showDropdownMenu = input<boolean>(false);
+  showDropdownMenu = input(false, {transform: booleanAttribute});
   dropdownMenu = input<MatMenu>(new MatMenu());
   selectionRows = model<T[]>();
   isLoading = input<boolean>(false);

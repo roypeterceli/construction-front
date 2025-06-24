@@ -2,8 +2,7 @@ import { Routes } from '@angular/router';
 import { SupportPage } from './support.page';
 import { ZoneSupportPage } from './zone-support/zone-support.page';
 import { ZoneDetailPage } from './zone-detail/zone-detail.page';
-// import { ZoneDetailPage } from './zone-detail/zone-detail.page';
-// import { zoneByIdResolver } from '@wow/core/resolvers';
+import { zoneByIdResolver } from '@wow/core/resolvers';
 
 export const routes: Routes = [
   {
@@ -15,8 +14,9 @@ export const routes: Routes = [
         component: ZoneSupportPage,
       },
       {
-        path: ':zonaId/troncales',
-        // resolve: { zone: zoneByIdResolver },
+        // path: ':zonaId/troncales',
+        path: ':z1/detalles',
+        resolve: { zone: zoneByIdResolver },
         component: ZoneDetailPage
       },
       {

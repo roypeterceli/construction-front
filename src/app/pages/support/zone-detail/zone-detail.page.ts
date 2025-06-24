@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './zone-detail.page.scss'
 })
 export class ZoneDetailPage {
-
+  
 }

@@ -1,5 +1,4 @@
 import { TagItem } from '@wow/shared/interfaces';
-import { STATE_CONSTRUCTION, STATE_SALE } from '@wow/core/interfaces';
 
 export enum ZoneStateType {
   PENDING = 1,
@@ -55,59 +54,54 @@ export interface EndZoneRequest {
 }
 
 
-export class ZoneSupport {
-  zone_id: number;
-  ubigeo_department_id: string;
-  ubigeo_province_id: string;
-  zone_code: string;
+export class Zone {
+  zoneId: number;
+  ubigeoDepartmentId: string;
+  ubigeoProvinceId: string;
+  zoneCode: string;
   troncales: number;
-  box_naps: number;
-  advance_id: number;
-  state_id: ZoneStateType;
-  sale_id: ZoneSaleType;
+  boxNaps: number;
+  advanceId: number;
+  stateId: ZoneStateType;
+  saleId: ZoneSaleType;
   
-  created_at?: Date;
+  createdAt?: Date;
   updated_at?: Date;
   created_by?: number;
   updated_by?: number;
 
-  constructor(model: ZoneSupport) {
-    this.zone_id = model.zone_id;
-    this.ubigeo_department_id = model.ubigeo_department_id;
-    this.ubigeo_province_id = model.ubigeo_province_id;
-    this.zone_code = model.zone_code;
+  constructor(model: Zone) {
+    this.zoneId = model.zoneId;
+    this.ubigeoDepartmentId = model.ubigeoDepartmentId;
+    this.ubigeoProvinceId = model.ubigeoProvinceId;
+    this.zoneCode = model.zoneCode;
     this.troncales = model.troncales;
-    this.box_naps = model.box_naps;
-    this.advance_id = model.advance_id;
-    this.state_id = model.state_id;
-    this.sale_id = model.sale_id;
+    this.boxNaps = model.boxNaps;
+    this.advanceId = model.advanceId;
+    this.stateId = model.stateId;
+    this.saleId = model.saleId;
     
-    this.created_at = model.created_at;
+    this.createdAt = model.createdAt;
     this.updated_at = model.updated_at;
     this.created_by = model.created_by;
     this.updated_by = model.updated_by;
 
   }
 
-  get stateBadge(): TagItem | null {
-    return ZONE_SUPPORT_STATE[this.state_id];
-  }
-
-
-  get zoneId(): number | null {
-    return this.zone_id;
-  }
+  // get zoneId(): number | null {
+  //   return this.zoneId;
+  // }
 
   get department(): string {
-    return this.ubigeo_department_id;
+    return this.ubigeoDepartmentId;
   }
 
   get province(): string {
-    return this.ubigeo_province_id;
+    return this.ubigeoProvinceId;
   }
 
-  get zoneCode(): string | null{
-    return this.zone_code;
+  get zonecode(): string | null{
+    return this.zoneCode;
   }
 
   get troncals(): number |null {
@@ -115,21 +109,29 @@ export class ZoneSupport {
   }
 
   get nodes(): number  |null{
-    return this.box_naps;
+    return this.boxNaps;
   }
 
   get advance(): number |null {
-    return this.advance_id;
+    return this.advanceId;
   }
 
-  get zoneState(): string |null {
-    const index = STATE_CONSTRUCTION.findIndex(item => item.id === this.state_id)
-    return STATE_CONSTRUCTION[index].name;
+  // get stateBadge(): TagItem | null {
+  //   return ZONE_SUPPORT_STATE[this.state_id];
+  // }
+
+  get zoneState(): TagItem | null  {
+    // const index = STATE_CONSTRUCTION.findIndex(item => item.id === this.state_id)
+    // return STATE_CONSTRUCTION[index].name;
+    return ZONE_SUPPORT_STATE[this.stateId];
+    
   }
 
-  get saleState(): string | null {
-    const index = STATE_SALE.findIndex(item => item.id === this.sale_id)
-    return STATE_SALE[index].name;
+  get saleState(): TagItem | null  {
+    // const index = STATE_SALE.findIndex(item => item.id === this.sale_id)
+    // return STATE_SALE[index].name;
+    return ZONE_SALE_STATE[this.saleId];
+    
   }
 
   get shares(): string | null {

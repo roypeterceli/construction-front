@@ -1,23 +1,27 @@
 import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { WowDynamicTable } from '@wow/shared/components/table';
-import { ZoneSupport } from '@wow/core/interfaces';
+import { Zone } from '@wow/core/interfaces';
 import { columns } from './zone-support.config';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ZoneService } from '@wow/core/services';
 import { Subject, merge, takeUntil, finalize } from 'rxjs';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'wow-zone-support-page',
   imports: [
     MatCardModule,
-    WowDynamicTable
+    WowDynamicTable,
+    MatMenuModule,
+    MatIconModule
   ],
   templateUrl: './zone-support.page.html',
 })
 export class ZoneSupportPage implements OnInit, OnDestroy {
 
-  readonly data = signal<ZoneSupport[]>([]);
+  readonly data = signal<Zone[]>([]);
   readonly loading = signal<boolean>(false);
   readonly columns = columns;
 
@@ -40,8 +44,12 @@ export class ZoneSupportPage implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  goToDetail(zone: ZoneSupport): void {
-    this.router.navigate(['../', zone.zone_id, 'detalles'], { relativeTo: this.route }).then();
+  goToDetail(zone: Zone): void {
+    this.router.navigate(['../', zone.zoneId, 'detalles'], { relativeTo: this.route }).then();
+  }
+
+  edit(zone: Zone): void {
+    console.log(zone);
   }
 
   private getZones(): void {
