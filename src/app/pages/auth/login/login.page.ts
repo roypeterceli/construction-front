@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { AuthService } from '@wow/core/services';
+import { AuthService, TOKEN_LOCAL_STORAGE_KEY } from '@wow/core/services';
 import { AlertDialogService } from '@wow/shared/components/alert';
 import { fadeInUp400ms } from '@wow/shared/animations';
 import { MatSelectModule } from '@angular/material/select';
@@ -55,14 +55,12 @@ export class LoginPage implements OnInit {
       return;
     }
 
-    const { email, password, cexType } = this.loginForm.value;
+    // const { email, password } = this.loginForm.value;
 
-    this.authService.login(email, password).subscribe(res => {
-      if (res && res.status && res.data) {
+    this.authService.login(TOKEN_LOCAL_STORAGE_KEY).subscribe(res => {
+     
         this.router.navigate(['/construccion']).then();
-      } else {
-        this.unauthorizedMessage();
-      }
+
     })
   }
 

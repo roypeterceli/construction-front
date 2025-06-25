@@ -28,7 +28,7 @@ export const columns: TableColumn<Zone>[] = [
     type: 'text',
     property: 'zoneCode',
     visible: true,
-    cssClasses: ['font-semibold', 'text-gray-800']
+    cssClasses: ['font-semibold', 'text-[#7030A0]']
   },
   {
     label: 'Troncales',
@@ -47,7 +47,7 @@ export const columns: TableColumn<Zone>[] = [
     type: 'text',
     property: 'advanceId',
     visible: true,
-    cssClasses: ['font-semibold', 'text-gray-800']
+    cssClasses: ['font-semibold', 'text-gray-800', 'after:content-["%"]']
   },
   {
     label: 'F. Creación',
@@ -55,7 +55,7 @@ export const columns: TableColumn<Zone>[] = [
     format: 'yyyy-MM-dd',
     property: 'createdAt',
     visible: true,
-    cssClasses: ['font-semibold']
+    cssClasses: []
   },
   {
     label: 'Estado',

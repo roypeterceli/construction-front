@@ -8,7 +8,9 @@ export const environment = {
       realm: 'construction-realm',
       clientId: 'connection-client',
       clientSecret: '9NKUBK4f16GUi38pZJ8KUyC5DG2PJjoW',
-      grant_type: 'password'
+      grant_type: 'password',
+      username: 'admin',
+      password: 'admin',
     },
     initOptions: {
       onLoad: 'login-required',

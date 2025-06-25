@@ -20,14 +20,14 @@ export const ZONE_SUPPORT_STATE: Record<ZoneStateType, TagItem> = {
   },
   [ZoneStateType.IN_PROGRESS]: {
     text: 'En construcción',
-    textClass: 'text-amber-600',
-    bgClass: 'bg-amber-600/10',
+    textClass: 'text-white',
+    bgClass: 'bg-[#4C6DAF]',
     previewClass: 'bg-amber-600'
   },
   [ZoneStateType.BUILT]: {
     text: 'Construido',
     textClass: 'text-green-600',
-    bgClass: 'bg-green-600/10',
+    bgClass: 'bg-[#4CAF50]',
     previewClass: 'bg-green-600'
   }
 };
@@ -35,14 +35,14 @@ export const ZONE_SUPPORT_STATE: Record<ZoneStateType, TagItem> = {
 export const ZONE_SALE_STATE: Record<ZoneSaleType, TagItem> = {
   [ZoneSaleType.BLOCKED]: {
     text: 'Bloqueado',
-    textClass: 'text-blue-600',
-    bgClass: 'bg-blue-600/10',
+    textClass: 'text-white',
+    bgClass: 'bg-[#9C9C9C]',
     previewClass: 'bg-blue-600'
   },
   [ZoneSaleType.IN_SALE]: {
     text: 'En venta',
     textClass: 'text-amber-600',
-    bgClass: 'bg-amber-600/10',
+    bgClass: 'bg-[#4CAF50]',
     previewClass: 'bg-amber-600'
   }
 };

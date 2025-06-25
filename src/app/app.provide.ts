@@ -5,8 +5,8 @@ import {
   withAutoRefreshToken
 } from 'keycloak-angular';
 import { environment } from '../environments/environment.development';
-// import { provideNgProgressRouter } from 'ngx-progressbar/router';
-// import { GuardsCheckEnd, NavigationEnd } from '@angular/router';
+import { provideNgProgressRouter } from 'ngx-progressbar/router';
+import { GuardsCheckEnd, NavigationEnd } from '@angular/router';
 import { Provider } from '@angular/core';
 
 export const provideKeycloakAngular = () =>
@@ -36,9 +36,9 @@ export function provideKeycloakTokenInterceptor(): Provider {
   };
 }
 
-// export const provideNgxProgressRouter = () =>
-//   provideNgProgressRouter({
-//     startEvents: [GuardsCheckEnd],
-//     completeEvents: [NavigationEnd],
-//     minDuration: 500
-//   });
+export const provideNgxProgressRouter = () =>
+  provideNgProgressRouter({
+    startEvents: [GuardsCheckEnd],
+    completeEvents: [NavigationEnd],
+    minDuration: 500
+  });

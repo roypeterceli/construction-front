@@ -100,7 +100,7 @@ $_palettes: (
     60: #988d9c,
     70: #b3a7b7,
     80: #cfc2d3,
-    90: #ebdeef,
+    90: #EDEDF6,
     95: #faecfd,
     98: #fff7fd,
     99: #fffbff,
@@ -199,7 +199,7 @@ $tertiary-palette: map.merge(map.get($_palettes, tertiary), $_rest);
     on-error: _high-contrast-value(#ffffff, #000000, $theme-type),
     error-container: _high-contrast-value(#98000a, #ffaea4, $theme-type),
     on-error-container: _high-contrast-value(#ffffff, #220001, $theme-type),
-    surface-variant: _high-contrast-value(#ebdeef, #4c4451, $theme-type),
+    surface-variant: _high-contrast-value(#EDEDF6, #4c4451, $theme-type),
     on-surface-variant: _high-contrast-value(#000000, #ffffff, $theme-type),
   ))
  }

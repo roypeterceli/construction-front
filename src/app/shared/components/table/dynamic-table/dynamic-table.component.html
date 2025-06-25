@@ -114,7 +114,7 @@
         (click)="onCellCtrlClick($event, column.property, row, column.allowCtrlClick)" mat-cell>
         <div class="flex items-center gap-1">
           <div [ngClass]="[row[column.property].textClass, row[column.property].bgClass]"
-            class="rounded px-2 py-1 font-medium text-xs flex-none">
+            class="rounded-xl px-2 py-1 font-medium text-xs flex-none">
             {{ row[column.property].text }}
           </div>
         </div>
