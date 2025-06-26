@@ -66,11 +66,6 @@ export class SaveZoneSupportDlgComponent implements OnInit {
     // private fb: FormBuilder,
     public zoneService: ZoneService // importante que sea público para usarlo en el HTML
     ) {
-    this.zoneForm = this.fb.group({
-      department_code: [''],
-      province_code: [''],
-      zone_code: ['']
-    });
   }
 
 
@@ -94,9 +89,8 @@ export class SaveZoneSupportDlgComponent implements OnInit {
 
     this.screenLoaderService.show();
     const zone = this.zoneForm.value as Zone;
-    // zone.created_by = this.authService.currentUser()!.nIdUsuario;
 
-    this.zoneSupportService.create(zone)
+    this.zoneSupportService.create(this.zoneForm.value)
       .pipe(
         finalize(() => this.screenLoaderService.hide())
       )
@@ -180,8 +174,8 @@ export class SaveZoneSupportDlgComponent implements OnInit {
   private initZoneForm(): void {
     // this.zoneForm.patchValue({ zone_code: ''});
     this.zoneForm = this.fb.group({
-      department_code: [null, [Validators.required]],
-      province_code: [null, [Validators.required]],
+      ubigeoDepartmentId: [null, [Validators.required]],
+      ubigeoProvinceId: [null, [Validators.required]],
       zone_code: [null, [Validators.required]]
     });
 

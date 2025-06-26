@@ -3,6 +3,7 @@ import { MatMenu, MatMenuItem, MatMenuTrigger } from "@angular/material/menu";
 import { MatRipple } from "@angular/material/core";
 // import { AuthService } from '@wow/core/services';
 import { Router } from '@angular/router';
+import Keycloak from 'keycloak-js';
 // import { CEX_COLLECTION } from '@wow/core/interfaces';
 
 
@@ -18,12 +19,11 @@ import { Router } from '@angular/router';
 })
 export class WowAvatarMenu {
   // private authService = inject(AuthService);
-  // private router = inject(Router);
+  private keycloak = inject(Keycloak);
 
-  // logout(): void {
-  //   this.authService.logout();
-  //   this.router.navigateByUrl("/auth/login");
-  // }
+  logout(): void {
+    this.keycloak.logout().then();
+  }
 
   // get userName(): string {
   //   const user = this.authService.getUserLogged();

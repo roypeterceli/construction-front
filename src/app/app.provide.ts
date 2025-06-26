@@ -22,7 +22,7 @@ export const provideKeycloakAngular = () =>
   });
 
 export function provideKeycloakTokenInterceptor(): Provider {
-  const escapedBaseUrl = environment.api.construction.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const escapedBaseUrl = environment.api.domain.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const apiUrlPattern = new RegExp(`^(${escapedBaseUrl})(/.*)?$`, 'i');
 
   const urlCondition = createInterceptorCondition({

@@ -76,7 +76,7 @@
               <mat-option value="option2">ANCASH</mat-option>
               <mat-option value="option3">APURIMAC</mat-option>
             </mat-select> -->
-            <mat-select formControlName="ubigeo_department_id">
+            <mat-select formControlName="ubigeoDepartmentId">
               <mat-option>Todos</mat-option>
               @for (department of ubigeoService.departments(); track department.department_code) {
                 <mat-option [value]="department.department_code">{{ department.department_name }}</mat-option>
