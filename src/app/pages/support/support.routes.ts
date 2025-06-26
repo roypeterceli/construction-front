@@ -15,7 +15,7 @@ export const routes: Routes = [
       },
       {
         // path: ':zonaId/troncales',
-        path: ':z1/detalles',
+        path: ':zoneId/detalles',
         resolve: { zone: zoneByIdResolver },
         component: ZoneDetailPage
       },

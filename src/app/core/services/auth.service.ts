@@ -4,7 +4,7 @@ import { environment } from '@wow/env/environment.development';
 // import { map } from 'rxjs';
 // import { User } from '@wow/core/interfaces';
 
-import Keycloak, { KeycloakProfile } from 'keycloak-js';
+import Keycloak, { KeycloakInstance, KeycloakProfile } from 'keycloak-js';
 
 export const USER_LOCAL_STORAGE_KEY = 'user';
 export const TOKEN_LOCAL_STORAGE_KEY = 'token';
@@ -22,7 +22,8 @@ export class AuthService {
   private http = inject(HttpClient);
 
   profile: KeycloakProfile | null = null;
-
+  private keycloak!: KeycloakInstance;
+  private userProfile: KeycloakProfile | null = null;
 
   login(token: string) {
     const headers = new HttpHeaders({
@@ -60,27 +61,7 @@ export class AuthService {
   //   );
   // }
 
-  // logout(): void {
-    // localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
-    // localStorage.removeItem(TOKEN_LOCAL_STORAGE_KEY);
-  //   const request = { email, password };
-  //   return this.http.post(`${ environment.keycloak.config.url }/auth/logout`, request).pipe(
-  //     map((res: any) => {
-  //       const user: User = res.aUsuario;
-  //       if (user.aRol && ALLOWED_ID_ROLES.includes(user.aRol.nIdRol)) {
-  //         this.setUserData(user, res.stoken);
-  //         return { status: true, data: res };
-  //       } else {
-  //         return {status: false, data: null};
-  //       }
-  //     })
-  //   );
-  // }
 
-  // logout(): void {
-  //   localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
-  //   localStorage.removeItem(TOKEN_LOCAL_STORAGE_KEY);
-  // }
   
   // getUserLogged() {
   //   const user = localStorage.getItem(USER_LOCAL_STORAGE_KEY);
@@ -93,22 +74,22 @@ export class AuthService {
   }
 
   //with keycloak
-  private keycloak = inject(Keycloak);
-  logout(): void {
-    this.keycloak.logout().then();
-  }
+  // private keycloak = inject(Keycloak);
+  // logout(): void {
+  //   this.keycloak.logout().then();
+  // }
 
   // profile: KeycloakProfile | null;
   getProfile(): void {
-  this.keycloak.loadUserProfile()
-    .then(profile => {
-      this.profile = profile;
-      console.log(this.profile)
-    })
-    .catch(err => {
-      console.error('Error loading user profile:', err);
-    });
-}
+    this.keycloak.loadUserProfile()
+      .then(profile => {
+        this.profile = profile;
+        console.log(this.profile)
+      })
+      .catch(err => {
+        console.error('Error loading user profile:', err);
+      });
+  }
 
   getDecodedToken(): any {
     return this.keycloak?.tokenParsed;
@@ -118,9 +99,6 @@ export class AuthService {
   //   return this.keycloakService.getKeycloakInstance().tokenParsed?.email;
   // }
 
-  getFullName(): string | undefined {
-    return this.keycloak?.tokenParsed?.session_state;
-  }
 
   getRoles(): string[] {
     return this.keycloak?.tokenParsed?.realm_access?.roles || [];
@@ -159,4 +137,21 @@ export class AuthService {
   //   return localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY);
   // }
 
+    private loadUserProfile(): Promise<void> {
+      return this.keycloak.loadUserProfile().then((profile) => {
+        this.userProfile = profile;
+      });
+    }
+    
+    getUserProfile(): KeycloakProfile | null {
+      return this.userProfile;
+    }
+
+    getUsername(): string | undefined {
+        return this.userProfile?.username;
+      }
+
+    getEmail(): string | undefined {
+      return this.userProfile?.email;
+    }
 }

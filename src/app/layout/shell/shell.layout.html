@@ -92,6 +92,7 @@
               <mat-option value="option3">En construcción</mat-option>
             </mat-select> -->
             <mat-select formControlName="state_construction">
+              <mat-option>Todos</mat-option>
               @for (issue of settingService.stateConstruction(); track issue.id) {
                 <mat-option [value]="issue.id">{{ issue.name }}</mat-option>
               }
