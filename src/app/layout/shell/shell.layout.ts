@@ -1,21 +1,21 @@
 import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+// import { Router } from '@angular/router';
 import { WowAvatarMenu, WowMenubar } from '@wow/shared/components/menu';
 import { SettingService } from '@wow/core/services';
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
-import { AsyncPipe } from '@angular/common';
+// import { BreakpointObserver } from '@angular/cdk/layout';
+// import { Observable } from 'rxjs';
+// import { map, shareReplay } from 'rxjs/operators';
+// import { AsyncPipe } from '@angular/common';
 import { Module, ZoneStateType} from '@wow/core/interfaces';
-import { SaveZoneSupportDlgComponent } from '@wow/pages/support/components/save-zone-support-dlg/save-zone-support-dlg.component';
+// import { SaveZoneSupportDlgComponent } from '@wow/pages/support/components/save-zone-support-dlg/save-zone-support-dlg.component';
 
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialog } from '@angular/material/dialog';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatSelect } from '@angular/material/select';
+// import { MatDialog } from '@angular/material/dialog';
+// import { MatFormField, MatLabel } from '@angular/material/form-field';
+// import { MatSelect } from '@angular/material/select';
 import { FormGroup } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -24,6 +24,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {provideNativeDateAdapter} from '@angular/material/core';
 // import { UbigeoSupport } from '@wow/core/interfaces/ubigeo';
 import { UbigeoService } from '@wow/core/services/ubigeo.service';
+import { RouterOutlet } from '@angular/router';
 
 
 
@@ -41,14 +42,11 @@ const TAILWIND_BREAKPOINTS = {
     RouterOutlet,
     WowMenubar,
     WowAvatarMenu,
-    AsyncPipe,
     MatButtonModule,
     MatIconModule,
     MatListModule,
     MatSidenavModule,
-    MatFormField,
-    MatLabel,
-    MatSelect,MatSelectModule,
+    MatSelectModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule, 
   ],
   providers: [provideNativeDateAdapter()],
@@ -63,32 +61,32 @@ export class ShellLayout implements OnInit {
   selectedZoneState = signal<ZoneStateType | null | undefined>(null);
   settingService = inject(SettingService);
   ubigeoService = inject(UbigeoService);
-  private breakpointObserver = inject(BreakpointObserver);
-  private readonly router = inject(Router);
-  private readonly dialog = inject(MatDialog);
+  // private breakpointObserver = inject(BreakpointObserver);
+  // private readonly router = inject(Router);
+  // private readonly dialog = inject(MatDialog);
   protected readonly zoneState = ZoneStateType;
 
 
   // ubigeo_department_id = this.ubigeoForm.value as UbigeoSupport;
 
 
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe([TAILWIND_BREAKPOINTS.sm, TAILWIND_BREAKPOINTS.md])
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
+  // isHandset$: Observable<boolean> = this.breakpointObserver
+  //   .observe([TAILWIND_BREAKPOINTS.sm, TAILWIND_BREAKPOINTS.md])
+  //   .pipe(
+  //     map(result => result.matches),
+  //     shareReplay()
+  //   );
 
   ngOnInit(): void {
     this.getSubModules();
   }
 
-  openSaveZoneDlg(): void {
-    this.dialog.open(SaveZoneSupportDlgComponent, {
-      role: 'dialog',
-      // panelClass: ['dialog-panel-fullscreen', 'dialog-panel-position-end', 'md:w-1/2', 'lg:w-1/3', 'w-full']
-    });
-  }
+  // openSaveZoneDlg(): void {
+  //   this.dialog.open(SaveZoneSupportDlgComponent, {
+  //     role: 'dialog',
+  //     // panelClass: ['dialog-panel-fullscreen', 'dialog-panel-position-end', 'md:w-1/2', 'lg:w-1/3', 'w-full']
+  //   });
+  // }
 
   // getZoneFilter(state?: ZoneStateType): void {
   //   this.selectedZoneState.set(state);
@@ -100,16 +98,16 @@ export class ShellLayout implements OnInit {
     this.subModules.set(subModule?.children);
   }
 
-  departmentChange():void{
+  // departmentChange():void{
     
-  }
+  // }
 
-  filter():void{
+  // filter():void{
     
-  }
+  // }
 
-  clean():void{
+  // clean():void{
     
-  }
+  // }
 
 }

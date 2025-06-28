@@ -9,11 +9,15 @@
         </div>
         <div class="flex items-center pl-[70rem]">
           <h4>Gestión</h4>
-          <button
+          <!-- <button
             type="button"
             aria-label="Toggle sidenav"
             mat-icon-button
-            (click)="sidenav.toggle()">
+            (click)="sidenav.toggle()"
+            >
+            <mat-icon class="text-white" aria-label="Side nav toggle icon">apps</mat-icon>
+          </button> -->
+          <button type="button" aria-label="Toggle sidenav" mat-icon-button>
             <mat-icon class="text-white" aria-label="Side nav toggle icon">apps</mat-icon>
           </button>
         </div>
@@ -26,104 +30,6 @@
   <wow-menubar [modules]="settingService.modules()"></wow-menubar>
 </div>
 
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav class="sidenav" fixedInViewport
-               [fixedInViewport]="false"
-               [fixedTopGap]="0"
-               [fixedBottomGap]="0"
-               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-               [mode]="(isHandset$ | async) ? 'over' : 'side'"
-               [opened]="(isHandset$ | async) === false">
-
-    <div class="pl-2 pr-2 sm:pl-6 md:pl-10 pt-8 mx-auto">
-
-      <!-- <hr class="m-4 dark:border-gray-600"> -->
-      <h2 class="pt-7 pb-4">Lista de zonas de cobertura</h2>
-      <div class="bordered bg-white container p-4 rounded shadow">
-          <!-- <mat-form-field class="w-full mb-2" appearance="outline">
-            <mat-label>Departamento</mat-label>
-            <mat-select formControlName="department" (selectionChange)="departmentChange()"> -->
-              <!-- @for (solicitude of settingService.solicitudeTypes(); track solicitude.id) {
-                <mat-option [value]="solicitude.id">{{ solicitude.name }}</mat-option>
-              } -->
-            <!-- </mat-select> -->
-            <!-- @if (formValidator.hasError('department')) {
-              <mat-error>{{ formValidator.getErrorMessage('solicitude_type') }}</mat-error>
-            } -->
-          <!-- </mat-form-field> -->
-
-          <!-- <mat-form-field class="w-full mb-2" appearance="outline">
-            <mat-label>Estado</mat-label>
-            <mat-select formControlName="issue_type_id"> -->
-              <!-- @for (issue of settingService.issueTypes(); track issue.id) {
-                <mat-option [value]="issue.id">{{ issue.name }}</mat-option>
-              } -->
-            <!-- </mat-select>
-          </mat-form-field> -->
-
-          <!-- <mat-form-field class="w-full mb-2" appearance="outline"> 
-            <mat-label> Fecha creación </mat-label> 
-            <input  matInput [matDatepicker]= "picker">  -->
-            <!-- <mat-hint> dd/mm/aa </mat-hint>  -->
-            <!-- <mat-datepicker-toggle  matIconSuffix [for]= "picker" > </mat-datepicker-toggle> 
-            <mat-datepicker #picker > </mat-datepicker > 
-          </mat-form-field > -->
-          <mat-form-field class="w-full">
-            <mat-label>Departamento</mat-label>
-            <!-- <mat-select [(value)]="selected">
-              <mat-option>Todos</mat-option>
-              <mat-option value="option1">AMAZONAS</mat-option>
-              <mat-option value="option2">ANCASH</mat-option>
-              <mat-option value="option3">APURIMAC</mat-option>
-            </mat-select> -->
-            <mat-select formControlName="ubigeoDepartmentId">
-              <mat-option>Todos</mat-option>
-              @for (department of ubigeoService.departments(); track department.department_code) {
-                <mat-option [value]="department.department_code">{{ department.department_name }}</mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class="w-full">
-            <mat-label>Estado</mat-label>
-            <!-- <mat-select [(value)]="selected">
-              <mat-option>Todos</mat-option>
-              <mat-option value="option1">Pendiente</mat-option>
-              <mat-option value="option2">Construido</mat-option>
-              <mat-option value="option3">En construcción</mat-option>
-            </mat-select> -->
-            <mat-select formControlName="state_construction">
-              <mat-option>Todos</mat-option>
-              @for (issue of settingService.stateConstruction(); track issue.id) {
-                <mat-option [value]="issue.id">{{ issue.name }}</mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class="w-full">
-            <mat-label>Fecha Creación</mat-label>
-            <input matInput [matDatepicker]="picker">
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-      <div class="flex justify-end">
-        <button type="button" mat-stroked-button (click)="clean()" class="border">Limpiar</button>&nbsp;
-        <button type="button" mat-flat-button (click)="filter()">Filtrar</button>
-      </div>
-      </div>
-    </div>
-    
-  </mat-sidenav>
-
-  <mat-sidenav-content>
-    <div class="px-4 md:px-10 mt-8 md:mt-6 mb-8">
-      <div class="flex justify-end">
-        <button type="button" mat-flat-button
-          class="mb-6"
-          (click)="openSaveZoneDlg()">
-        <mat-icon>add</mat-icon>
-          Nueva zona
-        </button>
-      </div>
-      <router-outlet/>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<main class="pt-36 px-8">
+  <router-outlet />
+</main>

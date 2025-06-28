@@ -1,11 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { ActivatedRoute } from '@angular/router';
+import { ZoneSupport } from '@wow/core/interfaces';
+import { WowTitle } from '@wow/shared/components/title';
+import { MatTabsModule} from '@angular/material/tabs';
+import { ContentTroncalComponent } from '../components/content-troncal/content-troncal.component';
+
 
 @Component({
   selector: 'wow-zone-detail',
-  imports: [],
+  imports: [    
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    WowTitle,
+    MatTabsModule,
+    ContentTroncalComponent
+    ],
   templateUrl: './zone-detail.page.html',
   styleUrl: './zone-detail.page.scss'
 })
-export class ZoneDetailPage {
+export class ZoneDetailPage implements OnInit{
+  zone = signal<ZoneSupport | null>(null);
+  private route = inject(ActivatedRoute);
   
+  ngOnInit(): void {
+    this.zone.set(this.route.snapshot.data['zone']);
+  }
+
+
+  openSaveTroncalDlg(){
+    
+  }
 }

@@ -1,53 +1,53 @@
 import { TableColumn } from '@wow/shared/components/table';
-import { ZoneSupport } from '@wow/core/interfaces';
+import { Troncal } from '@wow/core/interfaces';
 
-export const columns: TableColumn<ZoneSupport>[] = [
+export const columns: TableColumn<Troncal>[] = [
   {
     label: 'Id',
     type: 'text',
-    property: 'zone_id',
+    property: 'idTroncal',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Código',
     type: 'text',
-    property: 'ubigeo_department_id',
+    property: 'codeTroncal',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Distrito',
     type: 'text',
-    property: 'ubigeo_province_id',
+    property: 'districtTroncal',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Prefijo',
     type: 'text',
-    property: 'zone_code',
+    property: 'prefixTroncal',
     visible: true,
      cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'N. Inicial',
-    type: 'number',
-    property: 'troncales',
+    type: 'text',
+    property: 'nodeInitial',
     visible: true,
      cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'N. Final',
-    type: 'number',
-    property: 'box_naps',
+    type: 'text',
+    property: 'nodeFinal',
     visible: true,
      cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Constr.',
-    type: 'number',
-    property: 'advance_id',
+    type: 'text',
+    property: 'percentage',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
@@ -55,27 +55,20 @@ export const columns: TableColumn<ZoneSupport>[] = [
     label: 'F. Actualización',
     type: 'date',
     format: 'yyyy-MM-dd',
-    property: 'created_at',
+    property: 'fecUpdate',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Estado',
     type: 'badge',
-    property: 'stateBadge',
+    property: 'stateTroncal',
     visible: true,
   },
   {
     label: 'Venta',
     type: 'badge',
-    property: 'saleState',
-    visible: true,
-  },
-  {
-    label: 'Acciones',
-    type: 'icon',
-    icon: 'more_vert',
-    property: 'shares',
+    property: 'stateSale',
     visible: true,
   }
 ]

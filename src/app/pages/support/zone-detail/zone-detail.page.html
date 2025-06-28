@@ -1,1 +1,80 @@
-<p>zone-detail works!</p>
+<header class="flex md:flex-row justify-start items-start md:justify-between md:items-center mb-5">
+
+    <div class="flex justify-start items-start w-full md:w-5/12">
+        <wow-title [url]="['/construccion']">
+            <h2 class="text-[#7030A0]">
+                Gestión de Zona de Cobertura
+            </h2>
+        </wow-title>
+    </div>
+
+    <div class="flex justify-end items-end w-full md:w-5/12">
+        <button type="button" mat-flat-button class="mb-6" (click)="openSaveTroncalDlg()">
+            <mat-icon>add</mat-icon>
+            Agregar troncales
+        </button>
+    </div>
+
+</header>
+
+<div class="flex md:flex-row"> 
+    @if (zone()) {
+        @let zona = zone()!;
+        <div class="flex justify-between items-center rounded bg-white shadow w-full md:w-12/12 p-6">
+            <div class="id">
+                <h6 class="text-gray-400">ID</h6>
+                {{ zona.zoneId }}
+            </div>
+            <div class="departamento px-7">
+                <h6 class="text-gray-400">Departamento</h6>
+                {{ zona.ubigeoDepartmentId }}
+            </div>
+            <div class="provincia px-7">
+                <h6 class="text-gray-400">Provincia</h6>
+                {{ zona.ubigeoProvinceId }}
+            </div>
+            <div class="codigo px-7">
+                <h6 class="text-gray-400">Código</h6>
+                {{ zona.zoneCode}}
+            </div>
+            <div class="troncales px-7">
+                <h6 class="text-gray-400">Troncales</h6>
+                {{ zona.troncales }}
+            </div>
+            <div class="cajas-nap px-7">
+                <h6 class="text-gray-400">Cajas NAP</h6>
+                {{ zona.boxNaps }}
+            </div>
+            <div class="puertos px-7">
+                <h6 class="text-gray-400">Puertos</h6>
+                {{ 0 }}
+            </div>
+            <div class="construccion px-7">
+                <h6 class="text-gray-400">Construcción</h6>
+                {{ zona.advanceId + " %"}}
+            </div>
+            <div class="estado px-7">
+                <h6 class="text-gray-400">Estado</h6>
+                {{ zona.stateId }}
+            </div>
+            <div class="venta px-7">
+                <h6 class="text-gray-400">Venta</h6>
+                {{ zona.saleId}}
+            </div>
+        </div>
+        }
+</div>
+
+<div class="pt-6 pb-6">
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+        <mat-tab label="Troncales">
+            <wow-content-troncal></wow-content-troncal>
+        </mat-tab>
+        <mat-tab label="Mapa">
+            
+        </mat-tab>
+        <mat-tab label="Configuración" [disabled]="true">
+            
+        </mat-tab>
+    </mat-tab-group>
+</div>

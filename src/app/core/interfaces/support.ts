@@ -134,8 +134,5 @@ export class Zone {
     
   }
 
-  get shares(): string | null {
-    return this.shares;
-  }
 
 }

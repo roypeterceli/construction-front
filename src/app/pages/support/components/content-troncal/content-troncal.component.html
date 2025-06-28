@@ -1,8 +1,5 @@
-
-<div class="flex justify-between gap-4">
+<div class="flex pt-6 justify-between gap-4">
   <div class="w-full lg:w-2/12">
-
-      <h2 class="pt-7 pb-4">Lista de zonas de cobertura</h2>
       <div class="bordered bg-white container p-4 rounded shadow">
 
         <mat-form-field class="w-full">
@@ -36,13 +33,7 @@
       </div>
     </div>
 
- <div class="w-full lg:w-10/12">
-      <div class="flex justify-end">
-        <button type="button" mat-flat-button class="mb-6" (click)="openSaveZoneDlg()">
-          <mat-icon>add</mat-icon>
-          Nueva zona
-        </button>
-      </div>
+    <div class="w-full lg:w-10/12">
       <mat-card class="mat-card-no-space">
         <mat-card-content>
           <wow-dynamic-table [columns]="columns" [data]="data()" showDropdownMenu [dropdownMenu]="actionsMenu"

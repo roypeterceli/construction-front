@@ -16,7 +16,11 @@ export class ZoneService {
   provincesList = signal<{ code: string; name: string }[]>([]);
 
   private zoneCreatedSource = new Subject<void>();
+  // private troncalCreatedSource = new Subject<void>();
+  // private nodeCreatedSource = new Subject<void>();
   zoneCreated$ = this.zoneCreatedSource.asObservable();
+  // troncalCreated$ = this.troncalCreatedSource.asObservable();
+  // nodeCreated$ = this.nodeCreatedSource.asObservable();
 
 
   constructor() {

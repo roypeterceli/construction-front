@@ -157,7 +157,7 @@ export class SaveZoneSupportDlgComponent implements OnInit {
 
     alertRef.afterClosed().subscribe(res => {
       if (res && res.isConfirmed) {
-        this.router.navigate(['/zonas', zone.zoneId, 'detalles']).then();
+        this.router.navigate(['/construccion', zone.zoneId, 'detalles']).then();
       }
     });
   }

@@ -3,9 +3,9 @@ import { inject, Injectable, signal } from '@angular/core';
 import {STATE_CONSTRUCTION} from '@wow/core/interfaces';
 import { Module } from '@wow/core/interfaces';
 import { HttpClient } from '@angular/common/http';
-import { ApiResponse } from '@wow/shared/interfaces';
-import { environment } from '@wow/env/environment.development';
-import { tap } from 'rxjs';
+// import { ApiResponse } from '@wow/shared/interfaces';
+// import { environment } from '@wow/env/environment.development';
+// import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class SettingService {
   
   // province = signal<{ province_code: string; province_name: string }[]>([]);
 
-  private http = inject(HttpClient);
+  // private http = inject(HttpClient);
 
   constructor() {
     this.getModules();
