@@ -7,6 +7,8 @@ import { ZoneSupport } from '@wow/core/interfaces';
 import { WowTitle } from '@wow/shared/components/title';
 import { MatTabsModule} from '@angular/material/tabs';
 import { ContentTroncalComponent } from '../components/content-troncal/content-troncal.component';
+import { MatDialog } from '@angular/material/dialog';
+import { SaveTroncalSupportDlgComponent } from '../components/save-troncal-support-dlg/save-troncal-support-dlg.component';
 
 
 @Component({
@@ -26,12 +28,18 @@ export class ZoneDetailPage implements OnInit{
   zone = signal<ZoneSupport | null>(null);
   private route = inject(ActivatedRoute);
   
+  private readonly dialog = inject(MatDialog);
+  
   ngOnInit(): void {
     this.zone.set(this.route.snapshot.data['zone']);
   }
 
 
   openSaveTroncalDlg(){
-    
+    this.dialog.open(SaveTroncalSupportDlgComponent, {
+      role: 'dialog',
+    });
   }
+
+
 }

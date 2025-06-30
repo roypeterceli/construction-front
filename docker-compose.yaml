@@ -1,17 +1,17 @@
 services:
-  cex-mng-colas-app:
+  construction-db-ui-app:
     build:
       context: .
       dockerfile: Dockerfile
       args:
         ENV: ${ENV:-production}
-    image: cex-mng-colas-app:latest
-    container_name: cex-mng-colas-app
+    image: construction-db-ui-app:latest
+    container_name: construction-db-ui-app
     ports:
       - "5000:80"
     networks:
-      - cex-network
+      - construction-network
 
 networks:
-  cex-network:
+  construction-network:
     external: true

@@ -31,7 +31,7 @@ export class TroncalService {
     return this.http.post<ApiResponse<Troncal>>(`${ environment.api.construction }/troncals`, request);
   }
 
-  notifyTicketCreated(): void {
+  notifyTroncalCreated(): void {
     this.troncalCreatedSource.next();
   }
 
