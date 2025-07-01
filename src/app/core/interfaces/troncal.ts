@@ -6,6 +6,7 @@ export interface TroncalSupport {
   prefixTroncal: string;
   nodeInitial: string;
   nodeFinal: string;
+  zoneId: string;
   percentage: string;
   fecUpdate: Date;
   stateTroncal: string;
@@ -19,6 +20,7 @@ export class Troncal{
   prefixTroncal: string;
   nodeInitial: string;
   nodeFinal: string;
+  zoneId: string;
   percentage: string;
   fecUpdate: Date;
   stateTroncal: string;
@@ -31,6 +33,7 @@ export class Troncal{
     this.prefixTroncal = model.prefixTroncal;
     this.nodeInitial = model.nodeInitial;
     this.nodeFinal = model.nodeFinal;
+    this.zoneId = model.zoneId;
     this.percentage = model.percentage;
     this.fecUpdate = model.fecUpdate;
     this.stateTroncal = model.stateTroncal;

@@ -5,8 +5,8 @@ export const STATE_CONSTRUCTION: { id: number; name: string; }[] = [
 ]
 
 export const STATE_SALE: { id: number; name: string; }[] = [
-  { id: 3, name: 'Bloqueado' },
-  { id: 4, name: 'En venta' }
+  { id: 1, name: 'Bloqueado' },
+  { id: 2, name: 'En venta' }
 ]
 
 export const CORRELATIVE: { id: number; name: string; }[] = [

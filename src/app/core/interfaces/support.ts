@@ -11,6 +11,7 @@ export enum ZoneSaleType {
   IN_SALE = 2
 }
 
+
 export const ZONE_SUPPORT_STATE: Record<ZoneStateType, TagItem> = {
   [ZoneStateType.PENDING]: {
     text: 'Pendiente',
@@ -47,12 +48,6 @@ export const ZONE_SALE_STATE: Record<ZoneSaleType, TagItem> = {
   }
 };
 
-export interface EndZoneRequest {
-  codeAtention: string;
-  zendeskZone: string;
-  zendeskUrl: string;
-}
-
 
 export class Zone {
   zoneId: number;
@@ -64,7 +59,7 @@ export class Zone {
   advanceId: number;
   stateId: ZoneStateType;
   saleId: ZoneSaleType;
-  
+
   createdAt?: Date;
   updated_at?: Date;
   created_by?: number;
@@ -80,12 +75,12 @@ export class Zone {
     this.advanceId = model.advanceId;
     this.stateId = model.stateId;
     this.saleId = model.saleId;
-    
+
     this.createdAt = model.createdAt;
     this.updated_at = model.updated_at;
     this.created_by = model.created_by;
     this.updated_by = model.updated_by;
-
+    
   }
 
   // get zoneId(): number | null {
@@ -93,26 +88,28 @@ export class Zone {
   // }
 
   get department(): string {
-    return this.ubigeoDepartmentId;
+    const departamento = this.ubigeoDepartmentId
+    // return this.ubigeoDepartmentId;
+    return departamento;    
   }
 
   get province(): string {
     return this.ubigeoProvinceId;
   }
 
-  get zonecode(): string | null{
+  get zonecode(): string | null {
     return this.zoneCode;
   }
 
-  get troncals(): number |null {
+  get troncals(): number | null {
     return this.troncales;
   }
 
-  get nodes(): number  |null{
+  get nodes(): number | null {
     return this.boxNaps;
   }
 
-  get advance(): number |null {
+  get advance(): number | null {
     return this.advanceId;
   }
 
@@ -120,18 +117,18 @@ export class Zone {
   //   return ZONE_SUPPORT_STATE[this.state_id];
   // }
 
-  get zoneState(): TagItem | null  {
+  get zoneState(): TagItem | null {
     // const index = STATE_CONSTRUCTION.findIndex(item => item.id === this.state_id)
     // return STATE_CONSTRUCTION[index].name;
     return ZONE_SUPPORT_STATE[this.stateId];
-    
+
   }
 
-  get saleState(): TagItem | null  {
+  get saleState(): TagItem | null {
     // const index = STATE_SALE.findIndex(item => item.id === this.sale_id)
     // return STATE_SALE[index].name;
     return ZONE_SALE_STATE[this.saleId];
-    
+
   }
 
 

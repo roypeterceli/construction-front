@@ -9,21 +9,24 @@
     <form [formGroup]="troncalForm" class="py-4">
       <div class="grid justify-start grid-cols-3 lg:grid-cols-3 gap-3 mb-2">
         <div class="flex items-start md:flex-row">
-           @if (zone()) {
-            @let item = zone()!;
-            <div class="departamento pr-7">
-              <h6 class="text-gray-400 py-5">Departamento</h6>
-              {{ item.ubigeoDepartmentId }}
+           <!-- @if (zone()) {
+            @let item = zone()!; -->
+            <div class="departamento pr-7 pb-5">
+              <h6 class="text-gray-400">Departamento</h6>
+              <!-- {{ item.ubigeoDepartmentId }} -->
+                <strong>{{ 'AYACUCHO' }}</strong>
             </div>
             <div class="provincia pr-7">
-              <h6 class="text-gray-400 py-5">Provincia</h6>
-              {{ item.ubigeoProvinceId }}
+              <h6 class="text-gray-400">Provincia</h6>
+              <!-- {{ item.ubigeoProvinceId }} -->
+                <strong>{{ 'HUANTA' }}</strong>
             </div>
             <div class="codigo">
-              <h6 class="text-gray-400 py-5">Código</h6>
-              {{ item.zoneCode}}
+              <h6 class="text-gray-400">Código</h6>
+              <!-- {{ item.zoneCode}} -->
+                <strong>{{ 'CAC44' }}</strong>
             </div>
-           }  
+           <!-- }   -->
         </div>
       </div>
       <mat-form-field class="w-full">

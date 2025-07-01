@@ -20,14 +20,14 @@ export class TroncalService {
 
   departmentCode = '05';
   // departmentCode = signal<Zone | null>(null);
-  provinceCode = '0503';
+  provinceCode = '0504';
   // provinceCode = signal<Zone | null>(null);
+  constructor() {
+    this.loadDistricts(this.departmentCode,this.provinceCode);
+  }
 
   districtsList = signal<{ code: string; name: string }[]>([]);
 
-  loadDistricts(department_code: string, province_code: string): void{
-    
-  }
   getAll() {
     return this.http.get<ApiResponse<Troncal[]>>(`${ environment.api.construction }/troncals`).pipe(
       map(res => {
@@ -50,6 +50,20 @@ export class TroncalService {
 
   getById(id: number) {
     return this.http.get<ApiResponse<Zone>>(`${environment.api.construction}/troncals/${id}`);
+  }
+
+  private loadDistricts(department_code:string, province_code: string): void {
+  if (this.districtsList().length === 0) {
+    this.getDisctricts(department_code, province_code).subscribe();
+    }
+  }
+
+  getDisctricts(department_code: string, province_code: string) {
+    return this.http.get<ApiResponse<{ code: string; name: string; }[]>>(
+      `${environment.api.construction}/ubigeo/departments/${department_code}/provinces/${province_code}/districts`
+    ).pipe(
+      tap(res => this.districtsList.set(res.data ?? []))
+    );
   }
 
 }

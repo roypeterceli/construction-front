@@ -9,3 +9,4 @@ export interface ZoneSupport {
   stateId: string;
   saleId: string;
 }
+

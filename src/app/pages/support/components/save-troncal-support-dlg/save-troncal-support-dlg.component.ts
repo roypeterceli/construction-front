@@ -46,33 +46,26 @@ export class SaveTroncalSupportDlgComponent implements OnInit {
   // private zoneService = inject(ZoneService);
   private alertService = inject(AlertDialogService);
   // private authService = inject(AuthService);
-  troncalService = inject(TroncalService);
+  // troncalService = inject(TroncalService);
   private router = inject(Router);
   private readonly fb = inject(FormBuilder);
   private readonly dialogRef = inject(MatDialogRef<SaveTroncalSupportDlgComponent>);
   // private route = inject(ActivatedRoute);
 
-  readonly data = inject<ZoneSupport>(MAT_DIALOG_DATA);
+  // readonly data = inject<ZoneSupport>(MAT_DIALOG_DATA);
 
   public http = inject(HttpClient);
   zone = signal<ZoneSupport | null>(null);
-  // constructor(
-  //   @Inject(MAT_DIALOG_DATA) public data: { zone: ZoneSupport },
-  //   public troncalService: TroncalService
-  // ) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { zone: ZoneSupport },
+    public troncalService: TroncalService
+  ) {}
 
-  districtsList = signal<{ code: string; name: string }[]>([]);
-
-  // constructor() {
-    // this.loadDisctricts(this.departmentCode, this.provinceCode);
-  // }
-  //   constructor(
-  //   @Inject(MAT_DIALOG_DATA) public data: { zone: ZoneSupport },
-  //   public troncalService: TroncalService
-  // ) {}
 
  ngOnInit(): void {
     this.initTroncalForm();
+    // this.loadDistricts('04','0404');
+    // this.troncalService.districtsList('04','0404');
   }
 
   createTroncal(): void {
@@ -83,9 +76,9 @@ export class SaveTroncalSupportDlgComponent implements OnInit {
     }
 
     this.screenLoaderService.show();
-    const troncal = this.troncalForm.value as Troncal;
-
-    this.troncalService.create(troncal)
+    // const troncal = this.troncalForm.value as Troncal;
+    console.log('Payload a enviar:', this.troncalForm.value);
+    this.troncalService.create(this.troncalForm.value)
       .pipe(
         finalize(() => this.screenLoaderService.hide())
       )
@@ -141,22 +134,6 @@ export class SaveTroncalSupportDlgComponent implements OnInit {
 
   }
 
-
-  
-    private loadDisctricts(department_code:string, province_code: string): void {
-      if (this.districtsList().length === 0) {
-        this.getDisctricts(department_code, province_code).subscribe();
-      }
-    }
-    
-    getDisctricts(department_code: string, province_code: string) {
-      return this.http.get<ApiResponse<{ code: string; name: string; }[]>>(
-        `${environment.api.construction}/ubigeo/departments/${department_code}/provinces/${province_code}/districts`
-      ).pipe(
-        tap(res => this.districtsList.set(res.data ?? []))
-      );
-    }
-    
 
 
 

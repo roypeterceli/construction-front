@@ -87,7 +87,7 @@ export class SaveZoneSupportDlgComponent implements OnInit {
     }
 
     this.screenLoaderService.show();
-    const zone = this.zoneForm.value as Zone;
+    // const zone = this.zoneForm.value as Zone;
 
     this.zoneSupportService.create(this.zoneForm.value)
       .pipe(
