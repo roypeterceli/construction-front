@@ -16,7 +16,6 @@ import { finalize } from 'rxjs';
 import { Router } from '@angular/router';
 
 
-
 const FORM_ERROR_MESSAGES = {
   // zone_code: { pattern: 'Solo letras y números' }
   // name: { pattern: 'Solo se permite letras' },

@@ -1,0 +1,21 @@
+span.sale, span.enabled, span.in-progress{
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.sale{
+    border: 3px solid #7030A0;
+    background-color: #C7AFDA;
+}
+
+.enabled{
+    border: 3px solid #FFD980;
+    background-color: #FFE9B5;
+}
+
+.in-progress{
+    border: 3px solid #EB6608;
+    background-color: #F9D1B4;
+}
