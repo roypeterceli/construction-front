@@ -1,46 +1,129 @@
+import { TagItem } from '@wow/shared/interfaces';
+
+export enum TroncalStateType {
+  PENDING = 1,
+  IN_PROGRESS = 2,
+  BUILT = 3
+}
+
+export enum TroncalSaleType {
+  BLOCKED = 1,
+  IN_SALE = 2
+}
+
+export const TRONCAL_SUPPORT_STATE: Record<TroncalStateType, TagItem> = {
+  [TroncalStateType.PENDING]: {
+    text: 'Pendiente',
+    textClass: 'text-blue-600',
+    bgClass: 'bg-blue-600/10',
+    previewClass: 'bg-blue-600'
+  },
+  [TroncalStateType.IN_PROGRESS]: {
+    text: 'En construcción',
+    textClass: 'text-white',
+    bgClass: 'bg-[#4C6DAF]',
+    previewClass: 'bg-amber-600'
+  },
+  [TroncalStateType.BUILT]: {
+    text: 'Construido',
+    textClass: 'text-green-600',
+    bgClass: 'bg-[#4CAF50]',
+    previewClass: 'bg-green-600'
+  }
+};
+
+export const TRONCAL_SALE_STATE: Record<TroncalSaleType, TagItem> = {
+  [TroncalSaleType.BLOCKED]: {
+    text: 'Bloqueado',
+    textClass: 'text-white',
+    bgClass: 'bg-[#9C9C9C]',
+    previewClass: 'bg-blue-600'
+  },
+  [TroncalSaleType.IN_SALE]: {
+    text: 'En venta',
+    textClass: 'text-amber-600',
+    bgClass: 'bg-[#4CAF50]',
+    previewClass: 'bg-amber-600'
+  }
+};
+
 
 export interface TroncalSupport {
-  idTroncal: string;
-  codeTroncal: string;
-  districtTroncal: string;
-  prefixTroncal: string;
-  nodeInitial: string;
-  nodeFinal: string;
-  zoneId: string;
-  percentage: string;
-  fecUpdate: Date;
-  stateTroncal: string;
-  stateSale: string;
+  troncalId: number;
+  troncalCode: string;
+  ubigeoDistrictId: string;
+  nodePrefix: string;
+  nodeStart: number;
+  nodeEnd: number;
+  zoneId: number;
+  troncalAdvance: number;
+  updatedAt: Date;
+  stateTroncal: number;
+  stateSale: number;
 }
 
 export class Troncal{
-  idTroncal: string;
-  codeTroncal: string;
-  districtTroncal: string;
-  prefixTroncal: string;
-  nodeInitial: string;
-  nodeFinal: string;
-  zoneId: string;
-  percentage: string;
-  fecUpdate: Date;
-  stateTroncal: string;
-  stateSale: string;
+  troncalId: number;
+  troncalCode: string;
+  ubigeoDistrictId: string;
+  nodePrefix: string;
+  nodeStart: number;
+  nodeEnd: number;
+  zoneId: number;
+  troncalAdvance: number;
+  updatedAt: Date;
+  stateTroncal: TroncalStateType;
+  stateSale: TroncalSaleType;
 
   constructor(model: Troncal){
-    this.idTroncal = model.idTroncal;
-    this.codeTroncal = model.codeTroncal;
-    this.districtTroncal = model.districtTroncal;
-    this.prefixTroncal = model.prefixTroncal;
-    this.nodeInitial = model.nodeInitial;
-    this.nodeFinal = model.nodeFinal;
+    this.troncalId = model.troncalId;
+    this.troncalCode = model.troncalCode;
+    this.ubigeoDistrictId = model.ubigeoDistrictId;
+    this.nodePrefix = model.nodePrefix;
+    this.nodeStart = model.nodeStart;
+    this.nodeEnd = model.nodeEnd;
     this.zoneId = model.zoneId;
-    this.percentage = model.percentage;
-    this.fecUpdate = model.fecUpdate;
+    this.troncalAdvance = model.troncalAdvance;
+    this.updatedAt = model.updatedAt;
     this.stateTroncal = model.stateTroncal;
     this.stateSale = model.stateSale;
   }
 
-  // get zendeskTicket(): string | null {
-  //   return this.zendesk_ticket;
-  // }
+  get codeTroncal(): string {
+    return this.troncalCode;
+  }
+
+  get districtTroncal(): string | null {
+    return this.ubigeoDistrictId;
+  }
+
+  get prefixTroncal(): string | null {
+    return this.nodePrefix;
+  }
+
+  get nodeInitial(): number | null {
+    return this.nodeStart;
+  }
+
+  get nodeFinal(): number | null {
+    return this.nodeEnd;
+  }
+
+  get advanceTroncal(): number | null {
+    return this.troncalAdvance;
+  }
+  
+  get fecUpdate(): Date | null {
+    return this.updatedAt;
+  }
+
+  get troncalState(): TagItem | null {
+    return TRONCAL_SUPPORT_STATE[this.stateTroncal];
+
+  }
+
+  get saleState(): TagItem | null {
+    return TRONCAL_SALE_STATE[this.stateSale];
+
+    }
 }

@@ -17,17 +17,19 @@
 
 </header>
 
-<div class="flex md:flex-row"> 
-    @if (zone()) {
-        @let zona = zone()!;
-        <div class="flex justify-between items-center rounded bg-white shadow w-full md:w-12/12 p-6">
-            <div class="id">
-                <h6 class="text-gray-400">ID</h6>
+@if (zone()) {
+    @let zona = zone()!;
+    <div class="flex md:flex-row justify-start items-center rounded bg-white shadow w-full md:w-12/12 p-6">
+        <div class="id px-7">
+            <h6 class="text-gray-400">ID</h6>
+            <span class="font-semibold">
                 {{ zona.zoneId }}
-            </div>
-            <div class="departamento px-7">
-                <h6 class="text-gray-400">Departamento</h6>
-                <!-- {{ zona.ubigeoDepartmentId }} -->
+            </span>
+        </div>
+        <div class="departamento px-7">
+            <h6 class="text-gray-400">Departamento</h6>
+            <!-- {{ zona.ubigeoDepartmentId }} -->
+            <span class="text-[#7030A0] font-semibold">
                 @switch (zona.ubigeoDepartmentId) {
                     @case ('01'){ 
                         {{ 'AMAZONAS' }}
@@ -105,10 +107,12 @@
                         {{ 'UCAYALI' }}
                     }
                 }
-            </div>
-            <div class="provincia px-7">
-                <h6 class="text-gray-400">Provincia</h6>
-                <!-- {{ zona.ubigeoProvinceId }} -->
+            </span>
+        </div>
+        <div class="provincia px-7">
+            <h6 class="text-gray-400">Provincia</h6>
+            <!-- {{ zona.ubigeoProvinceId }} -->
+            <span class="text-[#7030A0] font-semibold">
                 @switch (zona.ubigeoProvinceId) {
                     @case ('0101'){ 
                         {{ 'CHACHAPOYAS' }}
@@ -700,64 +704,62 @@
                     }                    
 
                 }
-            </div>
-            <div class="codigo px-7">
-                <h6 class="text-gray-400">Código</h6>
-                {{ zona.zoneCode}}
-            </div>
-            <div class="troncales px-7">
-                <h6 class="text-gray-400">Troncales</h6>
-                {{ zona.troncales }}
-            </div>
-            <div class="cajas-nap px-7">
-                <h6 class="text-gray-400">Cajas NAP</h6>
-                {{ zona.boxNaps }}
-            </div>
-            <div class="puertos px-7">
-                <h6 class="text-gray-400">Puertos</h6>
-                {{ 0 }}
-            </div>
-            <div class="construccion px-7">
-                <h6 class="text-gray-400">Construcción</h6>
-                {{ zona.advanceId + " %"}}
-            </div>
-            <div class="estado px-7">
-                <h6 class="text-gray-400">Estado</h6>
-                <!-- {{ zona.stateId }} -->
-                @if(zona.stateId == '1'){
-                <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-blue-600/10 text-blue-600">
-                    Pendiente
-                </div>
-                } @else if(zona.saleId == '2'){
-                    <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4C6DAF] text-white">
-                        En Construcción
-                    </div>
-                }@else if(zona.saleId == '3'){
-                    <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4CAF50] text-green-600">
-                        Construido
-                    </div>
-                }
-            </div>
-            <div class="venta px-7">
-                <h6 class="text-gray-400">Venta</h6>
-                <!-- {{ zona.saleId}} -->
-                @if(zona.saleId == '1'){
-                    <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#9C9C9C] text-white">
-                        Bloqueado
-                    </div>
-                } @else if(zona.saleId == '2'){
-                    <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4CAF50] text-amber-600">
-                        En venta
-                    </div>
-                }
-                <!-- export const STATE_SALE: { id: number; name: string; }[] = [
-                    { id: 3, name: 'Bloqueado' },
-                    { id: 4, name: 'En venta' }
-                    ] -->
-            </div>
+            </span>
         </div>
-        }
-</div>
+        <div class="codigo px-7">
+            <h6 class="text-gray-400">Código</h6>
+            <span class="text-[#7030A0] font-semibold">
+                {{ zona.zoneCode}}
+            </span>
+        </div>
+        <div class="troncales px-7">
+            <h6 class="text-gray-400">Troncales</h6>
+            {{ zona.troncales }} / {{ zona.troncales }}
+        </div>
+        <div class="cajas-nap px-7">
+            <h6 class="text-gray-400">Cajas NAP</h6>
+            {{ zona.boxNaps }}
+        </div>
+        <div class="puertos px-7">
+            <h6 class="text-gray-400">Puertos</h6>
+            {{ 0 }}
+        </div>
+        <div class="construccion px-7">
+            <h6 class="text-gray-400">Construcción</h6>
+            {{ zona.advanceId + " %"}}
+        </div>
+        <div class="estado px-7">
+            <h6 class="text-gray-400">Estado</h6>
+            <!-- {{ zona.stateId }} -->
+            @if(zona.stateId == '1'){
+            <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-blue-600/10 text-blue-600">
+                Pendiente
+            </div>
+            } @else if(zona.saleId == '2'){
+                <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4C6DAF] text-white">
+                    En Construcción
+                </div>
+            }@else if(zona.saleId == '3'){
+                <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4CAF50] text-green-600">
+                    Construido
+                </div>
+            }
+        </div>
+        <div class="venta px-7">
+            <h6 class="text-gray-400">Venta</h6>
+            <!-- {{ zona.saleId}} -->
+            @if(zona.saleId == '1'){
+                <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#9C9C9C] text-white">
+                    Bloqueado
+                </div>
+            } @else if(zona.saleId == '2'){
+                <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4CAF50] text-amber-600">
+                    En venta
+                </div>
+            }
+        </div>
+    </div>
+    }
 
 <div class="pt-6 pb-6">
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">

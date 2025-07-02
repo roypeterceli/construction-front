@@ -39,7 +39,6 @@ export class ZoneDetailPage implements OnInit{
     this.zone.set(this.route.snapshot.data['zone']);
   }
 
-
   openSaveTroncalDlg(){
     this.dialog.open(SaveTroncalSupportDlgComponent, {
       role: 'dialog',

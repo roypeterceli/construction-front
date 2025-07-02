@@ -5,70 +5,72 @@ export const columns: TableColumn<Troncal>[] = [
   {
     label: 'Id',
     type: 'text',
-    property: 'idTroncal',
+    property: 'troncalId',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Código',
     type: 'text',
-    property: 'codeTroncal',
+    property: 'troncalCode',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Distrito',
     type: 'text',
-    property: 'districtTroncal',
+    property: 'ubigeoDistrictId',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Prefijo',
     type: 'text',
-    property: 'prefixTroncal',
+    property: 'nodePrefix',
     visible: true,
-     cssClasses: ['font-semibold', 'text-gray-800']
+    cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'N. Inicial',
     type: 'text',
-    property: 'nodeInitial',
+    property: 'nodeStart',
     visible: true,
-     cssClasses: ['font-semibold', 'text-gray-800']
+    cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'N. Final',
     type: 'text',
-    property: 'nodeFinal',
+    property: 'nodeEnd',
     visible: true,
-     cssClasses: ['font-semibold', 'text-gray-800']
+    cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Constr.',
     type: 'text',
-    property: 'percentage',
+    property: 'troncalAdvance',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
-  {
-    label: 'F. Actualización',
-    type: 'date',
-    format: 'yyyy-MM-dd',
-    property: 'fecUpdate',
-    visible: true,
-    cssClasses: ['font-semibold', 'text-gray-800']
-  },
-  {
-    label: 'Estado',
-    type: 'badge',
-    property: 'stateTroncal',
-    visible: true,
-  },
-  {
-    label: 'Venta',
-    type: 'badge',
-    property: 'stateSale',
-    visible: true,
-  }
+  // {
+  //   label: 'F. Actualización',
+  //   type: 'date',
+  //   format: 'yyyy-MM-dd',
+  //   property: 'updatedAt',
+  //   visible: true,
+  //     cssClasses: []
+  // },
+  // {
+  //   label: 'Estado',
+  //   type: 'badge',
+  //   property: 'stateTroncal',
+  //   visible: true,
+  //   cssClasses: []
+  // },
+  // {
+  //   label: 'Venta',
+  //   type: 'badge',
+  //   property: 'stateSale',
+  //   visible: true,
+  //   cssClasses: []
+  // },
 ]

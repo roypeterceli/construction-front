@@ -21,6 +21,18 @@ export const routes: Routes = [
         loadChildren: () => import('./pages/support/support.routes').then(m => m.routes)
       },
       {
+        path: 'reportes',
+        loadChildren: () => import('./pages/reports/reports.routes').then(m => m.routes)
+      },
+      {
+        path: 'notififaciones',
+        loadChildren: () => import('./pages/notifications/notifications.routes').then(m => m.routes)
+      },
+      {
+        path: 'documentacion',
+        loadChildren: () => import('./pages/documentation/documentation.routes').then(m => m.routes)
+      },
+      {
         path: '',
         pathMatch: 'full',
         redirectTo: 'construccion'

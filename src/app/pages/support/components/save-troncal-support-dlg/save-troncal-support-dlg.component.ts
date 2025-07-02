@@ -15,8 +15,8 @@ import { ScreenLoaderService } from '@wow/shared/components/loader';
 import { finalize, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ApiResponse } from '@wow/shared/interfaces';
-import { environment } from '@wow/env/environment.development';
+// import { ApiResponse } from '@wow/shared/interfaces';
+// import { environment } from '@wow/env/environment.development';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -36,7 +36,7 @@ import { HttpClient } from '@angular/common/http';
 export class SaveTroncalSupportDlgComponent implements OnInit {
 
   // selected = 'option1';
-
+  zoneId = '';
   troncalForm = new FormGroup<any>({});
   formValidator!: FormValidator;
   // showFields = signal<boolean>(false);
@@ -108,7 +108,7 @@ export class SaveTroncalSupportDlgComponent implements OnInit {
 
   private successMessage(troncal: Troncal): void {
     const alertRef = this.alertService.success({
-      title: `Troncal creada: ${ troncal.idTroncal }`,
+      title: `Troncal creada: ${ troncal.troncalId }`,
       message: 'La Troncal ha sido creada',
       actionButtonsAlign: 'end',
       confirmButton: { text: 'Ver troncal', style: 'flat' },
@@ -117,7 +117,7 @@ export class SaveTroncalSupportDlgComponent implements OnInit {
 
     alertRef.afterClosed().subscribe(res => {
       if (res && res.isConfirmed) {
-        this.router.navigate(['/construccion', troncal.idTroncal, 'detalles']).then();
+        this.router.navigate(['/construccion', troncal.troncalId, 'detalles']).then();
       }
     });
   }

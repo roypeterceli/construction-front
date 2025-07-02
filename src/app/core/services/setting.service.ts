@@ -31,7 +31,7 @@ export class SettingService {
       {
         id: 1,
         name: 'Construcción',
-        path: ['zonas'],
+        path: ['construccion'],
        
         // children: [
         //   {

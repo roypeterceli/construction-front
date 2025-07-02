@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatFormField, MatLabel, MatSelect, MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Troncal } from '@wow/core/interfaces';
+import { Troncal, Zone, ZoneSupport } from '@wow/core/interfaces';
 import { SettingService, TroncalService } from '@wow/core/services';
 import { UbigeoService } from '@wow/core/services/ubigeo.service';
 import { WowDynamicTable } from '@wow/shared/components/table';
@@ -66,7 +66,7 @@ export class ContentTroncalComponent implements OnInit{
   }
 
   goToDetail(troncal: Troncal): void {
-    this.router.navigate(['../', troncal.idTroncal, 'detalles'], { relativeTo: this.route }).then();
+    this.router.navigate(['../', troncal.troncalId, 'detalles'], { relativeTo: this.route }).then();
   }
 
   
