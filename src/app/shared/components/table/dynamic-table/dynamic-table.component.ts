@@ -68,7 +68,7 @@ export class WowDynamicTable<T> implements OnInit, AfterViewInit {
   ctrlPressed = signal(false);
   hoveredCell = signal<{ rowIndex: number; columnProperty: string } | null>(null);
 
-  pageSize: number = 10;
+  pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 20, 50];
   dataSource!: MatTableDataSource<T>;
   selection: SelectionModel<T> = new SelectionModel<T>(true, []);
@@ -101,7 +101,7 @@ export class WowDynamicTable<T> implements OnInit, AfterViewInit {
     this.addTag.emit({ column, data: row });
   }
 
-  onCellCtrlClick(event: MouseEvent, column: Extract<keyof T, string>, row: T, allowCtrlClick: boolean = false): void {
+  onCellCtrlClick(event: MouseEvent, column: Extract<keyof T, string>, row: T, allowCtrlClick = false): void {
     if (event.ctrlKey && allowCtrlClick) {
       this.cellCtrlClick.emit({ column, data: row });
     } else {
@@ -109,7 +109,7 @@ export class WowDynamicTable<T> implements OnInit, AfterViewInit {
     }
   }
 
-  isCtrlHoverActive(i: number, columnProperty: string, allowCtrlClick: boolean = false): boolean {
+  isCtrlHoverActive(i: number, columnProperty: string, allowCtrlClick = false): boolean {
     return (
       this.ctrlPressed() &&
       this.hoveredCell()?.rowIndex === i &&

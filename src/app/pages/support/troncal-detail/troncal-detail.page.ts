@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, OnInit } from '@angular/core';
 import { SaveNodeSupportDlgComponent } from '../components/save-node-support-dlg/save-node-support-dlg.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -21,7 +21,7 @@ import { MatTabsModule } from '@angular/material/tabs';
   templateUrl: './troncal-detail.page.html',
   styleUrl: './troncal-detail.page.scss'
 })
-export class TroncalDetailPage {
+export class TroncalDetailPage implements OnInit {
   zone = signal<ZoneSupport | null>(null);
   troncal = signal<TroncalSupport | null>(null);
   node = signal<NodeSupport | null>(null);

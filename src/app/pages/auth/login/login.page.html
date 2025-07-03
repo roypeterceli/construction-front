@@ -17,7 +17,7 @@
         class="flex flex-col gap-1.5">
     <mat-form-field class="flex-1" appearance="outline">
       <mat-label>E-Mail</mat-label>
-      <input type="text" matInput autofocus formControlName="email"/>
+      <input type="text" matInput formControlName="email"/>
 
       @if (formValidator.hasError('email')) {
         <mat-error>{{ formValidator.getErrorMessage('email') }}</mat-error>
