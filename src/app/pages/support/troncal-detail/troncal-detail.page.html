@@ -1,6 +1,6 @@
 <header class="flex md:flex-row justify-start items-start md:justify-between md:items-center mb-5">
     <div class="flex justify-start items-start w-full md:w-5/12">
-        <wow-title [url]="['/construccion/:zoneId']">
+        <wow-title [url]="['../../detalles']">
             <h2 class="text-[#7030A0]">
                 Gestión de Troncal
             </h2>
@@ -14,7 +14,7 @@
     </div>
 </header>
 
-<div class="flex md:flex-row justify-start items-center rounded bg-white shadow w-full md:w-12/12 p-6">
+<div class="flex md:flex-row justify-start items-center rounded bg-white shadow w-full md:w-12/12 p-6 gap-4">
 @if (zone()) {
 @let item = zone()!;
     <div class="id px-7">
@@ -736,15 +736,15 @@
     <div class="estado px-7">
         <h6 class="text-gray-400">Estado</h6>
         <!-- {{ zona.stateId }} -->
-        @if(zona.stateId == '1'){
+        @if(zona.stateId === '1'){
         <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-blue-600/10 text-blue-600">
             Pendiente
         </div>
-        } @else if(zona.saleId == '2'){
+        } @else if(zona.saleId === '2'){
         <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4C6DAF] text-white">
             En Construcción
         </div>
-        }@else if(zona.saleId == '3'){
+        }@else if(zona.saleId === '3'){
         <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4CAF50] text-green-600">
             Construido
         </div>
@@ -753,15 +753,37 @@
     <div class="venta px-7">
         <h6 class="text-gray-400">Venta</h6>
         <!-- {{ zona.saleId}} -->
-        @if(zona.saleId == '1'){
+        @if(zona.saleId === '1'){
         <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#9C9C9C] text-white">
             Bloqueado
         </div>
-        } @else if(zona.saleId == '2'){
+        } @else if(zona.saleId === '2'){
         <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4CAF50] text-amber-600">
             En venta
         </div>
         }
     </div>
 }
+</div>
+
+<div class="flex justify-between pt-6 pb-6 gap-3">
+    <div class="w-full lg:w-3/12">
+        <mat-card class="mat-card-no-space">
+            <mat-card-content>
+            <wow-dynamic-table [columns]="columns" [data]="data()" showDropdownMenu [dropdownMenu]="actionsMenu"
+                (rowDblClick)="goToDetail($event)" [isLoading]="loading()"></wow-dynamic-table>
+            </mat-card-content>
+        </mat-card>
+        <mat-menu #actionsMenu="matMenu" xPosition="before" yPosition="below">
+            <ng-template let-data="rowSelected" matMenuContent>
+            <button mat-menu-item (click)="edit(data)">
+                <mat-icon>edit</mat-icon>
+                <span>Editar</span>
+            </button>
+            </ng-template>
+        </mat-menu>
+    </div>
+    <div class="flex w-full justify-start items-center rounded md:w-19/12 p-6 ">
+        <wow-show-node-support></wow-show-node-support>
+    </div>
 </div>

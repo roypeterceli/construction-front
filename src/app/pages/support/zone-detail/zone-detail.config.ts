@@ -49,28 +49,28 @@ export const columns: TableColumn<Troncal>[] = [
     type: 'text',
     property: 'troncalAdvance',
     visible: true,
-    cssClasses: ['font-semibold', 'text-gray-800']
+    cssClasses: ['font-semibold', 'text-gray-800', 'after:content-["%"]']
   },
-  // {
-  //   label: 'F. Actualización',
-  //   type: 'date',
-  //   format: 'yyyy-MM-dd',
-  //   property: 'updatedAt',
-  //   visible: true,
-  //     cssClasses: []
-  // },
-  // {
-  //   label: 'Estado',
-  //   type: 'badge',
-  //   property: 'stateTroncal',
-  //   visible: true,
-  //   cssClasses: []
-  // },
-  // {
-  //   label: 'Venta',
-  //   type: 'badge',
-  //   property: 'stateSale',
-  //   visible: true,
-  //   cssClasses: []
-  // },
+  {
+    label: 'F. Actualización',
+    type: 'date',
+    format: 'yyyy-MM-dd',
+    property: 'updatedAt',
+    visible: false,
+    cssClasses: []
+  },
+  {
+    label: 'Estado',
+    type: 'badge',
+    property: 'troncalState',
+    visible: false,
+    cssClasses: []
+  },
+  {
+    label: 'Venta',
+    type: 'badge',
+    property: 'saleState',
+    visible: false,
+    cssClasses: []
+  },
 ]

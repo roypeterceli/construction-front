@@ -1,0 +1,45 @@
+<div class="w-full md:w-4/12">
+    <wow-map-troncal-detail></wow-map-troncal-detail>
+</div>
+<div class="w-full flex flex-row md:w-8/12">
+    <div class="nodos px-7">
+        <h6 class="text-gray-400">Nodos</h6>
+        {{ "ADAD-2"}}
+    </div>
+    <div class="construccion px-7">
+        <h6 class="text-gray-400">Sufijo</h6>
+        {{ "A" }}
+    </div>
+    @if (node()) {
+    @let item = node()!;
+    <div class="estado px-7">
+        <h6 class="text-gray-400">Estado</h6>
+        @if(item.nodeState === 1){
+        <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-blue-600/10 text-blue-600">
+            Pendiente
+        </div>
+        } @else if(item.nodeState === 2){
+        <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4C6DAF] text-white">
+            En Construcción
+        </div>
+        }@else if(item.nodeState === 3){
+        <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4CAF50] text-green-600">
+            Construido
+        </div>
+        }
+    </div>
+    <div class="venta px-7">
+        <h6 class="text-gray-400">Venta</h6>
+        @if(item.stateSale === 1){
+        <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#9C9C9C] text-white">
+            Bloqueado
+        </div>
+        } @else if(item.stateSale === 2){
+        <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4CAF50] text-amber-600">
+            En venta
+        </div>
+        }
+    </div>
+    }
+</div>
+

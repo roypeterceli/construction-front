@@ -8,11 +8,9 @@ import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 // import { KeycloakService } from './core/services';
-import { authInterceptor, httpErrorInterceptor } from './core/interceptors';
+// import { authInterceptor, httpErrorInterceptor } from './core/interceptors';
 import { includeBearerTokenInterceptor } from 'keycloak-angular';
 import { provideKeycloakAngular, provideKeycloakTokenInterceptor } from './app.provide';
-
-
 
 registerLocaleData(localeEs, 'es');
 export const appConfig: ApplicationConfig = {

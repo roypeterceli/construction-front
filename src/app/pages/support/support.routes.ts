@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { SupportPage } from './support.page';
 import { ZoneSupportPage } from './zone-support/zone-support.page';
-import { ZoneDetailPage } from './zone-detail/zone-detail.page';
 import { zoneByIdResolver } from '@wow/core/resolvers';
+import { ZoneDetailPage } from './zone-detail/zone-detail.page';
 import { TroncalDetailPage } from './troncal-detail/troncal-detail.page';
 // import { NodeDetailPage } from './node-detail/node-detail.page';
 

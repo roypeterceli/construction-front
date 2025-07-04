@@ -58,7 +58,7 @@ export interface TroncalSupport {
   zoneId: number;
   troncalAdvance: number;
   updatedAt: Date;
-  stateTroncal: number;
+  troncalState: number;
   stateSale: number;
 }
 
@@ -72,8 +72,8 @@ export class Troncal{
   zoneId: number;
   troncalAdvance: number;
   updatedAt: Date;
-  stateTroncal: TroncalStateType;
-  stateSale: TroncalSaleType;
+  troncalState: TroncalStateType;
+  saleState: TroncalSaleType;
 
   constructor(model: Troncal){
     this.troncalId = model.troncalId;
@@ -85,8 +85,8 @@ export class Troncal{
     this.zoneId = model.zoneId;
     this.troncalAdvance = model.troncalAdvance;
     this.updatedAt = model.updatedAt;
-    this.stateTroncal = model.stateTroncal;
-    this.stateSale = model.stateSale;
+    this.troncalState = model.troncalState;
+    this.saleState = model.saleState;
   }
 
   get codeTroncal(): string {
@@ -117,13 +117,13 @@ export class Troncal{
     return this.updatedAt;
   }
 
-  get troncalState(): TagItem | null {
-    return TRONCAL_SUPPORT_STATE[this.stateTroncal];
+  get stateTroncal(): TagItem | null {
+    return TRONCAL_SUPPORT_STATE[this.troncalState];
 
   }
 
-  get saleState(): TagItem | null {
-    return TRONCAL_SALE_STATE[this.stateSale];
+  get stateSale(): TagItem | null {
+    return TRONCAL_SALE_STATE[this.saleState];
 
     }
 }

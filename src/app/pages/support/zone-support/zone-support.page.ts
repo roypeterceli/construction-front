@@ -113,10 +113,11 @@ export class ZoneSupportPage implements OnInit, OnDestroy {
 
 
   filter(): void {
-
+    return console.log('filtros');
+    
   }
 
   clean(): void {
-
+    return console.log('limpiar'); 
   }
 }

@@ -48,6 +48,7 @@ export const NODE_SALE_STATE: Record<NodeSaleType, TagItem> = {
 };
 
 export interface NodeSupport {
+  nodeId: number;
   nodeCorrelative: string;
   nodeSufix: string;
   napsCount: number;
@@ -55,18 +56,18 @@ export interface NodeSupport {
   stateSale: number;
 }
 export class Node{
+  nodeId: number;
   nodeCorrelative: string;
   nodeSufix: string;
   napsCount: number;
-  sufixNode: string;
   nodeState: NodeStateType;
   stateSale: NodeSaleType;
 
   constructor(model: Node){
+    this.nodeId = model.nodeId;
     this.nodeCorrelative = model.nodeCorrelative;
     this.nodeSufix = model.nodeSufix;
     this.napsCount = model.napsCount;
-    this.sufixNode = model.sufixNode;
     this.nodeState = model.nodeState;
     this.stateSale = model.stateSale;
   }
@@ -83,9 +84,9 @@ export class Node{
     return this.napsCount;
   }
 
-  get nodeInitial(): string | null {
-    return this.sufixNode;
-  }
+  // get nodeInitial(): string | null {
+  //   return this.sufixNode;
+  // }
 
   get stateNode(): TagItem | null {
     return NODE_SUPPORT_STATE[this.nodeState];
