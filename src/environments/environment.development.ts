@@ -5,13 +5,13 @@ export const environment = {
   },
   keycloak: {
     config: {
-      url: 'https://identity.wowperu.local',
-      realm: 'wow',
-      clientId: 'sgc-construction-app'
+      url: 'http://localhost:8080',
+      realm: 'my-realm',
+      clientId: 'angular-client'
     },
     initOptions: {
       onLoad: 'login-required',
       checkLoginIframe: false
-    }
-  }
+    }
+  }
 };

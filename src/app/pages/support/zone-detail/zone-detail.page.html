@@ -731,15 +731,15 @@
         <div class="estado px-7">
             <h6 class="text-gray-400">Estado</h6>
             <!-- {{ zona.stateId }} -->
-            @if(zona.stateId === '1'){
+            @if(zona.stateId === 1){
             <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-blue-600/10 text-blue-600">
                 Pendiente
             </div>
-            } @else if(zona.saleId === '2'){
+            } @else if(zona.stateId === 2){
                 <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4C6DAF] text-white">
                     En Construcción
                 </div>
-            }@else if(zona.saleId === '3'){
+            }@else if(zona.stateId === 3){
                 <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4CAF50] text-green-600">
                     Construido
                 </div>
@@ -748,11 +748,11 @@
         <div class="venta px-7">
             <h6 class="text-gray-400">Venta</h6>
             <!-- {{ zona.saleId}} -->
-            @if(zona.saleId === '1'){
+            @if(zona.saleId === 1){
                 <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#9C9C9C] text-white">
                     Bloqueado
                 </div>
-            } @else if(zona.saleId === '2'){
+            } @else if(zona.saleId === 2){
                 <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4CAF50] text-amber-600">
                     En venta
                 </div>

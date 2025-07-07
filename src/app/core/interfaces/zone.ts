@@ -1,12 +1,12 @@
 export interface ZoneSupport {
-  zoneId: string;
+  zoneId: number;
   ubigeoDepartmentId: string;
   ubigeoProvinceId: string;
   zoneCode: string;
   troncales: string;
   boxNaps: string;
-  advanceId: string;
-  stateId: string;
-  saleId: string;
+  advanceId: number;
+  stateId: number;
+  saleId: number;
 }
 
