@@ -5,9 +5,9 @@ export const environment = {
   },
   keycloak: {
     config: {
-      url: 'http://localhost:8080',
-      realm: 'my-realm',
-      clientId: 'angular-client'
+      url: 'https://identity.wowperu.local',
+      realm: 'wow',
+      clientId: 'sgc-construction-app'
     },
     initOptions: {
       onLoad: 'login-required',

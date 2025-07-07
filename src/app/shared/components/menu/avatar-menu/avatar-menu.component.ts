@@ -2,10 +2,8 @@ import { Component, inject } from '@angular/core';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from "@angular/material/menu";
 import { MatRipple } from "@angular/material/core";
 import { AuthService } from '@wow/core/services';
-import { Router } from '@angular/router';
 
 import Keycloak, { KeycloakProfile } from 'keycloak-js';
-import { NgIf } from '@angular/common';
 // import { CEX_COLLECTION } from '@wow/core/interfaces';
 
 
@@ -15,7 +13,7 @@ import { NgIf } from '@angular/common';
     MatMenu,
     MatMenuItem,
     MatRipple,
-    MatMenuTrigger, NgIf
+    MatMenuTrigger,
   ],
   templateUrl: './avatar-menu.component.html'
 })

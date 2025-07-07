@@ -23,16 +23,16 @@ export const columns: TableColumn<Node>[] = [
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
-  {
-    label: 'Estado',
-    type: 'badge',
-    property: 'nodeState',
-    visible: true,
-  },
-  {
-    label: 'Venta',
-    type: 'badge',
-    property: 'saleState',
-    visible: true,
-  }
+  // {
+  //   label: 'Estado',
+  //   type: 'badge',
+  //   property: 'nodeState',
+  //   visible: true,
+  // },
+  // {
+  //   label: 'Venta',
+  //   type: 'badge',
+  //   property: 'saleState',
+  //   visible: true,
+  // }
 ]

@@ -4,17 +4,17 @@
     </div>
     <div class="md:w-7/12 py-5 ">
         <div class="flex md:flex-row">
-            <div class="nodos mr-3">
+            <div class="nodos mr-5">
                 <h6 class="text-gray-400">Nodo</h6>
                 {{ "ADAD-2"}}
             </div>
-            <div class="construccion mr-3">
+            <div class="construccion mr-5">
                 <h6 class="text-gray-400">Sufijo</h6>
                 {{ "A" }}
             </div>
             @if (node()) {
             @let item = node()!;
-            <div class="estado mr-3">
+            <div class="estado mr-5">
                 <h6 class="text-gray-400">Estado</h6>
                 @if(item.nodeState === 1){
                 <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-blue-600/10 text-blue-600">
@@ -30,7 +30,7 @@
                 </div>
                 }
             </div>
-            <div class="venta mr-3">
+            <div class="venta mr-5">
                 <h6 class="text-gray-400">Venta</h6>
                 @if(item.stateSale === 1){
                 <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#9C9C9C] text-white">
@@ -45,25 +45,65 @@
             }
         </div>
         <h3>Cajas NAP</h3>
-        <div class="bg-[#F5F5F8] p-3">
-            <div class="caja-nap flex md:flex-row">
-                <div class="md:w-2/12">
-                    <span>#</span>
-                    {{ "1" }}
-                </div>
-                <div class="md:w-3/12">
-                    <span>Puertos</span>
-                    <select name="puertos" id="">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-                <div class="md:w-8/12">
-                    <input type="checkbox" name="" id="">
+        <div class="flex md:flex-row w-full">
+            <div class="bg-[#F5F5F8] p-3 md:w-6/12 my-3 mr-2">
+                <div class="flex md:flex-row">
+                    <div class="md:w-3/12">
+                        <h6>#</h6>
+                        {{ "1" }}
+                    </div>
+                    <div class="md:w-6/12">
+                        <h6>Puertos</h6>
+                        <select name="puertos" id="">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                    <div class="md:w-3/12">
+                        <mat-slide-toggle formControlName="enablePort"></mat-slide-toggle>
+                    </div>
                 </div>
             </div>
+            <div class="bg-[#F5F5F8] p-3 md:w-6/12 my-3 mr-2">
+                <div class="flex md:flex-row">
+                    <div class="md:w-3/12">
+                        <h6>#</h6>
+                        {{ "2" }}
+                    </div>
+                    <div class="md:w-6/12">
+                        <h6>Puertos</h6>
+                        <select name="puertos" id="">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                    <div class="md:w-3/12">
+                        <mat-slide-toggle formControlName="enablePort"></mat-slide-toggle>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-[#F5F5F8] p-3 md:w-6/12 my-3 mr-2">
+                <div class="flex md:flex-row">
+                    <div class="md:w-3/12">
+                        <h6>#</h6>
+                        {{ "3" }}
+                    </div>
+                    <div class="md:w-6/12">
+                        <h6>Puertos</h6>
+                        <select name="puertos" id="">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                    <div class="md:w-3/12">
+                        <mat-slide-toggle formControlName="enablePort"></mat-slide-toggle>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </div>
-</div>    
-
+</div>
