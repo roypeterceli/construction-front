@@ -12,12 +12,12 @@ import { SettingService, TroncalService} from '@wow/core/services';
 import { Troncal, Zone, ZoneSupport } from '@wow/core/interfaces';
 import { FormValidator } from '@wow/shared/utils';
 import { ScreenLoaderService } from '@wow/shared/components/loader';
-import { finalize, tap } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { finalize } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 // import { ApiResponse } from '@wow/shared/interfaces';
 // import { environment } from '@wow/env/environment.development';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'wow-save-troncal-support-dlg',
@@ -56,13 +56,14 @@ export class SaveTroncalSupportDlgComponent implements OnInit {
 
   public http = inject(HttpClient);
   zone = signal<ZoneSupport | null>(null);
+  
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { zone: ZoneSupport },
     public troncalService: TroncalService
   ) {}
 
 
- ngOnInit(): void {
+  ngOnInit(): void {
     this.initTroncalForm();
     // this.loadDistricts('04','0404');
     // this.troncalService.districtsList('04','0404');
@@ -91,11 +92,11 @@ export class SaveTroncalSupportDlgComponent implements OnInit {
       })
   }
 
-  getParams(zone: Zone): void{
-    zone.ubigeoDepartmentId,
-    zone.ubigeoProvinceId,
-    zone.zoneCode
-  }
+  // getParams(zone: Zone): void{
+  //   zone.ubigeoDepartmentId,
+  //   zone.ubigeoProvinceId,
+  //   zone.zoneCode
+  // }
 
   zona(zone: Zone): void {
     console.log(zone);

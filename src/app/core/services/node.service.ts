@@ -10,7 +10,7 @@ import { Node } from '../interfaces';
 export class NodeService {
 
   private http = inject(HttpClient);
-  
+
   private nodeCreatedSource = new Subject<void>();
   nodeCreated$ = this.nodeCreatedSource.asObservable();
 
@@ -34,7 +34,7 @@ export class NodeService {
 
   //fill table nodes
   getAll() {
-    return this.http.get<ApiResponse<Node[]>>(`${ environment.api.construction }/nodes`).pipe(
+    return this.http.get<ApiResponse<Node[]>>(`${environment.api.construction}/nodes`).pipe(
       map(res => {
         if (res && res.data) {
           return res.data.map(item => new Node(item));
@@ -42,6 +42,18 @@ export class NodeService {
         return [];
       })
     );
+  }
+
+  create(request: Node) {
+    return this.http.post<ApiResponse<Node>>(`${environment.api.construction}/nodes`, request);
+  }
+
+  notifyNodeCreated(): void {
+    this.nodeCreatedSource.next();
+  }
+
+  getById(id: number) {
+    return this.http.get<ApiResponse<Node>>(`${environment.api.construction}/nodes/${id}`);
   }
 }
 
