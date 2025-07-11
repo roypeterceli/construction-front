@@ -1,8 +1,13 @@
-<h2 mat-dialog-title>
-  <div class="flex justify-between items-center">
-    <span class="text-orange-400">Nueva Zona</span>
-  </div>
-</h2>
+<div class="flex justify-between items-center mr-4">
+  <h2 mat-dialog-title>
+    <div class="flex justify-between items-center">
+      <span class="text-orange-400">Nueva Zona</span>
+    </div>
+  </h2>
+  <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
 
 <mat-dialog-content>
   <form [formGroup]="zoneForm" class="py-4">

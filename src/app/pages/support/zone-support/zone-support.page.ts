@@ -94,8 +94,21 @@ export class ZoneSupportPage implements OnInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe(zones => this.data.set(zones));
+    
   }
 
+  // private getZones(): void {
+  //   this.loading.set(true);
+
+  //   this.zoneSupportService.getAll()
+  //     .pipe(
+  //       finalize(() => this.loading.set(false)),
+  //       takeUntil(this.destroy$)
+  //     )
+  //     .subscribe(response => {
+  //       this.data.set(response);
+  //     });
+  // }
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe([TAILWIND_BREAKPOINTS.sm, TAILWIND_BREAKPOINTS.md])

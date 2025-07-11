@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { Node, Troncal, TroncalSupport } from '@wow/core/interfaces';
-import { NodeService } from '@wow/core/services';
+import { NodeService, SettingService } from '@wow/core/services';
 import { AlertDialogService } from '@wow/shared/components/alert';
 import { ScreenLoaderService } from '@wow/shared/components/loader';
 import { finalize } from 'rxjs';
@@ -41,6 +41,7 @@ export class SaveNodeSupportDlgComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private alertService = inject(AlertDialogService);
 
+  settingService = inject(SettingService);
   // constructor(
   //   @Inject(MAT_DIALOG_DATA) public data: { troncal: TroncalSupport },
   //   public nodeService: NodeService
@@ -114,11 +115,10 @@ export class SaveNodeSupportDlgComponent implements OnInit {
 
   private initNodeForm(): void {
     this.nodeForm = this.fb.group({
-      ubigeoDistrictId: [null, [Validators.required]],
-      troncalCode: [null, [Validators.required]],
-      prefix: [null, [Validators.required]],
-      nodeStart: [null, [Validators.required]],
-      nodeEnd: [null, [Validators.required]]
+      correlative: [null, [Validators.required]],
+      sufix: [null, [Validators.required]],
+      stateNode: [null, [Validators.required]],
+      stateSale: [null, [Validators.required]],
     });
 
   }

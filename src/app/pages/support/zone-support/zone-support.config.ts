@@ -12,14 +12,14 @@ export const columns: TableColumn<Zone>[] = [
   { 
     label: 'Departamento',
     type: 'text',
-    property: 'ubigeoDepartmentId',
+    property: 'departmentName',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
     label: 'Provincia',
     type: 'text',
-    property: 'ubigeoProvinceId',
+    property: 'provinceName',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },

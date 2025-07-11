@@ -8,7 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { AlertDialogService } from '@wow/shared/components/alert';
-import { SettingService, TroncalService} from '@wow/core/services';
+import { SettingService, TroncalService } from '@wow/core/services';
 import { Troncal, Zone, ZoneSupport } from '@wow/core/interfaces';
 import { FormValidator } from '@wow/shared/utils';
 import { ScreenLoaderService } from '@wow/shared/components/loader';
@@ -56,12 +56,13 @@ export class SaveTroncalSupportDlgComponent implements OnInit {
 
   public http = inject(HttpClient);
   zone = signal<ZoneSupport | null>(null);
-  
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { zone: ZoneSupport },
-    public troncalService: TroncalService
-  ) {}
 
+  data = inject<{ zone: ZoneSupport }>(MAT_DIALOG_DATA);
+  troncalService = inject(TroncalService);
+
+  constructor() {
+    // Ya no necesitas parámetros en el constructor
+  }
 
   ngOnInit(): void {
     this.initTroncalForm();
@@ -109,7 +110,7 @@ export class SaveTroncalSupportDlgComponent implements OnInit {
 
   private successMessage(troncal: Troncal): void {
     const alertRef = this.alertService.success({
-      title: `Troncal creada: ${ troncal.troncalId }`,
+      title: `Troncal creada: ${troncal.troncalId}`,
       message: 'La Troncal ha sido creada',
       actionButtonsAlign: 'end',
       confirmButton: { text: 'Ver troncal', style: 'flat' },
@@ -123,7 +124,7 @@ export class SaveTroncalSupportDlgComponent implements OnInit {
     });
   }
 
-  
+
   private initTroncalForm(): void {
     this.troncalForm = this.fb.group({
       ubigeoDistrictId: [null, [Validators.required]],

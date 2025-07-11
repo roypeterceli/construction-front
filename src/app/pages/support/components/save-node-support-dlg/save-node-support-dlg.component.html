@@ -1,33 +1,62 @@
 <div class="rounded bg-white shadow w-full md:w-12/12">
-  <h2 mat-dialog-title>
-    <div class="flex justify-between items-center">
-      <span class="text-orange-400">Agregar Nodo</span>
-    </div>
-  </h2>
+  <div class="flex justify-between items-center mr-4">
+    <h2 mat-dialog-title>
+      <div class="flex justify-between items-center">
+        <span class="text-orange-400">Agregar Nodo</span>
+      </div>
+    </h2>
+    <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
   <mat-dialog-content>
     <form [formGroup]="nodeForm" class="py-4">
-      <div class="grid justify-start grid-cols-3 lg:grid-cols-3 gap-3 mb-2">
+      <div class="grid justify-start grid-cols-2 lg:grid-cols-2 gap-3 mb-2">
         <div class="flex items-start md:flex-row">
           <!-- @if (zone()) {
             @let item = zone()!; -->
           <div class="departamento pr-7 pb-5">
-            <h6 class="text-gray-400">Departamento</h6>
+            <h6 class="text-gray-400">Troncal</h6>
             <!-- {{ item.ubigeoDepartmentId }} -->
-            <strong>{{ 'AYACUCHO' }}</strong>
+            <strong>{{ 'APU01-1' }}</strong>
           </div>
           <div class="provincia pr-7">
-            <h6 class="text-gray-400">Provincia</h6>
-            <!-- {{ item.ubigeoProvinceId }} -->
-            <strong>{{ 'HUANTA' }}</strong>
-          </div>
-          <div class="codigo">
             <h6 class="text-gray-400">Código</h6>
-            <!-- {{ item.zoneCode}} -->
-            <strong>{{ 'AHU23' }}</strong>
+            <!-- {{ item.ubigeoProvinceId }} -->
+            <strong>{{ 'ADAD' }}</strong>
           </div>
-          <!-- }   -->
         </div>
       </div>
+      <div class="grid grid-cols-2 lg:grid-cols-2 gap-2 mb-2">
+        <mat-form-field>
+          <mat-label>Correlativo</mat-label>
+          <input matInput type="number" formControlName="correlative">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Sufijo</mat-label>
+          <mat-select formControlName="sufix">
+            @for (issue of settingService.sufix(); track issue.id) {
+            <mat-option [value]="issue.id">{{ issue.name }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <mat-form-field class="w-full">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="stateNode">
+          @for (issue of settingService.stateConstruction(); track issue.id) {
+          <mat-option [value]="issue.id">{{ issue.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label>Venta</mat-label>
+        <mat-select formControlName="stateSale">
+          @for (issue of settingService.stateSale(); track issue.id) {
+          <mat-option [value]="issue.id">{{ issue.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
     </form>
   </mat-dialog-content>
   <mat-dialog-actions>

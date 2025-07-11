@@ -1,8 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
 // import { IDENTITY_DOCUMENT_TYPES, ISSUE_TYPES, Module, SOLICITUDE_TYPES, CEX_COLLECTION } from '@wow/core/interfaces';
-import {STATE_CONSTRUCTION} from '@wow/core/interfaces';
+import {STATE_CONSTRUCTION, STATE_SALE, SUFIX} from '@wow/core/interfaces';
 import { Module } from '@wow/core/interfaces';
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 // import { ApiResponse } from '@wow/shared/interfaces';
 // import { environment } from '@wow/env/environment.development';
 // import { tap } from 'rxjs';
@@ -15,6 +15,8 @@ export class SettingService {
   // documentTypes = signal(IDENTITY_DOCUMENT_TYPES);
   // processTypes = signal<{ id: number; name: string }[]>([]);
   stateConstruction = signal<{ id: number; name: string }[]>(STATE_CONSTRUCTION);
+  stateSale = signal<{ id: number; name: string }[]>(STATE_SALE);
+  sufix = signal<{ id: number; name: string }[]>(SUFIX);
   // departments = signal<{ id: number; name: string }[]>([]);
   // issueTypes = signal<{ id: number; name: string }[]>(ISSUE_TYPES);
   

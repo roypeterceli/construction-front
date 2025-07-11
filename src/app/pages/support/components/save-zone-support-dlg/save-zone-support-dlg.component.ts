@@ -60,14 +60,10 @@ export class SaveZoneSupportDlgComponent implements OnInit {
     this.initZoneForm();
   }
 
-  // form: FormGroup;
-  constructor(
-    // private fb: FormBuilder,
-    public zoneService: ZoneService // importante que sea público para usarlo en el HTML
-    ) {
-  }
 
+  public zoneService = inject(ZoneService);
 
+  
   onDepartmentChange(departmentCode: string): void {
     this.zoneService.getProvinceByDepartment(departmentCode).subscribe();
     this.zoneForm.get('province_code')?.reset(); // limpiar selección previa

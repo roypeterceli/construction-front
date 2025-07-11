@@ -52,7 +52,9 @@ export const ZONE_SALE_STATE: Record<ZoneSaleType, TagItem> = {
 export class Zone {
   zoneId: number;
   ubigeoDepartmentId: string;
+  departmentName: string;
   ubigeoProvinceId: string;
+  provinceName: string;
   zoneCode: string;
   troncales: number;
   boxNaps: number;
@@ -68,7 +70,9 @@ export class Zone {
   constructor(model: Zone) {
     this.zoneId = model.zoneId;
     this.ubigeoDepartmentId = model.ubigeoDepartmentId;
+    this.departmentName = model.departmentName;
     this.ubigeoProvinceId = model.ubigeoProvinceId;
+    this.provinceName = model.provinceName;
     this.zoneCode = model.zoneCode;
     this.troncales = model.troncales;
     this.boxNaps = model.boxNaps;
