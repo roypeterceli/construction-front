@@ -29,23 +29,29 @@ import { finalize } from 'rxjs';
   templateUrl: './save-node-support-dlg.component.html'
 })
 
-export class SaveNodeSupportDlgComponent implements OnInit{
+export class SaveNodeSupportDlgComponent implements OnInit {
 
   nodeI = '';
   nodeForm = new FormGroup<any>({});
   private readonly dialogRef = inject(MatDialogRef<SaveNodeSupportDlgComponent>);
-  
+
   private screenLoaderService = inject(ScreenLoaderService)
-  
+
   private router = inject(Router);
   private readonly fb = inject(FormBuilder);
   private alertService = inject(AlertDialogService);
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { troncal: TroncalSupport },
-    public nodeService: NodeService
-  ) {}
+  // constructor(
+  //   @Inject(MAT_DIALOG_DATA) public data: { troncal: TroncalSupport },
+  //   public nodeService: NodeService
+  // ) {}
 
+  data = inject<{ troncal: TroncalSupport }>(MAT_DIALOG_DATA);
+  nodeService = inject(NodeService);
+
+  constructor() {
+    // Ya no necesitas parámetros en el constructor
+  }
 
   ngOnInit(): void {
     this.initNodeForm();
@@ -85,7 +91,7 @@ export class SaveNodeSupportDlgComponent implements OnInit{
     console.log(troncal);
   }
 
-    
+
   closeDlg(data?: any): void {
     this.dialogRef.close(data);
   }

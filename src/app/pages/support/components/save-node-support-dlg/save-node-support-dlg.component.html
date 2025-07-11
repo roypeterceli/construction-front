@@ -1,13 +1,36 @@
 <div class="rounded bg-white shadow w-full md:w-12/12">
-    <h2 mat-dialog-title>
-        <div class="flex justify-between items-center">
-        <span class="text-orange-400">Agregar Nodo</span>
+  <h2 mat-dialog-title>
+    <div class="flex justify-between items-center">
+      <span class="text-orange-400">Agregar Nodo</span>
+    </div>
+  </h2>
+  <mat-dialog-content>
+    <form [formGroup]="nodeForm" class="py-4">
+      <div class="grid justify-start grid-cols-3 lg:grid-cols-3 gap-3 mb-2">
+        <div class="flex items-start md:flex-row">
+          <!-- @if (zone()) {
+            @let item = zone()!; -->
+          <div class="departamento pr-7 pb-5">
+            <h6 class="text-gray-400">Departamento</h6>
+            <!-- {{ item.ubigeoDepartmentId }} -->
+            <strong>{{ 'AYACUCHO' }}</strong>
+          </div>
+          <div class="provincia pr-7">
+            <h6 class="text-gray-400">Provincia</h6>
+            <!-- {{ item.ubigeoProvinceId }} -->
+            <strong>{{ 'HUANTA' }}</strong>
+          </div>
+          <div class="codigo">
+            <h6 class="text-gray-400">Código</h6>
+            <!-- {{ item.zoneCode}} -->
+            <strong>{{ 'AHU23' }}</strong>
+          </div>
+          <!-- }   -->
         </div>
-    </h2>
-    <mat-dialog-content>
-
-    </mat-dialog-content>
-    <mat-dialog-actions>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
     <button type="button" mat-stroked-button (click)="closeDlg()">Cancelar</button>
     <button type="button" mat-flat-button (click)="createNode()">Crear Nodo</button>
   </mat-dialog-actions>
