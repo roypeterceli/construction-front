@@ -1,51 +1,5 @@
 import { TagItem } from '@wow/shared/interfaces';
-
-export enum TroncalStateType {
-  PENDING = 1,
-  IN_PROGRESS = 2,
-  BUILT = 3
-}
-
-export enum TroncalSaleType {
-  BLOCKED = 1,
-  IN_SALE = 2
-}
-
-export const TRONCAL_SUPPORT_STATE: Record<TroncalStateType, TagItem> = {
-  [TroncalStateType.PENDING]: {
-    text: 'Pendiente',
-    textClass: 'text-blue-600',
-    bgClass: 'bg-blue-600/10',
-    previewClass: 'bg-blue-600'
-  },
-  [TroncalStateType.IN_PROGRESS]: {
-    text: 'En construcción',
-    textClass: 'text-white',
-    bgClass: 'bg-[#4C6DAF]',
-    previewClass: 'bg-amber-600'
-  },
-  [TroncalStateType.BUILT]: {
-    text: 'Construido',
-    textClass: 'text-green-600',
-    bgClass: 'bg-[#4CAF50]',
-    previewClass: 'bg-green-600'
-  }
-};
-
-export const TRONCAL_SALE_STATE: Record<TroncalSaleType, TagItem> = {
-  [TroncalSaleType.BLOCKED]: {
-    text: 'Bloqueado',
-    textClass: 'text-white',
-    bgClass: 'bg-[#9C9C9C]',
-    previewClass: 'bg-blue-600'
-  },
-  [TroncalSaleType.IN_SALE]: {
-    text: 'En venta',
-    textClass: 'text-amber-600',
-    bgClass: 'bg-[#4CAF50]',
-    previewClass: 'bg-amber-600'
-  }
-};
+import { SaleType, StateType, TRONCAL_SALE_STATE, TRONCAL_SUPPORT_STATE } from './support';
 
 
 export interface TroncalSupport {
@@ -72,8 +26,8 @@ export class Troncal{
   zoneId: number;
   troncalAdvance: number;
   updatedAt: Date;
-  troncalState: TroncalStateType;
-  saleState: TroncalSaleType;
+  troncalState: StateType;
+  saleState: SaleType;
 
   constructor(model: Troncal){
     this.troncalId = model.troncalId;
@@ -124,6 +78,5 @@ export class Troncal{
 
   get stateSale(): TagItem | null {
     return TRONCAL_SALE_STATE[this.saleState];
-
-    }
+  }
 }

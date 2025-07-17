@@ -6,7 +6,7 @@ import { SettingService } from '@wow/core/services';
 // import { Observable } from 'rxjs';
 // import { map, shareReplay } from 'rxjs/operators';
 // import { AsyncPipe } from '@angular/common';
-import { Module, ZoneStateType} from '@wow/core/interfaces';
+import { Module, StateType} from '@wow/core/interfaces';
 // import { SaveZoneSupportDlgComponent } from '@wow/pages/support/components/save-zone-support-dlg/save-zone-support-dlg.component';
 
 import { MatListModule } from '@angular/material/list';
@@ -29,12 +29,12 @@ import { RouterOutlet } from '@angular/router';
 
 
 
-const TAILWIND_BREAKPOINTS = {
-  sm: '(max-width: 639px)',
-  md: '(min-width: 640px) and (max-width: 1023px)',
-  lg: '(min-width: 1024px) and (max-width: 1279px)',
-  xl: '(min-width: 1280px)',
-};
+// const TAILWIND_BREAKPOINTS = {
+//   sm: '(max-width: 639px)',
+//   md: '(min-width: 640px) and (max-width: 1023px)',
+//   lg: '(min-width: 1024px) and (max-width: 1279px)',
+//   xl: '(min-width: 1280px)',
+// };
 
 @Component({
   selector: 'wow-shell-layout',
@@ -58,13 +58,13 @@ export class ShellLayout implements OnInit {
   // selected = 'option1';
   ubigeoForm = new FormGroup<any>({});
   subModules = signal<Module[] | null | undefined>([]);
-  selectedZoneState = signal<ZoneStateType | null | undefined>(null);
+  selectedZoneState = signal<StateType | null | undefined>(null);
   settingService = inject(SettingService);
   ubigeoService = inject(UbigeoService);
   // private breakpointObserver = inject(BreakpointObserver);
   // private readonly router = inject(Router);
   // private readonly dialog = inject(MatDialog);
-  protected readonly zoneState = ZoneStateType;
+  protected readonly zoneState = StateType;
 
 
   // ubigeo_department_id = this.ubigeoForm.value as UbigeoSupport;
@@ -88,7 +88,7 @@ export class ShellLayout implements OnInit {
   //   });
   // }
 
-  // getZoneFilter(state?: ZoneStateType): void {
+  // getZoneFilter(state?: StateType): void {
   //   this.selectedZoneState.set(state);
   //   this.router.navigate(['/zonas', 'zonas'], { queryParams: { state: state } }).then();
   // }
