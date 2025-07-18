@@ -19,6 +19,7 @@ import { NodeService } from '@wow/core/services';
 import { finalize, merge, Subject, takeUntil } from 'rxjs';
 import { columns } from './troncal-detail.config';
 import { ShowNodeSupportComponent } from '../components/show-node-support/show-node-support.component';
+import { NgIf } from '@angular/common';
 
 
 
@@ -33,7 +34,7 @@ import { ShowNodeSupportComponent } from '../components/show-node-support/show-n
     MatSidenavModule, MatSelectModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     MatButtonModule,
-    ShowNodeSupportComponent
+    ShowNodeSupportComponent, NgIf
   ],
   templateUrl: './troncal-detail.page.html',
   styleUrl: './troncal-detail.page.scss'
@@ -43,9 +44,9 @@ export class TroncalDetailPage implements OnInit, OnDestroy {
   readonly data = signal<Node[]>([]);
   readonly loading = signal<boolean>(false);
 
-  zone = signal<ZoneSupport | null>(null);
-  troncal = signal<TroncalSupport | null>(null);
-  node = signal<NodeSupport | null>(null);
+  readonly zone = signal<ZoneSupport | null>(null);
+  readonly troncal = signal<TroncalSupport | null>(null);
+  readonly node = signal<NodeSupport | null>(null);
 
   private readonly nodeSupportService = inject(NodeService);
 
@@ -54,13 +55,17 @@ export class TroncalDetailPage implements OnInit, OnDestroy {
   private readonly dialog = inject(MatDialog);
   readonly columns = columns;
   private readonly destroy$ = new Subject<void>();
-  
+
   readonly department = signal('');
   readonly province = signal('');
   readonly district = signal('');
 
   ngOnInit(): void {
     // this.troncal.set(this.route.snapshot.data['troncal']);
+    const zoneData = this.route.snapshot.data['zone'] as ZoneSupport;
+    if (zoneData) {
+      this.zone.set(zoneData);
+    }
     merge(
       this.route.queryParams,
       this.nodeSupportService.nodeCreated$
