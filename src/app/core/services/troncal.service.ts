@@ -39,6 +39,18 @@ export class TroncalService {
     );
   }
 
+  getAllByZone(zoneId: number){
+    return this.http.get<ApiResponse<Troncal[]>>(`${ environment.api.construction }/troncals/by-zone/${zoneId}`).pipe(    
+      map(res => {
+        if (res && res.data) {
+          return res.data.map(item => new Troncal(item));
+        }
+        return [];
+      })
+    );
+  }
+
+
   create(request: Troncal) {
     return this.http.post<ApiResponse<Troncal>>(`${ environment.api.construction }/troncals`, request);
   }
@@ -49,7 +61,7 @@ export class TroncalService {
 
 
   getById(id: number) {
-    return this.http.get<ApiResponse<Zone>>(`${environment.api.construction}/troncals/${id}`);
+    return this.http.get<ApiResponse<Troncal>>(`${environment.api.construction}/troncals/${id}`);
   }
 
   private loadDistricts(department_code:string, province_code: string): void {
@@ -62,7 +74,8 @@ export class TroncalService {
     return this.http.get<ApiResponse<{ code: string; name: string; }[]>>(
       `${environment.api.construction}/ubigeo/departments/${department_code}/provinces/${province_code}/districts`
     ).pipe(
-      tap(res => this.districtsList.set(res.data ?? []))
+      tap(res => this.districtsList.set(res.data ?? [])),
+      map(res => res.data ?? [])
     );
   }
 

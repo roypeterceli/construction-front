@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatFormField, MatLabel, MatSelect, MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Troncal, Zone, ZoneSupport } from '@wow/core/interfaces';
+import { Troncal } from '@wow/core/interfaces';
 import { SettingService, TroncalService } from '@wow/core/services';
 import { UbigeoService } from '@wow/core/services/ubigeo.service';
 import { WowDynamicTable } from '@wow/shared/components/table';
@@ -55,9 +55,13 @@ export class ContentTroncalComponent implements OnInit{
   }
 
   private getTroncal(): void {
+    const zoneId = Number(this.route.snapshot.paramMap.get('zoneId')); // ← aquí se toma el ID dinámicamente
+
+    if (!zoneId) return;
+
     this.loading.set(true);
 
-    this.troncalSupportService.getAll()
+    this.troncalSupportService.getAllByZone(zoneId)
       .pipe(
         finalize(() => this.loading.set(false)),
         takeUntil(this.destroy$)
@@ -75,10 +79,10 @@ export class ContentTroncalComponent implements OnInit{
   }
 
   filter(): void {
-
+    return console.log('filter');
   }
 
   clean(): void {
-
+    return console.log('clean');
   }
 }
