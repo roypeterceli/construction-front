@@ -102,9 +102,14 @@ export class TroncalDetailPage implements OnInit, OnDestroy {
 
   private getNodes(): void {
     // const state = this.route.snapshot.queryParams['state'];
+    // this.loading.set(true);
+    const troncalId = Number(this.route.snapshot.paramMap.get('troncalId')); // ← aquí se toma el ID dinámicamente
+
+    if (!troncalId) return;
+
     this.loading.set(true);
 
-    this.nodeSupportService.getAll()
+    this.nodeSupportService.getAllByTroncal(troncalId)
       .pipe(
         finalize(() => this.loading.set(false)),
         takeUntil(this.destroy$)

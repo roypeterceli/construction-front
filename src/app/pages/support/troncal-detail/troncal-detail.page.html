@@ -17,45 +17,51 @@
 <div *ngIf="zone() as item">
     <div class="flex md:flex-row justify-start items-center rounded bg-white shadow w-full md:w-12/12 p-6 gap-4">
         <div class="id px-7">
-            <h6 class="text-gray-400">ID</h6>
-            <span class="font-semibold">
+            <h6 class="text-gray-400 text-xs">ID</h6>
+            <span class="font-semibold text-[#7030A0]">
                 {{ item.zoneId }}
             </span>
         </div>
         <div class="departamento px-7">
-            <h6 class="text-gray-400">Departamento</h6>
-            <span class="font-semibold">
+            <h6 class="text-gray-400 text-xs">Departamento</h6>
+            <span class="font-semibold text-[#7030A0]">
                 {{ item.departmentName }}
             </span>
         </div>
         <div class="provincia px-7">
-            <h6 class="text-gray-400">Provincia</h6>
-            <span class="font-semibold">
+            <h6 class="text-gray-400 text-xs">Provincia</h6>
+            <span class="font-semibold text-[#7030A0]">
                 {{ item.provinceName }}
             </span>
         </div>
         <div class="codigo px-7">
-            <h6 class="text-gray-400">Distrito</h6>
+            <h6 class="text-gray-400 text-xs">Distrito</h6>
             <span class="text-[#7030A0] font-semibold">
                 <!-- {{ item.ubigeoDistrictId}} -->
             </span>
         </div>
         <div class="troncales px-7">
-            <h6 class="text-gray-400">Código</h6>
-            {{ item.zoneCode }} 
+            <h6 class="text-gray-400 text-xs">Código</h6>
+            <span class="text-[#7030A0] font-semibold">
+                {{ item.zoneCode }} 
+            </span>
         </div>
         <div class="cajas-nap px-7">
-            <h6 class="text-gray-400">Nodos</h6>
-            {{ item.boxNaps }} / {{ item.boxNaps }}
+            <h6 class="text-gray-400 text-xs">Nodos</h6>
+            <span class="font-semibold">
+                {{ item.boxNaps }}
+            </span>
         </div>
 
         <div class="construccion px-7">
-            <h6 class="text-gray-400">Construcción</h6>
-            {{ item.advanceId + " %"}}
+            <h6 class="text-gray-400 text-xs">Construcción</h6>
+            <span class="font-semibold">
+                {{ item.advanceId + " %"}}
+            </span>
         </div>
         
         <div class="estado px-7">
-            <h6 class="text-gray-400">Estado</h6>
+            <h6 class="text-gray-400 text-xs">Estado</h6>
             @if(item.stateId === 1){
             <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-blue-600/10 text-blue-600">
                 Pendiente
@@ -71,7 +77,7 @@
             }
         </div>
         <div class="venta px-7">
-            <h6 class="text-gray-500 text-xs">Venta</h6>
+            <h6 class="text-gray-400 text-xs">Venta</h6>
             @if(item.saleId === 1){
                 <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#9C9C9C] text-white">
                     Bloqueado

@@ -2,13 +2,13 @@ import { TableColumn } from '@wow/shared/components/table';
 import { Node } from '@wow/core/interfaces';
 
 export const columns: TableColumn<Node>[] = [
-  {
-    label: 'Id',
-    type: 'text',
-    property: 'nodeId',
-    visible: true,
-    cssClasses: ['font-semibold', 'text-gray-800']
-  },
+  // {
+  //   label: 'Id',
+  //   type: 'text',
+  //   property: 'nodeId',
+  //   visible: true,
+  //   cssClasses: ['font-semibold', 'text-gray-800']
+  // },
   {
     label: 'Nodo',
     type: 'text',

@@ -24,14 +24,6 @@ export class NodeService {
     // );
   }
 
-  getNodesByTroncal() {
-    // return this.http.get<ApiResponse<{ code: string; name: string }[]>>(
-    //   `${environment.api.construction}/ubigeo/departments/${department_code}/provinces`
-    // ).pipe(
-    //   tap(res => this.provincesList.set(res.data ?? []))
-    // );
-  }
-
   //fill table nodes
   getAll() {
     return this.http.get<ApiResponse<Node[]>>(`${environment.api.construction}/nodes`).pipe(
@@ -43,6 +35,19 @@ export class NodeService {
       })
     );
   }
+
+
+  getAllByTroncal(troncalId: number){
+    return this.http.get<ApiResponse<Node[]>>(`${ environment.api.construction }/nodes/by-troncal/${troncalId}`).pipe(    
+      map(res => {
+        if (res && res.data) {
+          return res.data.map(item => new Node(item));
+        }
+        return [];
+      })
+    );
+  }
+
 
   create(request: Node) {
     return this.http.post<ApiResponse<Node>>(`${environment.api.construction}/nodes`, request);
