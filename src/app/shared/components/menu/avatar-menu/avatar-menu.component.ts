@@ -4,6 +4,7 @@ import { MatRipple } from "@angular/material/core";
 import { AuthService } from '@wow/core/services';
 
 import Keycloak, { KeycloakProfile } from 'keycloak-js';
+import { MatIconModule } from '@angular/material/icon';
 // import { CEX_COLLECTION } from '@wow/core/interfaces';
 
 
@@ -11,6 +12,7 @@ import Keycloak, { KeycloakProfile } from 'keycloak-js';
   selector: 'wow-avatar-menu',
   imports: [
     MatMenu,
+    MatIconModule,
     MatMenuItem,
     MatRipple,
     MatMenuTrigger,
