@@ -28,11 +28,9 @@ import { MapTroncalComponent } from '../components/map-troncal/map-troncal.compo
 })
 export class ZoneDetailPage implements OnInit{
   zone = signal<ZoneSupport | null>(null);
+
   private route = inject(ActivatedRoute);
   
-  readonly department = signal('');
-  readonly province = signal('');
-  readonly zoneCode = signal('');
   private readonly dialog = inject(MatDialog);
   
   ngOnInit(): void {
@@ -43,9 +41,12 @@ export class ZoneDetailPage implements OnInit{
     this.dialog.open(SaveTroncalSupportDlgComponent, {
       role: 'dialog',
       data: {
-        department: this.department(),
-        province: this.province(),
-        zoneCode: this.zoneCode(),
+        zoneId: this.zone()!.zoneId,
+        departmentId: this.zone()?.ubigeoDepartmentId,
+        departmentName: this.zone()?.departmentName,
+        provinceId: this.zone()?.ubigeoProvinceId,
+        provinceName: this.zone()?.provinceName,
+        zoneCode: this.zone()?.zoneCode,
       }
     });
   }

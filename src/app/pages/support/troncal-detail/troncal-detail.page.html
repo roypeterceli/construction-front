@@ -95,18 +95,18 @@
     <div class="w-full lg:w-4/12">
         <mat-card class="mat-card-no-space">
             <mat-card-content>
-                <wow-dynamic-table [columns]="columns" [data]="data()" showDropdownMenu [dropdownMenu]="actionsMenu"
+                <wow-dynamic-table [columns]="columns" [data]="data()" showDropdownMenu
                     (rowDblClick)="goToDetail($event)" [isLoading]="loading()"></wow-dynamic-table>
             </mat-card-content>
         </mat-card>
-        <mat-menu #actionsMenu="matMenu" xPosition="before" yPosition="below">
+        <!-- <mat-menu #actionsMenu="matMenu" xPosition="before" yPosition="below">
             <ng-template let-data="rowSelected" matMenuContent>
                 <button mat-menu-item (click)="edit(data)">
                     <mat-icon>edit</mat-icon>
                     <span>Editar</span>
                 </button>
             </ng-template>
-        </mat-menu>
+        </mat-menu> -->
     </div>
     <div class="w-full lg:w-8/12">
         <wow-show-node-support></wow-show-node-support>

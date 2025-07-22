@@ -34,3 +34,23 @@ export const SUFIX: { id: number; name: string; }[] = [
   { id: 10, name: 'J' },
   { id: 11, name: 'K' }
 ]
+
+export const PORT: { id: number; value: string; }[] = [
+  { id: 0, value: '0' },
+  { id: 1, value: '1' },
+  { id: 2, value: '2' },
+  { id: 3, value: '3' },
+  { id: 4, value: '4' },
+  { id: 5, value: '5' },
+  { id: 6, value: '6' },
+  { id: 7, value: '7' },
+  { id: 8, value: '8' },
+  { id: 9, value: '9' },
+  { id: 10, value: '10' },
+  { id: 11, value: '11' },
+  { id: 12, value: '12' },
+  { id: 13, value: '13' },
+  { id: 14, value: '14' },
+  { id: 15, value: '15' },
+  { id: 16, value: '16' }
+]

@@ -1,4 +1,4 @@
-<div class="bg-white rounded shadow flex md:flex-row">
+<div class="bg-white rounded shadow flex md:flex-row p-3">
     <div class="md:w-5/12">
         <wow-map-troncal-detail></wow-map-troncal-detail>
     </div>
@@ -12,98 +12,361 @@
                 <h6 class="text-gray-400 text-xs">Sufijo</h6>
                 {{ "A" }}
             </div>
-            @if (node()) {
-            @let item = node()!;
-            <div class="estado mr-5">
-                <h6 class="text-gray-400">Estado</h6>
-                @if(item.nodeState === 1){
-                <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-blue-600/10 text-blue-600">
-                    Pendiente
+
+            <div *ngIf="zone() as item">
+                <div class="estado mr-5">
+                    <h6 class="text-gray-400">Estado</h6>
+                    @if(item.stateId === 1){
+                    <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-blue-600/10 text-blue-600">
+                        Pendiente
+                    </div>
+                    } @else if(item.stateId === 2){
+                    <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4C6DAF] text-white">
+                        En Construcción
+                    </div>
+                    }@else if(item.stateId === 3){
+                    <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4CAF50] text-green-600">
+                        Construido
+                    </div>
+                    }
                 </div>
-                } @else if(item.nodeState === 2){
-                <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4C6DAF] text-white">
-                    En Construcción
+                <div class="venta mr-5">
+                    <h6 class="text-gray-400">Venta</h6>
+                    @if(item.saleId === 1){
+                    <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#9C9C9C] text-white">
+                        Bloqueado
+                    </div>
+                    } @else if(item.saleId === 2){
+                    <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4CAF50] text-amber-600">
+                        En venta
+                    </div>
+                    }
                 </div>
-                }@else if(item.nodeState === 3){
-                <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4CAF50] text-green-600">
-                    Construido
-                </div>
-                }
             </div>
-            <div class="venta mr-5">
-                <h6 class="text-gray-400">Venta</h6>
-                @if(item.stateSale === 1){
-                <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#9C9C9C] text-white">
-                    Bloqueado
-                </div>
-                } @else if(item.stateSale === 2){
-                <div class="rounded-xl px-2 py-1 font-medium text-xs flex-none bg-[#4CAF50] text-amber-600">
-                    En venta
-                </div>
-                }
-            </div>
-            }
+
         </div>
-        <h3 class="mt-3">Cajas NAP</h3>
-        <div class="flex md:flex-row">
-            <div class="bg-[#F5F5F8] p-3 md:w-6/12 my-3 mr-2">
-                <div class="flex md:flex-row">
-                    <div class="md:w-3/12">
-                        <h6>#</h6>
+        <h3 class="my-2">Cajas NAP</h3>
+        <form [formGroup]="formPorts">
+            <div class="flex flex-wrap">
+                <div class="bg-[#F5F5F8] p-3 mr-2 mb-2 md:w-5/12 flex">
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">#</h6>
                         {{ "1" }}
                     </div>
-                    <div class="md:w-6/12">
-                        <h6>Puertos</h6>
-                        <select name="puertos" id="">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">Puertos</h6>
+                        <mat-select formControlName="ports">
+                            @for (port of portService.ports(); track port.id ) {
+                            <mat-option [value]="port.id">{{ port.value }}</mat-option>
+                            }
+                        </mat-select>
                     </div>
-                    <div class="md:w-3/12">
-                        <mat-slide-toggle formControlName="enablePort"></mat-slide-toggle>
+                    <div class="w-3/12"></div>
+                    <div class="w-3/12 text-right">
+                        <mat-slide-toggle formControlName="ports"></mat-slide-toggle>
                     </div>
                 </div>
-            </div>
-            <div class="bg-[#F5F5F8] p-3 md:w-6/12 my-3 mr-2">
-                <div class="flex md:flex-row">
-                    <div class="md:w-3/12">
-                        <h6>#</h6>
+                <div class="bg-[#F5F5F8] p-3 mr-2 mb-2 md:w-5/12 flex">
+
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">#</h6>
                         {{ "2" }}
                     </div>
-                    <div class="md:w-6/12">
-                        <h6>Puertos</h6>
-                        <select name="puertos" id="">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">Puertos</h6>
+                        <mat-select formControlName="ports">
+                            @for (port of portService.ports(); track port.id ) {
+                            <mat-option [value]="port.id">{{ port.value }}</mat-option>
+                            }
+                        </mat-select>
                     </div>
-                    <div class="md:w-3/12">
-                        <mat-slide-toggle formControlName="enablePort"></mat-slide-toggle>
+                    <div class="w-3/12"></div>
+                    <div class="w-3/12 text-right">
+                        <mat-slide-toggle formControlName="ports"></mat-slide-toggle>
                     </div>
+
                 </div>
-            </div>
-            <div class="bg-[#F5F5F8] p-3 md:w-6/12 my-3 mr-2">
-                <div class="flex md:flex-row">
-                    <div class="md:w-3/12">
-                        <h6>#</h6>
+                <div class="bg-[#F5F5F8] p-3 mr-2 mb-2 md:w-5/12 flex">
+
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">#</h6>
                         {{ "3" }}
                     </div>
-                    <div class="md:w-6/12">
-                        <h6>Puertos</h6>
-                        <select name="puertos" id="">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">Puertos</h6>
+                        <mat-select formControlName="ports">
+                            @for (port of portService.ports(); track port.id ) {
+                            <mat-option [value]="port.id">{{ port.value }}</mat-option>
+                            }
+                        </mat-select>
                     </div>
-                    <div class="md:w-3/12">
-                        <mat-slide-toggle formControlName="enablePort"></mat-slide-toggle>
+                    <div class="w-3/12"></div>
+                    <div class="w-3/12 text-right">
+                        <mat-slide-toggle formControlName="ports"></mat-slide-toggle>
                     </div>
+
+                </div>
+                <div class="bg-[#F5F5F8] p-3 mr-2 mb-2 md:w-5/12 flex">
+
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">#</h6>
+                        {{ "4" }}
+                    </div>
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">Puertos</h6>
+                        <mat-select formControlName="ports">
+                            @for (port of portService.ports(); track port.id ) {
+                            <mat-option [value]="port.id">{{ port.value }}</mat-option>
+                            }
+                        </mat-select>
+                    </div>
+                    <div class="w-3/12"></div>
+                    <div class="w-3/12 text-right">
+                        <mat-slide-toggle formControlName="ports"></mat-slide-toggle>
+                    </div>
+
+                </div>
+                <div class="bg-[#F5F5F8] p-3 mr-2 mb-2 md:w-5/12 flex">
+
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">#</h6>
+                        {{ "5" }}
+                    </div>
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">Puertos</h6>
+                        <mat-select formControlName="ports">
+                            @for (port of portService.ports(); track port.id ) {
+                            <mat-option [value]="port.id">{{ port.value }}</mat-option>
+                            }
+                        </mat-select>
+                    </div>
+                    <div class="w-3/12"></div>
+                    <div class="w-3/12 text-right">
+                        <mat-slide-toggle formControlName="ports"></mat-slide-toggle>
+                    </div>
+
+                </div>
+                <div class="bg-[#F5F5F8] p-3 mr-2 mb-2 md:w-5/12 flex">
+
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">#</h6>
+                        {{ "6" }}
+                    </div>
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">Puertos</h6>
+                        <mat-select formControlName="ports">
+                            @for (port of portService.ports(); track port.id ) {
+                            <mat-option [value]="port.id">{{ port.value }}</mat-option>
+                            }
+                        </mat-select>
+                    </div>
+                    <div class="w-3/12"></div>
+                    <div class="w-3/12 text-right">
+                        <mat-slide-toggle formControlName="ports"></mat-slide-toggle>
+                    </div>
+
+                </div>
+                <div class="bg-[#F5F5F8] p-3 mr-2 mb-2 md:w-5/12 flex">
+
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">#</h6>
+                        {{ "7" }}
+                    </div>
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">Puertos</h6>
+                        <mat-select formControlName="ports">
+                            @for (port of portService.ports(); track port.id ) {
+                            <mat-option [value]="port.id">{{ port.value }}</mat-option>
+                            }
+                        </mat-select>
+                    </div>
+                    <div class="w-3/12"></div>
+                    <div class="w-3/12 text-right">
+                        <mat-slide-toggle formControlName="ports"></mat-slide-toggle>
+                    </div>
+
+                </div>
+                <div class="bg-[#F5F5F8] p-3 mr-2 mb-2 md:w-5/12 flex">
+
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">#</h6>
+                        {{ "8" }}
+                    </div>
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">Puertos</h6>
+                        <mat-select formControlName="ports">
+                            @for (port of portService.ports(); track port.id ) {
+                            <mat-option [value]="port.id">{{ port.value }}</mat-option>
+                            }
+                        </mat-select>
+                    </div>
+                    <div class="w-3/12"></div>
+                    <div class="w-3/12 text-right">
+                        <mat-slide-toggle formControlName="ports"></mat-slide-toggle>
+                    </div>
+
+                </div>
+                <div class="bg-[#F5F5F8] p-3 mr-2 mb-2 md:w-5/12 flex">
+
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">#</h6>
+                        {{ "9" }}
+                    </div>
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">Puertos</h6>
+                        <mat-select formControlName="ports">
+                            @for (port of portService.ports(); track port.id ) {
+                            <mat-option [value]="port.id">{{ port.value }}</mat-option>
+                            }
+                        </mat-select>
+                    </div>
+                    <div class="w-3/12"></div>
+                    <div class="w-3/12 text-right">
+                        <mat-slide-toggle formControlName="ports"></mat-slide-toggle>
+                    </div>
+
+                </div>
+                <div class="bg-[#F5F5F8] p-3 mr-2 mb-2 md:w-5/12 flex">
+
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">#</h6>
+                        {{ "10" }}
+                    </div>
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">Puertos</h6>
+                        <mat-select formControlName="ports">
+                            @for (port of portService.ports(); track port.id ) {
+                            <mat-option [value]="port.id">{{ port.value }}</mat-option>
+                            }
+                        </mat-select>
+                    </div>
+                    <div class="w-3/12"></div>
+                    <div class="w-3/12 text-right">
+                        <mat-slide-toggle formControlName="ports"></mat-slide-toggle>
+                    </div>
+
+                </div>
+                <div class="bg-[#F5F5F8] p-3 mr-2 mb-2 md:w-5/12 flex">
+
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">#</h6>
+                        {{ "11" }}
+                    </div>
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">Puertos</h6>
+                        <mat-select formControlName="ports">
+                            @for (port of portService.ports(); track port.id ) {
+                            <mat-option [value]="port.id">{{ port.value }}</mat-option>
+                            }
+                        </mat-select>
+                    </div>
+                    <div class="w-3/12"></div>
+                    <div class="w-3/12 text-right">
+                        <mat-slide-toggle formControlName="ports"></mat-slide-toggle>
+                    </div>
+
+                </div>
+                <div class="bg-[#F5F5F8] p-3 mr-2 mb-2 md:w-5/12 flex">
+
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">#</h6>
+                        {{ "12" }}
+                    </div>
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">Puertos</h6>
+                        <mat-select formControlName="ports">
+                            @for (port of portService.ports(); track port.id ) {
+                            <mat-option [value]="port.id">{{ port.value }}</mat-option>
+                            }
+                        </mat-select>
+                    </div>
+                    <div class="w-3/12"></div>
+                    <div class="w-3/12 text-right">
+                        <mat-slide-toggle formControlName="ports"></mat-slide-toggle>
+                    </div>
+
+                </div>
+                <div class="bg-[#F5F5F8] p-3 mr-2 mb-2 md:w-5/12 flex">
+
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">#</h6>
+                        {{ "13" }}
+                    </div>
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">Puertos</h6>
+                        <mat-select formControlName="ports">
+                            @for (port of portService.ports(); track port.id ) {
+                            <mat-option [value]="port.id">{{ port.value }}</mat-option>
+                            }
+                        </mat-select>
+                    </div>
+                    <div class="w-3/12"></div>
+                    <div class="w-3/12 text-right">
+                        <mat-slide-toggle formControlName="ports"></mat-slide-toggle>
+                    </div>
+
+                </div>
+                <div class="bg-[#F5F5F8] p-3 mr-2 mb-2 md:w-5/12 flex">
+
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">#</h6>
+                        {{ "14" }}
+                    </div>
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">Puertos</h6>
+                        <mat-select formControlName="ports">
+                            @for (port of portService.ports(); track port.id ) {
+                            <mat-option [value]="port.id">{{ port.value }}</mat-option>
+                            }
+                        </mat-select>
+                    </div>
+                    <div class="w-3/12"></div>
+                    <div class="w-3/12 text-right">
+                        <mat-slide-toggle formControlName="ports"></mat-slide-toggle>
+                    </div>
+
+                </div>
+                <div class="bg-[#F5F5F8] p-3 mr-2 mb-2 md:w-5/12 flex">
+
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">#</h6>
+                        {{ "15" }}
+                    </div>
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">Puertos</h6>
+                        <mat-select formControlName="ports">
+                            @for (port of portService.ports(); track port.id ) {
+                            <mat-option [value]="port.id">{{ port.value }}</mat-option>
+                            }
+                        </mat-select>
+                    </div>
+                    <div class="w-3/12"></div>
+                    <div class="w-3/12 text-right">
+                        <mat-slide-toggle formControlName="ports"></mat-slide-toggle>
+                    </div>
+
+                </div>
+                <div class="bg-[#F5F5F8] p-3 mr-2 mb-2 md:w-5/12 flex">
+
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">#</h6>
+                        {{ "16" }}
+                    </div>
+                    <div class="w-3/12">
+                        <h6 class="text-gray-500 text-xs">Puertos</h6>
+                        <mat-select formControlName="ports">
+                            @for (port of portService.ports(); track port.id ) {
+                            <mat-option [value]="port.id">{{ port.value }}</mat-option>
+                            }
+                        </mat-select>
+                    </div>
+                    <div class="w-3/12"></div>
+                    <div class="w-3/12 text-right">
+                        <mat-slide-toggle formControlName="ports"></mat-slide-toggle>
+                    </div>
+
                 </div>
             </div>
-            
-        </div>
+        </form>
     </div>
 </div>

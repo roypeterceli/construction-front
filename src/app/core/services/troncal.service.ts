@@ -74,7 +74,7 @@ export class TroncalService {
     return this.http.get<ApiResponse<{ code: string; name: string; }[]>>(
       `${environment.api.construction}/ubigeo/departments/${department_code}/provinces/${province_code}/districts`
     ).pipe(
-      tap(res => this.districtsList.set(res.data ?? [])),
+      //tap(res => this.districtsList.set(res.data ?? [])),
       map(res => res.data ?? [])
     );
   }

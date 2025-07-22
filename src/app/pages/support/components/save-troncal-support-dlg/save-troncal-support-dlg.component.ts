@@ -1,4 +1,4 @@
-import { Component, Inject, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -17,7 +17,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 // import { ApiResponse } from '@wow/shared/interfaces';
 // import { environment } from '@wow/env/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'wow-save-troncal-support-dlg',
@@ -29,12 +30,13 @@ import { Router } from '@angular/router';
     MatSelectModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatIconModule
+    MatIconModule, NgIf
   ],
   templateUrl: './save-troncal-support-dlg.component.html'
 })
 export class SaveTroncalSupportDlgComponent implements OnInit {
 
+  zone = signal<ZoneSupport | null>(null);
   // selected = 'option1';
   zoneId = '';
   troncalForm = new FormGroup<any>({});
@@ -55,17 +57,20 @@ export class SaveTroncalSupportDlgComponent implements OnInit {
   // readonly data = inject<ZoneSupport>(MAT_DIALOG_DATA);
 
   public http = inject(HttpClient);
-  zone = signal<ZoneSupport | null>(null);
 
-  data = inject<{ zone: ZoneSupport }>(MAT_DIALOG_DATA);
+  data = inject(MAT_DIALOG_DATA);
   troncalService = inject(TroncalService);
+
+  districts = signal<{ code: string; name: string }[]>([]);
 
   constructor() {
     // Ya no necesitas parámetros en el constructor
   }
 
   ngOnInit(): void {
+    this.zone.set(this.data);
     this.initTroncalForm();
+    this.getDistricts(this.data.departmentId, this.data.provinceId);
     // this.loadDistricts('04','0404');
     // this.troncalService.districtsList('04','0404');
   }
@@ -78,9 +83,11 @@ export class SaveTroncalSupportDlgComponent implements OnInit {
     }
 
     this.screenLoaderService.show();
-    // const troncal = this.troncalForm.value as Troncal;
-    console.log('Payload a enviar:', this.troncalForm.value);
-    this.troncalService.create(this.troncalForm.value)
+
+    const troncal = this.troncalForm.value as Troncal;
+    troncal.zoneId = Number(this.data.zoneId);
+    console.log('Payload a enviar:', troncal);
+    this.troncalService.create(troncal)
       .pipe(
         finalize(() => this.screenLoaderService.hide())
       )
@@ -93,10 +100,10 @@ export class SaveTroncalSupportDlgComponent implements OnInit {
       })
   }
 
-  // getParams(zone: Zone): void{
+  // getParams(zone: Zone): void {
   //   zone.ubigeoDepartmentId,
-  //   zone.ubigeoProvinceId,
-  //   zone.zoneCode
+  //     zone.ubigeoProvinceId,
+  //     zone.zoneCode
   // }
 
   zona(zone: Zone): void {
@@ -129,13 +136,18 @@ export class SaveTroncalSupportDlgComponent implements OnInit {
     this.troncalForm = this.fb.group({
       ubigeoDistrictId: [null, [Validators.required]],
       troncalCode: [null, [Validators.required]],
-      prefix: [null, [Validators.required]],
+      nodePrefix: [null, [Validators.required]],
       nodeStart: [null, [Validators.required]],
       nodeEnd: [null, [Validators.required]]
     });
 
   }
 
+  private getDistricts(departmentId: string, provinceId: string) {
+    this.troncalService.getDisctricts(departmentId, provinceId).subscribe(res => {
+      this.districts.set(res);
+    });
+  }
 
 
 

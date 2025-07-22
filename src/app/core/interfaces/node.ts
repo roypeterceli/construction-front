@@ -15,7 +15,7 @@ export class Node{
   nodeSufix: string;
   napsCount: number;
   nodeState: StateType;
-  stateSale: SaleType;
+  saleState: SaleType;
 
   constructor(model: Node){
     this.nodeId = model.nodeId;
@@ -23,7 +23,7 @@ export class Node{
     this.nodeSufix = model.nodeSufix;
     this.napsCount = model.napsCount;
     this.nodeState = model.nodeState;
-    this.stateSale = model.stateSale;
+    this.saleState = model.saleState;
   }
 
   get correlative(): string {
@@ -47,8 +47,8 @@ export class Node{
 
   }
 
-  get saleState(): TagItem | null {
-    return NODE_SALE_STATE[this.stateSale];
+  get saleBadge(): TagItem | null {
+    return NODE_SALE_STATE[this.saleState];
 
   }
 }

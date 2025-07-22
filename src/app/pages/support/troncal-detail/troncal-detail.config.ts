@@ -17,22 +17,29 @@ export const columns: TableColumn<Node>[] = [
     cssClasses: ['font-semibold', 'text-gray-800']
   },
   {
-    label: 'Naps',
+    label: 'Subnodo',
     type: 'text',
     property: 'nodeSufix',
     visible: true,
     cssClasses: ['font-semibold', 'text-gray-800']
   },
-  // {
-  //   label: 'Estado',
-  //   type: 'badge',
-  //   property: 'nodeState',
-  //   visible: true,
-  // },
-  // {
-  //   label: 'Venta',
-  //   type: 'badge',
-  //   property: 'saleState',
-  //   visible: true,
-  // }
+  {
+    label: 'Naps',
+    type: 'text',
+    property: 'napsCount',
+    visible: true,
+    cssClasses: ['font-semibold', 'text-gray-800']
+  },
+  {
+    label: 'Estado',
+    type: 'badge',
+    property: 'stateNode',
+    visible: true,
+  },
+  {
+    label: 'Venta',
+    type: 'badge',
+    property: 'saleBadge',
+    visible: true,
+  }
 ]
