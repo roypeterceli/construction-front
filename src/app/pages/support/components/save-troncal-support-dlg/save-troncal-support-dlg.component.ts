@@ -135,7 +135,7 @@ export class SaveTroncalSupportDlgComponent implements OnInit {
   private initTroncalForm(): void {
     this.troncalForm = this.fb.group({
       ubigeoDistrictId: [null, [Validators.required]],
-      troncalCode: [null, [Validators.required]],
+      troncalCode: [this.data.zoneCode + '-' || '', [Validators.required]],
       nodePrefix: [null, [Validators.required]],
       nodeStart: [null, [Validators.required]],
       nodeEnd: [null, [Validators.required]]

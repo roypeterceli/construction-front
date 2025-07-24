@@ -11,6 +11,7 @@ export interface TroncalSupport {
   nodeEnd: number;
   zoneId: number;
   troncalAdvance: number;
+  nodesCount: number;
   updatedAt: Date;
   troncalState: number;
   stateSale: number;
@@ -25,6 +26,7 @@ export class Troncal{
   nodeEnd: number;
   zoneId: number;
   troncalAdvance: number;
+  nodesCount: number;
   updatedAt: Date;
   troncalState: StateType;
   saleState: SaleType;
@@ -38,6 +40,7 @@ export class Troncal{
     this.nodeEnd = model.nodeEnd;
     this.zoneId = model.zoneId;
     this.troncalAdvance = model.troncalAdvance;
+    this.nodesCount = model.nodesCount;
     this.updatedAt = model.updatedAt;
     this.troncalState = model.troncalState;
     this.saleState = model.saleState;
@@ -65,6 +68,10 @@ export class Troncal{
 
   get advanceTroncal(): number | null {
     return this.troncalAdvance;
+  }
+
+  get countNodes(): number | null {
+    return this.nodesCount;
   }
   
   get fecUpdate(): Date | null {

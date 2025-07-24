@@ -15,16 +15,22 @@
       <div class="grid justify-start grid-cols-3 lg:grid-cols-3 gap-3 mb-2">
         <div class="flex items-start md:flex-row" *ngIf="data">
           <div class="departamento pr-7 pb-5">
-            <h6 class="text-gray-400">Departamento</h6>
-            {{ data.departmentName }}
+            <h6 class="text-gray-400 text-xs">Departamento</h6>
+            <span class="font-semibold">
+              {{ data.departmentName }}
+            </span>
           </div>
           <div class="provincia pr-7">
-            <h6 class="text-gray-400">Provincia</h6>
-            {{ data.provinceName }}
+            <h6 class="text-gray-400 text-xs">Provincia</h6>
+            <span class="font-semibold">
+              {{ data.provinceName }}
+            </span>
           </div>
           <div class="codigo">
-            <h6 class="text-gray-400">Código</h6>
-            {{ data.zoneCode }}
+            <h6 class="text-gray-400 text-xs">Código</h6>
+            <span class="font-semibold">
+              {{ data.zoneCode }}
+            </span>
           </div>
         </div>
       </div>
@@ -54,10 +60,6 @@
           <mat-label>Nodo Final</mat-label>
           <input matInput type="number" formControlName="nodeEnd">
         </mat-form-field>
-        <!-- <mat-form-field>
-          <mat-label>Zone Id</mat-label>
-         <input matInput  type="number" formControlName="zoneId">
-        </mat-form-field> -->
       </div>
     </form>
   </mat-dialog-content>
