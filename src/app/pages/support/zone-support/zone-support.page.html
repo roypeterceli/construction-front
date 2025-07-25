@@ -3,12 +3,12 @@
   <div class="w-full lg:w-2/12">
 
       <h1 class="pt-5 pb-4 text-gray-600 font-medium md:text-xl sm:text-lg">Lista de zonas de cobertura</h1>
-      <div class="bordered bg-white container p-4 rounded shadow">
-
+      <div class="bordered bg-white container p-4 rounded shadow" >
+      <form [formGroup]="formFilter" (ngSubmit)="filter()">
         <mat-form-field class="w-full">
           <mat-label>Departamento</mat-label>
           <mat-select formControlName="ubigeoDepartmentId">
-            <mat-option>Todos</mat-option>
+            <mat-option [value]="''">Todos</mat-option>
             @for (department of ubigeoService.departments(); track department.department_code) {
             <mat-option [value]="department.department_code">{{ department.department_name }}</mat-option>
             }
@@ -17,7 +17,7 @@
         <mat-form-field class="w-full">
           <mat-label>Estado</mat-label>
           <mat-select formControlName="state_construction">
-            <mat-option>Todos</mat-option>
+            <mat-option [value]="''">Todos</mat-option>
             @for (issue of settingService.stateConstruction(); track issue.id) {
             <mat-option [value]="issue.id">{{ issue.name }}</mat-option>
             }
@@ -25,14 +25,15 @@
         </mat-form-field>
         <mat-form-field class="w-full">
           <mat-label>Fecha Creación</mat-label>
-          <input matInput [matDatepicker]="picker">
+          <input matInput [matDatepicker]="picker" formControlName="creation_date">
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <div class="flex justify-end">
           <button type="button" mat-stroked-button (click)="clean()" class="border">Limpiar</button>&nbsp;
-          <button type="button" mat-flat-button (click)="filter()">Filtrar</button>
+          <button type="submit" mat-flat-button>Filtrar</button>
         </div>
+      </form>
       </div>
     </div>
 

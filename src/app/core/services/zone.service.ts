@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '@wow/env/environment.development';
 import { ApiResponse } from '@wow/shared/interfaces';
-import { map, Subject, tap } from 'rxjs';
+import { map, Observable, Subject, tap } from 'rxjs';
 import { Zone } from '../interfaces';
 
 @Injectable({
@@ -87,4 +87,26 @@ export class ZoneService {
       })
     );
   }
+
+  getZones(filters: any): Observable<Zone[]> {
+    const params: any = {};
+
+    if (filters.ubigeoDepartmentId) params.ubigeoDepartmentId = filters.ubigeoDepartmentId;
+    if (filters.state_construction) params.stateId = filters.state_construction; // usar el nombre correcto
+    if (filters.creation_date) {
+      const date = new Date(filters.creation_date);
+      params.createdAt = date.toISOString().split('T')[0]; // YYYY-MM-DD
+    }
+
+    return this.http.get<ApiResponse<Zone[]>>(`${environment.api.construction}/zones`, { params })
+      .pipe(
+        map(res => {
+          if (res && res.data) {
+            return res.data.map(item => new Zone(item)); // si estás usando una clase Zone
+          }
+          return [];
+        })
+      );
+  }
+
 }

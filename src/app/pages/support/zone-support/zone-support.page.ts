@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { WowDynamicTable } from '@wow/shared/components/table';
-import { Zone } from '@wow/core/interfaces';
+import { StateType, Zone } from '@wow/core/interfaces';
 import { columns } from './zone-support.config';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SettingService, ZoneService } from '@wow/core/services';
@@ -20,6 +20,7 @@ import { SaveZoneSupportDlgComponent } from '../components/save-zone-support-dlg
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 const TAILWIND_BREAKPOINTS = {
   sm: '(max-width: 639px)',
@@ -30,6 +31,7 @@ const TAILWIND_BREAKPOINTS = {
 
 @Component({
   selector: 'wow-zone-support-page',
+  standalone: true,
   imports: [
     MatCardModule,
     WowDynamicTable,
@@ -40,11 +42,13 @@ const TAILWIND_BREAKPOINTS = {
     MatSidenavModule,
     MatSelect, MatSelectModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
-    MatButtonModule
+    MatButtonModule, ReactiveFormsModule
   ],
   templateUrl: './zone-support.page.html',
 })
 export class ZoneSupportPage implements OnInit, OnDestroy {
+
+  selectedZoneState = signal<StateType | null | undefined>(null);
 
   readonly data = signal<Zone[]>([]);
   readonly loading = signal<boolean>(false);
@@ -88,27 +92,37 @@ export class ZoneSupportPage implements OnInit, OnDestroy {
     // const state = this.route.snapshot.queryParams['state'];
     this.loading.set(true);
 
-    this.zoneSupportService.getAll()
-      .pipe(
-        finalize(() => this.loading.set(false)),
-        takeUntil(this.destroy$)
-      )
-      .subscribe(zones => this.data.set(zones));
-    
+    const filters = this.formFilter.value;
+
+    this.zoneSupportService.getZones(filters)
+    .pipe(
+      finalize(() => this.loading.set(false)),
+      takeUntil(this.destroy$)
+    )
+    .subscribe(zones => this.data.set(zones));
+
+    // this.zoneSupportService.getAll()
+    //   .pipe(
+    //     finalize(() => this.loading.set(false)),
+    //     takeUntil(this.destroy$)
+    //   )
+    //   .subscribe(zones => this.data.set(zones));
+
   }
 
-  // private getZones(): void {
-  //   this.loading.set(true);
 
-  //   this.zoneSupportService.getAll()
-  //     .pipe(
-  //       finalize(() => this.loading.set(false)),
-  //       takeUntil(this.destroy$)
-  //     )
-  //     .subscribe(response => {
-  //       this.data.set(response);
-  //     });
-  // }
+  formFilter: FormGroup;
+  private fb = inject(FormBuilder);
+  private zoneService = inject(ZoneService);
+
+  constructor() {
+    this.formFilter = this.fb.group({
+      ubigeoDepartmentId: [''],
+      state_construction: [''],
+      creation_date: ['']
+    });
+  }
+
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe([TAILWIND_BREAKPOINTS.sm, TAILWIND_BREAKPOINTS.md])
@@ -125,12 +139,36 @@ export class ZoneSupportPage implements OnInit, OnDestroy {
   }
 
 
-  filter(): void {
-    return console.log('filtros');
-    
+  filter() {
+    const filters = this.formFilter.value;
+    this.loading.set(true);
+    // this.zoneService.getZones(filters).subscribe((response) => {
+    //   console.log('Zonas filtradas:', response);
+    // });
+    this.zoneService.getZones(filters)
+    .pipe(finalize(() => this.loading.set(false)))
+    .subscribe((response) => {
+      this.data.set(response); // ✅ Mostrar en la tabla
+    });
   }
 
-  clean(): void {
-    return console.log('limpiar'); 
+  clean() {
+    this.formFilter.reset();
+    this.getZones();
+  }
+
+  getZoneFilter(state?: StateType): void {
+    this.selectedZoneState.set(state);
+    this.router.navigate(['/zones', 'zone'], {
+      queryParams: { state: state },
+      queryParamsHandling: 'merge',
+      replaceUrl: true
+    }).then();
+  }
+
+  private getZoneStateFromParam(): void {
+    const param = this.route.snapshot.queryParams['state'];
+    const state = Number(param);
+    this.selectedZoneState.set(!isNaN(state) ? state : null);
   }
 }
