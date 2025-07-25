@@ -19,6 +19,7 @@ import { NodeService } from '@wow/core/services';
 import { finalize, merge, Subject, takeUntil } from 'rxjs';
 import { columns } from './troncal-detail.config';
 import { ShowNodeSupportComponent } from '../components/show-node-support/show-node-support.component';
+import { NgIf } from '@angular/common';
 
 
 
@@ -33,7 +34,7 @@ import { ShowNodeSupportComponent } from '../components/show-node-support/show-n
     MatSidenavModule, MatSelectModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     MatButtonModule,
-    ShowNodeSupportComponent
+    ShowNodeSupportComponent, NgIf
   ],
   templateUrl: './troncal-detail.page.html',
   styleUrl: './troncal-detail.page.scss'
