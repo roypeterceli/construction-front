@@ -9,8 +9,10 @@ export interface ZoneSupport {
   ubigeoProvinceId: string;
   provinceName?: string;
   zoneCode: string;
-  troncales: string;
+  troncales: number;
+  troncalesCount: number;
   boxNaps: string;
+  nodesCount: number;
   advanceId: number;
   stateId: number;
   saleId: number;
@@ -24,7 +26,9 @@ export class Zone {
   provinceName: string;
   zoneCode: string;
   troncales: number;
+  troncalesCount: number;
   boxNaps: number;
+  nodesCount: number;
   advanceId: number;
   stateId: StateType;
   saleId: SaleType;
@@ -42,7 +46,9 @@ export class Zone {
     this.provinceName = model.provinceName;
     this.zoneCode = model.zoneCode;
     this.troncales = model.troncales;
+    this.troncalesCount = model.troncalesCount;
     this.boxNaps = model.boxNaps;
+    this.nodesCount = model.nodesCount;
     this.advanceId = model.advanceId;
     this.stateId = model.stateId;
     this.saleId = model.saleId;
@@ -76,8 +82,16 @@ export class Zone {
     return this.troncales;
   }
 
+  get troncalTotals(): number | null {
+    return this.troncalesCount;
+  }
+
   get nodes(): number | null {
     return this.boxNaps;
+  }
+
+  get totNodes(): number | null {
+    return this.nodesCount;
   }
 
   get advance(): number | null {

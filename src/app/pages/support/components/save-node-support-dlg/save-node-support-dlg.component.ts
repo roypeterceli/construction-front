@@ -1,4 +1,5 @@
-import { Component, Inject, inject, OnInit } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -8,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
-import { Node, Troncal, TroncalSupport } from '@wow/core/interfaces';
+import { Node, Troncal, TroncalSupport} from '@wow/core/interfaces';
 import { NodeService, SettingService } from '@wow/core/services';
 import { AlertDialogService } from '@wow/shared/components/alert';
 import { ScreenLoaderService } from '@wow/shared/components/loader';
@@ -24,7 +25,7 @@ import { finalize } from 'rxjs';
     MatSelectModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatIconModule
+    MatIconModule, NgIf
   ],
   templateUrl: './save-node-support-dlg.component.html'
 })
@@ -34,7 +35,7 @@ export class SaveNodeSupportDlgComponent implements OnInit {
   nodeI = '';
   nodeForm = new FormGroup<any>({});
   private readonly dialogRef = inject(MatDialogRef<SaveNodeSupportDlgComponent>);
-
+  troncal = signal<TroncalSupport | null>(null);
   private screenLoaderService = inject(ScreenLoaderService)
 
   private router = inject(Router);
@@ -47,7 +48,7 @@ export class SaveNodeSupportDlgComponent implements OnInit {
   //   public nodeService: NodeService
   // ) {}
 
-  data = inject<{ troncal: TroncalSupport }>(MAT_DIALOG_DATA);
+  data = inject(MAT_DIALOG_DATA);
   nodeService = inject(NodeService);
 
   constructor() {
@@ -55,6 +56,7 @@ export class SaveNodeSupportDlgComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.troncal.set(this.data);
     this.initNodeForm();
   }
 
@@ -88,9 +90,9 @@ export class SaveNodeSupportDlgComponent implements OnInit {
   //   node.napsCount
   // }
 
-  troncal(troncal: Troncal): void {
-    console.log(troncal);
-  }
+  // troncal(troncal: Troncal): void {
+  //   console.log(troncal);
+  // }
 
 
   closeDlg(data?: any): void {

@@ -19,7 +19,6 @@ import { NodeService } from '@wow/core/services';
 import { finalize, merge, Subject, takeUntil } from 'rxjs';
 import { columns } from './troncal-detail.config';
 import { ShowNodeSupportComponent } from '../components/show-node-support/show-node-support.component';
-import { NgIf } from '@angular/common';
 
 
 
@@ -34,7 +33,7 @@ import { NgIf } from '@angular/common';
     MatSidenavModule, MatSelectModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     MatButtonModule,
-    ShowNodeSupportComponent, NgIf
+    ShowNodeSupportComponent
   ],
   templateUrl: './troncal-detail.page.html',
   styleUrl: './troncal-detail.page.scss'
@@ -45,7 +44,7 @@ export class TroncalDetailPage implements OnInit, OnDestroy {
   readonly loading = signal<boolean>(false);
 
   readonly zone = signal<ZoneSupport | null>(null);
-  readonly troncal = signal<TroncalSupport | null>(null);
+  troncal = signal<TroncalSupport | null>(null);
   readonly node = signal<NodeSupport | null>(null);
 
   private readonly nodeSupportService = inject(NodeService);
@@ -56,12 +55,9 @@ export class TroncalDetailPage implements OnInit, OnDestroy {
   readonly columns = columns;
   private readonly destroy$ = new Subject<void>();
 
-  readonly department = signal('');
-  readonly province = signal('');
-  readonly district = signal('');
-
   ngOnInit(): void {
-    // this.troncal.set(this.route.snapshot.data['troncal']);
+    this.troncal.set(this.route.snapshot.data['troncal']);
+    
     const zoneData = this.route.snapshot.data['zone'] as ZoneSupport;
     if (zoneData) {
       this.zone.set(zoneData);
@@ -70,8 +66,9 @@ export class TroncalDetailPage implements OnInit, OnDestroy {
       this.route.queryParams,
       this.nodeSupportService.nodeCreated$
     )
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => this.getNodes());
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(() => this.getNodes());
+    
   }
 
   ngOnDestroy(): void {
@@ -79,16 +76,6 @@ export class TroncalDetailPage implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  openSaveNodeDlg() {
-    this.dialog.open(SaveNodeSupportDlgComponent, {
-      role: 'dialog',
-      data: {
-        department: this.department(),
-        province: this.province(),
-        district: this.district(),
-      }
-    });
-  }
 
   goToDetail(node: Node): void {
     this.router.navigate(['../', node.nodeId, 'detalles'], { relativeTo: this.route }).then();
@@ -116,4 +103,16 @@ export class TroncalDetailPage implements OnInit, OnDestroy {
       )
       .subscribe(nodes => this.data.set(nodes));
   }
+
+
+  openSaveNodeDlg() {
+    this.dialog.open(SaveNodeSupportDlgComponent, {
+      role: 'dialog',
+      data: {
+        troncal: this.troncal()?.troncalCode ?? '',
+        code: this.troncal()?.nodePrefix ?? ''
+      } as { troncal: string; code: string }
+    });
+  }
+
 }

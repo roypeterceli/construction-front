@@ -12,18 +12,14 @@
   <mat-dialog-content>
     <form [formGroup]="nodeForm" class="py-4">
       <div class="grid justify-start grid-cols-2 lg:grid-cols-2 gap-3 mb-2">
-        <div class="flex items-start md:flex-row">
-          <!-- @if (zone()) {
-            @let item = zone()!; -->
+        <div class="flex items-start md:flex-row" *ngIf="data">
           <div class="departamento pr-7 pb-5">
             <h6 class="text-gray-400">Troncal</h6>
-            <!-- {{ item.ubigeoDepartmentId }} -->
-            <strong>{{ 'APU01-1' }}</strong>
+            <strong>{{ data.troncal }}</strong>
           </div>
           <div class="provincia pr-7">
             <h6 class="text-gray-400">Código</h6>
-            <!-- {{ item.ubigeoProvinceId }} -->
-            <strong>{{ 'ADAD' }}</strong>
+            <strong>{{ data.code }}</strong>
           </div>
         </div>
       </div>

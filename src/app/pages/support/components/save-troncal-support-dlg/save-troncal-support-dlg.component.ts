@@ -14,10 +14,8 @@ import { FormValidator } from '@wow/shared/utils';
 import { ScreenLoaderService } from '@wow/shared/components/loader';
 import { finalize } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-// import { ApiResponse } from '@wow/shared/interfaces';
-// import { environment } from '@wow/env/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 
 @Component({
@@ -41,20 +39,13 @@ export class SaveTroncalSupportDlgComponent implements OnInit {
   zoneId = '';
   troncalForm = new FormGroup<any>({});
   formValidator!: FormValidator;
-  // showFields = signal<boolean>(false);
   settingService = inject(SettingService);
-  // zoneService = inject(ZoneService);
   private screenLoaderService = inject(ScreenLoaderService)
-  // private zoneService = inject(ZoneService);
   private alertService = inject(AlertDialogService);
-  // private authService = inject(AuthService);
-  // troncalService = inject(TroncalService);
   private router = inject(Router);
   private readonly fb = inject(FormBuilder);
   private readonly dialogRef = inject(MatDialogRef<SaveTroncalSupportDlgComponent>);
-  // private route = inject(ActivatedRoute);
 
-  // readonly data = inject<ZoneSupport>(MAT_DIALOG_DATA);
 
   public http = inject(HttpClient);
 
@@ -71,8 +62,6 @@ export class SaveTroncalSupportDlgComponent implements OnInit {
     this.zone.set(this.data);
     this.initTroncalForm();
     this.getDistricts(this.data.departmentId, this.data.provinceId);
-    // this.loadDistricts('04','0404');
-    // this.troncalService.districtsList('04','0404');
   }
 
   createTroncal(): void {
@@ -100,12 +89,7 @@ export class SaveTroncalSupportDlgComponent implements OnInit {
       })
   }
 
-  // getParams(zone: Zone): void {
-  //   zone.ubigeoDepartmentId,
-  //     zone.ubigeoProvinceId,
-  //     zone.zoneCode
-  // }
-
+  
   zona(zone: Zone): void {
     console.log(zone);
   }

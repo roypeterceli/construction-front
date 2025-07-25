@@ -31,9 +31,21 @@ export const columns: TableColumn<Zone>[] = [
     cssClasses: ['font-semibold', 'text-[#7030A0]']
   },
   {
+    label: 'Tot. Troncales',
+    type: 'text',
+    property: 'troncalTotals',
+    visible: true
+  },
+  {
     label: 'Troncales',
     type: 'text',
     property: 'troncales',
+    visible: true
+  },
+  {
+    label: 'Tot. Nodos',
+    type: 'text',
+    property: 'totNodes',
     visible: true
   },
   {
